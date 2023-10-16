@@ -6,6 +6,12 @@
     <title>Ptit Cuisto</title>
 </head>
 <body>
-    
+    <?php
+    if (isset($_GET['id'])) {
+        var_dump($_GET['id']);
+    } else {
+        phpinfo();
+    }
+    ?>
 </body>
 </html>

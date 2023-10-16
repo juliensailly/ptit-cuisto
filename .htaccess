@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Redirect "localhost/zizi"
+RewriteCond %{HTTP_HOST} ^localhost$
+RewriteRule ^zizi$ http://pornhub.com [L]
+
+# Redirect all other URLs to index.php with a 'id' parameter
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?id=$1 [QSA,L]
