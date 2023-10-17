@@ -5,4 +5,4 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Rewrite the URL to index.php with the 'id' parameter
-RewriteRule ^(.*)$ php/index.php?id=$1 [QSA,L]
+RewriteRule ^(.*)$ index.php?id=$1 [QSA,L]
