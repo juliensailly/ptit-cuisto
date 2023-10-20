@@ -1,8 +1,0 @@
-RewriteEngine On
-
-# Check if the requested URL is not a file and is not a directory
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-# Rewrite the URL to index.php with the 'id' parameter
-RewriteRule ^(.*)$ php/index.php?id=$1 [QSA,L]

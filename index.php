@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ptit Cuisto</title>
-</head>
-<body>
-    <!--<?php
-    if (isset($_GET['id'])) {
-        var_dump($_GET['id']);
-    } else {
-        phpinfo();
-    }
-    ?>-->
-
-    
-    
-</body>
-</html>
+<?php
+    session_start();
+    $d_s = DIRECTORY_SEPARATOR;
+    require_once(__DIR__ . $d_s . "lib" . $d_s . "file.php");
+    require_once(File::build_path(array("controller", "routeur.php")));
+?>
