@@ -16,7 +16,7 @@ class modelTypes{
 
   /** GETTERS **/
   public function getNomType(){
-    return $this->$nomType;
+    return $this->nomType;
   }
 
   /*public function getSomething(){
