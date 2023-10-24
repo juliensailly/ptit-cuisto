@@ -1,6 +1,6 @@
 <?php
 
-class modelIngredients extends model {
+class modelComments extends model {
 
   public function __construct($id){
     $this->id = $id;
