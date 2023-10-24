@@ -33,6 +33,6 @@ class modelCategory extends model {
     $req_prep = $this->pdo->prepare($sql);
     $req_prep->bindParam(':id', $this->id, PDO::PARAM_INT);
     $req_prep->execute();
-    return $query->execute();
+    return $req_prep->execute();
   }
 }
