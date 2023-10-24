@@ -43,6 +43,24 @@ class modelIngredients extends model {
     return $req_prep->rowCount() > 0;
   }
 
+  public function updateEmail($newEmail){
+    $sql = "UPDATE " . $this->table . " SET users_email = :new WHERE users_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $this->id, PDO::PARAM_INT);
+    $req_prep->bindParam(':new', $newEmail, PDO::PARAM_STR);
+    $req_prep->execute();
+    return $req_prep->rowCount() > 0;
+  }
+
+  public function updatePassword($newPassword){
+    $sql = "UPDATE " . $this->table . " SET users_password = :new WHERE users_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $this->id, PDO::PARAM_INT);
+    $req_prep->bindParam(':new', $newPassword, PDO::PARAM_STR);
+    $req_prep->execute();
+    return $req_prep->rowCount() > 0;
+  }
+
   public function delete(){
     $sql = "DELETE FROM " . $this->table . " WHERE users_id = " .$this->id;
     $req_prep = model::$pdo->prepare($sql);
