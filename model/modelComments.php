@@ -16,7 +16,7 @@ class modelIngredients extends model {
     $req_prep->bindParam(':date', NULL, PDO::PARAM_STR);
     $req_prep->bindParam(':nom', $nomIngredient, PDO::PARAM_STR);
     $req_prep->bindParam(':desc', $desc, PDO::PARAM_STR);
-    $req_prep->execute();
+    return $req_prep->execute();
   }
 
   //En cours (clé étrangère users_id ?)
@@ -32,6 +32,6 @@ class modelIngredients extends model {
     $sql = "DELETE FROM " . $this->table . " WHERE com_id = " .$this->id;
     $req_prep = model::$pdo->prepare($sql);
     $req_prep->execute();
-    $query->execute();
+    return $query->execute();
   }
 }

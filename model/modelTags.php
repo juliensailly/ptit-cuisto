@@ -14,13 +14,13 @@ class modelTags extends model {
     $req_prep = model::$pdo->prepare($sql);
     $req_prep->bindParam(':id', NULL, PDO::PARAM_NULL);
     $req_prep->bindParam(':nom', $nomTag, PDO::PARAM_STR);
-    $req_prep->execute();
+    return $req_prep->execute();
   }
 
   public function update($oldTag, $newTag) {
-    $sql = "UPDATE " . $this->table . " SET tag_title = :new WHERE tag_title = :old";
+    $sql = "UPDATE " . $this->table . " SET tag_title = :new WHERE tag_id = :id";
     $req_prep = model::$pdo->prepare($sql);
-    $req_prep->bindParam(':old', $oldTag, PDO::PARAM_STR);
+    $req_prep->bindParam(':id', $this->id, PDO::PARAM_STR);
     $req_prep->bindParam(':new', $newTag, PDO::PARAM_STR);
     $req_prep->execute();
 }
@@ -29,6 +29,6 @@ class modelTags extends model {
     $sql = "DELETE FROM " . $this->table . " WHERE tag_title = :nom";
     $req_prep = model::$pdo->prepare($sql);
     $req_prep->bindParam(':nom', $nomTag, PDO::PARAM_STR);
-    $req_prep->execute();
+    return $req_prep->execute();
   }
 }
