@@ -12,7 +12,7 @@ class modelIngredients extends model {
 
   public function create($nomCategory, $desc){
     $sql = "INSERT INTO " . $this->table . " (com_id, com_date, com_title, com_content) VALUES (:id, :date, :nom, :desc)";
-    $req_prep = model::$pdo->prepare($sql);
+    $req_prep = $this->pdo->prepare($sql);
     $req_prep->bindParam(':id', NULL, PDO::PARAM_INT);
     $req_prep->bindParam(':date', NULL, PDO::PARAM_STR);
     $req_prep->bindParam(':nom', $nomIngredient, PDO::PARAM_STR);
@@ -21,18 +21,19 @@ class modelIngredients extends model {
   }
 
   //En cours (clé étrangère users_id ?)
-  public function updateComment($idUser, $newDesc) {
+  public function updateComment($newDesc) {
     $sql = "UPDATE " . $this->table . " SET com_content = :new WHERE users_id = :id";
-    $req_prep = model::$pdo->prepare($sql);
-    $req_prep->bindParam(':id', $idUser, PDO::PARAM_INT);
+    $req_prep = $this->pdo->prepare($sql);
+    $req_prep->bindParam(':id', $this->id, PDO::PARAM_INT);
     $req_prep->bindParam(':new', $newDesc, PDO::PARAM_STR);
     $req_prep->execute();
     return $req_prep->rowCount() > 0;
   }
 
   public function delete(){
-    $sql = "DELETE FROM " . $this->table . " WHERE com_id = " .$this->id;
-    $req_prep = model::$pdo->prepare($sql);
+    $sql = "DELETE FROM " . $this->table . " WHERE com_id = :id";
+    $req_prep = $this->pdo->prepare($sql);
+    $req_prep->bindParam(':id', $this->id, PDO::PARAM_INT);
     $req_prep->execute();
     return $query->execute();
   }
