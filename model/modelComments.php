@@ -2,7 +2,8 @@
 
 class modelIngredients extends model {
 
-  public function __construct(){
+  public function __construct($id){
+    $this->id = $id;
     $this->table = "comments";
     $this->init(); //Connexion à la base
   }

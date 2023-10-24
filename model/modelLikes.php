@@ -2,7 +2,8 @@
 
 class modelTags extends model {
 
-  public function __construct(){
+  public function __construct($id){
+    $this->id = $id;
     $this->table = "likes";
     $this->init();
   }
