@@ -20,18 +20,18 @@ class modelIngredients extends model {
   }
 
   //En cours (clé étrangère users_id ?)
-  public function updateComment($id, $newDesc) {
+  public function updateComment($idUser, $newDesc) {
     $sql = "UPDATE " . $this->table . " SET com_content = :new WHERE users_id = :id";
     $req_prep = model::$pdo->prepare($sql);
-    $req_prep->bindParam(':id', $id, PDO::PARAM_INT);
+    $req_prep->bindParam(':id', $idUser, PDO::PARAM_INT);
     $req_prep->bindParam(':new', $newDesc, PDO::PARAM_STR);
     $req_prep->execute();
   }
 
-  public function delete($idComment){
-    $sql = "DELETE FROM " . $this->table . " WHERE com_id = :id";
+  public function delete(){
+    $sql = "DELETE FROM " . $this->table . " WHERE com_id = " .$this->id;
     $req_prep = model::$pdo->prepare($sql);
-    $req_prep->bindParam(':id', $idComment, PDO::PARAM_STR);
     $req_prep->execute();
+    $query->execute();
   }
 }
