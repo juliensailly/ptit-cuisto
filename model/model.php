@@ -4,6 +4,7 @@ require_once(File::build_path(array("config", "conf.php")));
 abstract class  model{
   public $table;
   public $id;
+  protected $pdo;
 
   public function init(){
     $login = conf::getLogin();
@@ -11,10 +12,10 @@ abstract class  model{
     $database_name = conf::getDatabase();
     $password = conf::getPassword();
 
-    $con = null;
+    $pdo = null;
 
     try{
-      $this->con = new PDO("mysql:host=$hostname;dbname=$database_name", $login, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+      $this->pdo = new PDO("mysql:host=$hostname;dbname=$database_name", $login, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     } catch(PDOException $e) {
       echo $e->getMessage();
       $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -34,6 +35,10 @@ abstract class  model{
     $query = $this->con->prepare($sql);
     $query->execute();
     return $query->fetch();
-
   }
+
+  public function logOut(){
+    $this->pdo = null;
+  }
+  
 }

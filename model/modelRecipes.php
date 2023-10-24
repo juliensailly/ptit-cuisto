@@ -14,7 +14,7 @@ class modelRecipes extends model {
     $sql = "INSERT INTO " . $this->table . " (rec_id, rec_title, rec_content, rec_summary, cat_id, rec_creation_date, 
     rec_image_src, rec_modification_date, users_id, rec_nb_person) 
     VALUES (:id, :title, :content, :summary, :catId, :dateC, :image, :dateM, :userId, :nbPerson)";
-    $req_prep = model::$pdo->prepare($sql);
+    $req_prep = $this->pdo->prepare($sql);
     $req_prep->bindParam(':id', NULL, PDO::PARAM_INT);
     $req_prep->bindParam(':title', $title, PDO::PARAM_STR);
     $req_prep->bindParam(':content', $content, PDO::PARAM_STR);
@@ -30,7 +30,7 @@ class modelRecipes extends model {
 
   public function updateRecipe($newRecipe) {
     $sql = "UPDATE " . $this->table . " SET rec_title = :new WHERE rec_id = :id";
-    $req_prep = model::$pdo->prepare($sql);
+    $req_prep = $this->pdo->prepare($sql);
     $req_prep->bindParam(':id', $this->id, PDO::PARAM_INT);
     $req_prep->bindParam(':new', $newRecipe, PDO::PARAM_STR);
     $req_prep->execute();
@@ -38,9 +38,9 @@ class modelRecipes extends model {
   }
 
   public function delete(){
-    $sql = "DELETE FROM " . $this->table . " WHERE rec_id = " .$this->id;
-    $req_prep = model::$pdo->prepare($sql);
-    $req_prep->execute();
-    return $query->execute();
+    $sql = "DELETE FROM " . $this->table . " WHERE rec_id = :id";
+    $req_prep = $this->pdo->prepare($sql);
+    $req_prep->bindParam(':id', $this->id, PDO::PARAM_INT);
+    return $req_prep->execute();
   }
 }
