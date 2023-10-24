@@ -22,7 +22,6 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `category`
 --
@@ -40,7 +39,8 @@ CREATE TABLE `category` (
 --
 
 CREATE TABLE `comments` (
-  `com_id` int(11) NOT NULL,
+  `rec_id` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
   `com_date` datetime NOT NULL DEFAULT current_timestamp(),
   `com_title` varchar(256) DEFAULT NULL,
   `com_content` varchar(512) DEFAULT NULL
@@ -65,9 +65,10 @@ CREATE TABLE `ingredient` (
 --
 
 CREATE TABLE `ingredients_list` (
-  `rec_id` int(11) NOT NULL DEFAULT 0,
-  `ing_id` int(11) NOT NULL DEFAULT 0,
-  `ing_quantity` double NOT NULL DEFAULT 1
+  `rec_id` int(11) NOT NULL,
+  `ing_id` int(11) NOT NULL,
+  `ing_quantity` double NOT NULL,
+  `ing_unit` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -78,8 +79,8 @@ CREATE TABLE `ingredients_list` (
 
 CREATE TABLE `likes` (
   `lik_id` int(11) NOT NULL,
-  `users_id` int(11) NOT NULL DEFAULT 0,
-  `rec_id` int(11) NOT NULL DEFAULT 0
+  `users_id` int(11) NOT NULL,
+  `rec_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -91,15 +92,14 @@ CREATE TABLE `likes` (
 CREATE TABLE `recipes` (
   `rec_id` int(11) NOT NULL,
   `rec_title` varchar(200) DEFAULT NULL,
-  `rec_content` varchar(300) DEFAULT NULL,
+  `rec_content` varchar(2000) DEFAULT NULL,
   `rec_summary` varchar(300) DEFAULT NULL,
-  `com_id` int(11) NOT NULL DEFAULT 0,
-  `cat_id` int(3) NOT NULL DEFAULT 0,
+  `cat_id` int(3) NOT NULL,
   `rec_creation_date` datetime NOT NULL DEFAULT current_timestamp(),
   `rec_image_src` varchar(100) DEFAULT NULL,
   `rec_modification_date` datetime DEFAULT NULL,
-  `users_id` int(3) NOT NULL DEFAULT 0,
-  `rec_nb_person` int(2) NOT NULL DEFAULT 1
+  `users_id` int(3) NOT NULL,
+  `rec_nb_person` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -135,11 +135,11 @@ CREATE TABLE `users` (
   `users_pseudo` varchar(25) DEFAULT NULL,
   `users_email` varchar(100) DEFAULT NULL,
   `users_password` char(64) NOT NULL,
-  `users_surname` varchar(100) DEFAULT NULL,
+  `users_lastname` varchar(100) DEFAULT NULL,
   `users_name` varchar(100) DEFAULT NULL,
   `users_inscription_date` date DEFAULT NULL,
-  `users_type` int(1) NOT NULL DEFAULT 0,
-  `users_status` int(1) NOT NULL DEFAULT 0
+  `users_type` int(1) NOT NULL,
+  `users_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -156,7 +156,9 @@ ALTER TABLE `category`
 -- Index pour la table `comments`
 --
 ALTER TABLE `comments`
-  ADD PRIMARY KEY (`com_id`);
+  ADD PRIMARY KEY (`rec_id`,`users_id`),
+  ADD KEY `fk_recipes_rec_id` (`rec_id`),
+  ADD KEY `fk_users_users_id` (`users_id`);
 
 --
 -- Index pour la table `ingredient`
@@ -185,8 +187,7 @@ ALTER TABLE `likes`
 ALTER TABLE `recipes`
   ADD PRIMARY KEY (`rec_id`),
   ADD KEY `fk_foreign_cat_id` (`cat_id`),
-  ADD KEY `fk_foreign_users_id` (`users_id`),
-  ADD KEY `fk_comments_com_id` (`com_id`);
+  ADD KEY `fk_foreign_users_id` (`users_id`);
 
 --
 -- Index pour la table `tag`
@@ -216,12 +217,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `category`
   MODIFY `cat_id` int(3) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `comments`
---
-ALTER TABLE `comments`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `ingredient`
@@ -275,9 +270,16 @@ ALTER TABLE `likes`
 -- Contraintes pour la table `recipes`
 --
 ALTER TABLE `recipes`
-  ADD CONSTRAINT `fk_comments_com_id` FOREIGN KEY (`com_id`) REFERENCES `comments` (`com_id`),
   ADD CONSTRAINT `fk_foreign_cat_id` FOREIGN KEY (`cat_id`) REFERENCES `category` (`cat_id`),
   ADD CONSTRAINT `fk_foreign_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`);
+
+--
+-- Contraintes pour la table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `fk_recipe_rec_id` FOREIGN KEY (`rec_id`) REFERENCES `recipes` (`rec_id`),
+  ADD CONSTRAINT `fk_users_users_id` FOREIGN KEY (`users_id`) REFERENCES `recipes` (`users_id`);
+
 
 --
 -- Contraintes pour la table `tags_list`
