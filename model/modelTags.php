@@ -23,6 +23,7 @@ class modelTags extends model {
     $req_prep->bindParam(':id', $this->id, PDO::PARAM_STR);
     $req_prep->bindParam(':new', $newTag, PDO::PARAM_STR);
     $req_prep->execute();
+    return $req_prep->rowCount() > 0;
 }
 
   public function delete($nomTag){

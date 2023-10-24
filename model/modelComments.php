@@ -26,6 +26,7 @@ class modelIngredients extends model {
     $req_prep->bindParam(':id', $idUser, PDO::PARAM_INT);
     $req_prep->bindParam(':new', $newDesc, PDO::PARAM_STR);
     $req_prep->execute();
+    return $req_prep->rowCount() > 0;
   }
 
   public function delete(){
