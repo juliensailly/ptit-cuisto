@@ -14,6 +14,11 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> <!-- Inclure ici votre favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -29,10 +34,11 @@
             <div class='d-flex'>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <style>
-                        .navbar-nav a{
+                        .navbar-nav a {
                             color: white;
                         }
-                        .navbar-nav a:hover{
+
+                        .navbar-nav a:hover {
                             color: black;
                         }
                     </style>
@@ -42,18 +48,19 @@
                         </li>
                         <li class='nav-item'><a href='' class='nav-link'>Nos recettes</a></li>
                         <style>
-                        .dropdown:hover .dropdown-menu{
-                            display: block;
-                            background-color: #7890cd;
-                        }
-                        .dropdown-menu a:hover{
-                            color: black;
-                            background-color: #7890cd;
-                        }
+                            .dropdown:hover .dropdown-menu {
+                                display: block;
+                                background-color: #7890cd;
+                            }
+
+                            .dropdown-menu a:hover {
+                                color: black;
+                                background-color: #7890cd;
+                            }
                         </style>
                         <li class="nav-item dropdown">
-                            <a class=" dropdown nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                            <a class=" dropdown nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropdown
                             </a>
                             <ul class="dropdown-menu">
@@ -75,11 +82,3 @@
             </div>
         </div>
     </nav>
-</body>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-
-</html>
