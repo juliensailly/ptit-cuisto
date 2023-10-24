@@ -1,6 +1,8 @@
 <?php
 
-require_once(File::build_path(array("model", "model.php")));
+require_once(File::build_path(array("model", "modelFiltres.php")));
+require_once(File::build_path(array("lib", "session.php")));
+
 class controllerFiltre
 {
   public static function readAll()
@@ -15,10 +17,7 @@ class controllerFiltre
     $pageTitle = "Filtre - Catégories";
     require(File::build_path(array("view", "navbar.php")));
     
-    $sql = "select * from category";
-    $rep = model::$pdo->query($sql);
-    $rep->setFetchMode(PDO::FETCH_CLASS, 'controllerFiltre');
-    $rep = $rep->fetchAll();
+    $rep = modelFiltres::getCategories();
     
     require(File::build_path(array("view", "filtres/categories.php")));
 

@@ -1,7 +1,7 @@
 <h1>Filtres - Catégories</h1>
 
 <label for="category">Choose a category:</label><br><br>
-<select id="category" name="category" multiple>
+<select id="category" name="category" multiple onchange="categoryChosen(this)">
     echo "test";
     <?php
     echo "test";
