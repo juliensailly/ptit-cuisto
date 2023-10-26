@@ -1,6 +1,6 @@
 <?php
 
-class modelIngredients extends model {
+class Users extends model {
 
   public function __construct($id){
     $this->table = "users";
