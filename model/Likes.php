@@ -1,6 +1,6 @@
 <?php
 
-class modelLikes extends model {
+class modelTags extends model {
 
   public function __construct($id){
     $this->id = $id;

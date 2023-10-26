@@ -1,6 +1,6 @@
 <?php
 
-class modelIngredients extends model {
+class Ingredients extends model {
 
   public function __construct($id){
     $this->id = $id;
@@ -42,3 +42,4 @@ class modelIngredients extends model {
     $req_prep->execute();
   }
 }
+?>

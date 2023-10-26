@@ -61,3 +61,4 @@ class modelTypes{
     $req_prep->execute($values);
   }
 }
+?>
