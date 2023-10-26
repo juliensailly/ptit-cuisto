@@ -44,3 +44,4 @@ class modelRecipes extends model {
     return $req_prep->execute();
   }
 }
+?>

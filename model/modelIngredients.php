@@ -42,3 +42,4 @@ class modelIngredients extends model {
     $req_prep->execute();
   }
 }
+?>

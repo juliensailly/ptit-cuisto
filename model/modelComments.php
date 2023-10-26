@@ -38,3 +38,4 @@ class modelIngredients extends model {
     return $query->execute();
   }
 }
+?>

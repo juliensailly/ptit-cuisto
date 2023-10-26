@@ -26,3 +26,4 @@ class modelTags extends model {
     return $req_prep->execute();
   }
 }
+?>
