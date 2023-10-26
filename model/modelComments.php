@@ -13,7 +13,7 @@ class modelIngredients extends model {
   public function create($nomCategory, $desc){
     $sql = "INSERT INTO " . $this->table . " (com_id, com_date, com_title, com_content) VALUES (:id, :date, :nom, :desc)";
     $req_prep = $this->pdo->prepare($sql);
-    $req_prep->bindParam(':id', NULL, PDO::PARAM_INT);
+    $req_prep->bindParam(':id', NULL, PDO::PARAM_NULL);
     $req_prep->bindParam(':date', NULL, PDO::PARAM_STR);
     $req_prep->bindParam(':nom', $nomIngredient, PDO::PARAM_STR);
     $req_prep->bindParam(':desc', $desc, PDO::PARAM_STR);

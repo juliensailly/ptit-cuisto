@@ -14,7 +14,7 @@ class modelIngredients extends model {
     $sql = "INSERT INTO " . $this->table . " (users_id, users_email, users_password, users_lastname, users_name, users_inscription_date, users_type, users_status) 
     VALUES (:id, :email, :password, :lastname, :name, :date, :type, :status)";
     $req_prep = $this->pdo->prepare($sql);
-    $req_prep->bindParam(':id', NULL, PDO::PARAM_INT);
+    $req_prep->bindParam(':id', NULL, PDO::PARAM_NULL);
     $req_prep->bindParam(':email', $email, PDO::PARAM_STR);
     $req_prep->bindParam(':password', $password, PDO::PARAM_STR);
     $req_prep->bindParam(':lastname', $lastname, PDO::PARAM_STR);

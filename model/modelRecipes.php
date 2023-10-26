@@ -15,7 +15,7 @@ class modelRecipes extends model {
     rec_image_src, rec_modification_date, users_id, rec_nb_person) 
     VALUES (:id, :title, :content, :summary, :catId, :dateC, :image, :dateM, :userId, :nbPerson)";
     $req_prep = $this->pdo->prepare($sql);
-    $req_prep->bindParam(':id', NULL, PDO::PARAM_INT);
+    $req_prep->bindParam(':id', NULL, PDO::PARAM_NULL);
     $req_prep->bindParam(':title', $title, PDO::PARAM_STR);
     $req_prep->bindParam(':content', $content, PDO::PARAM_STR);
     $req_prep->bindParam(':summary', $summary, PDO::PARAM_STR);
