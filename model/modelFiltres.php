@@ -26,4 +26,13 @@ class modelFiltres {
         $rep->setFetchMode(PDO::FETCH_CLASS, 'model');
         return $rep->fetchAll();
     }
+
+    public static function getIngredients() {
+        $model = new model();
+        $model->init();
+        $sql = "SELECT * FROM ingredient";
+        $rep = $model::$pdo->query($sql);
+        $rep->setFetchMode(PDO::FETCH_CLASS, 'model');
+        return $rep->fetchAll();
+    }
 }

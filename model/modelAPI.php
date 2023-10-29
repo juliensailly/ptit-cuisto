@@ -44,4 +44,22 @@ class modelAPI {
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
     return $req_prep->fetchAll();
   }
+
+  public static function getRecipesByIngredients($tab_ing_id) {
+    $model = new model();
+    $model->init();
+    $sql = "SELECT * FROM recipes WHERE rec_id IN (SELECT rec_id FROM rec_ing WHERE ing_id IN (";
+    foreach ($tab_ing_id as $key => $value) {
+      $sql .= $value;
+      if ($key != count($tab_ing_id) - 1) {
+        $sql .= ", ";
+      }
+    }
+    $sql .= "))";
+    var_dump($sql);
+    $req_prep = $model::$pdo->prepare($sql);
+    $req_prep->execute();
+    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+    return $req_prep->fetchAll();
+  }
 }

@@ -34,6 +34,8 @@ class controllerFiltre
   public static function ingredientsSearch() {
     $pageTitle = "Filtre - Recherche par ingrédients";
     require(File::build_path(array("view", "navbar.php")));
+
+    $ingredients = modelFiltres::getIngredients();
     require(File::build_path(array("view", "filtres/ingredientsSearch.php")));
     require(File::build_path(array("view", "footer.php")));
   }

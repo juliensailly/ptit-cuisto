@@ -5,11 +5,11 @@
     <br>
     <?php
     foreach ($ingredients as $ingredient) {
-        echo '<input type="checkbox" name="ingredients" value="' . $ingredient['id'] . '">' . $ingredient['name'] . '<br>';
+        echo '<input type="checkbox" id="ingredientsID' . $ingredient->ing_id . '" name="ingredients" value="' . $ingredient->ing_id . '">';
+        echo '<label for="ingredientsID' . $ingredient->ing_id . '">' . $ingredient->ing_title . '</label>';
+        echo '<br>';
     }
     ?>
-    <label for=""></label>
-    <input type="text" name="title" id="title" placeholder="Rechercher le titre d'une recette">
 </form>
 <div id="results"></div>
 <script src="resources/script/filtreIngredients.js"></script>
