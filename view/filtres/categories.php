@@ -1,7 +1,7 @@
 <h1>Filtres - Catégories</h1>
 
 <label for="category">Choose a category:</label><br><br>
-<select id="category" name="category" multiple onchange="categoryChosen(this)">
+<select id="category" name="category" multiple onchange="location = 'http:\/\/'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'&category='. this.value">
     echo "test";
     <?php
     echo "test";
