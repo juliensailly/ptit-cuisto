@@ -21,10 +21,26 @@ class modelAPI {
   public static function getRecipesByCategories($categoriesID) {
     $model = new model();
     $model->init();
-    $sql = "SELECT * FROM recipes WHERE cat_id = :idC";
+    $sql = "SELECT * FROM recipes WHERE cat_id = $categoriesID";
     $req_prep = $model::$pdo->prepare($sql);
-    $values = array("idC" => $categoriesID);
-    $req_prep->execute($values);
+    $req_prep->execute();
+    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+    return $req_prep->fetchAll();
+  }
+
+  public static function getRecipesByTitle($words) {
+    $model = new model();
+    $model->init();
+    $sql = "SELECT * FROM recipes WHERE upper(rec_title) LIKE ";
+    foreach ($words as $key => $value) {
+      $sql .= "'%".strtoupper($value)."%' ";
+      if ($key != count($words) - 1) {
+        $sql .= "OR upper(rec_title) LIKE ";
+      }
+    }
+    $sql .= "ORDER BY rec_title LIMIT 5";
+    $req_prep = $model::$pdo->prepare($sql);
+    $req_prep->execute();
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
     return $req_prep->fetchAll();
   }

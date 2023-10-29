@@ -1,8 +1,8 @@
 function init() {
-    document.querySelector('#category').addEventListener('change', function () {
+    document.querySelector('#title').addEventListener('input', function () {
         // Request AJAX
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://localhost/index.php?controller=API&action=categoryFilter&cat_id=' + this.value, true);
+        xhr.open('GET', 'http://localhost/index.php?controller=API&action=titleFilter&words=' + this.value, true);
         xhr.send();
         xhr.onload = function () {
             if (xhr.status === 200) {
@@ -23,6 +23,9 @@ function init() {
                     html += '</div>';
                 }
                 html += '</div>';
+                if (recipes.length === 0) {
+                    html = '<div class="alert alert-warning" role="alert">Aucune recette ne correspond à votre recherche.</div>';
+                }
                 document.querySelector('#results').innerHTML = html;
             }
         };
