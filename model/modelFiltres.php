@@ -19,8 +19,10 @@ class modelFiltres {
     }
 
     public static function getCategories() {
+        $model = new model();
+        $model->init();
         $sql = "SELECT * FROM category";
-        $rep = model::$pdo->query($sql);
+        $rep = $model::$pdo->query($sql);
         $rep->setFetchMode(PDO::FETCH_CLASS, 'model');
         return $rep->fetchAll();
     }
