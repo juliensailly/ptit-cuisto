@@ -24,7 +24,7 @@ class controllerAPI{
         if (!isset($_GET["tab_ing_id"])) {
             $tab_ing_id = array();
         } else {
-            $tab_ing_id = explode(" ", $_GET["tab_ing_id"]);
+            $tab_ing_id = explode(",", $_GET["tab_ing_id"]);
         }
         $data = modelAPI::getRecipesByIngredients($tab_ing_id);
         header('Content-Type: application/json; charset=utf-8');
