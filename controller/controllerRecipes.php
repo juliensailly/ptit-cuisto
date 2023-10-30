@@ -7,13 +7,17 @@ class controllerRecipes{
     $pageTitle = "Toutes les recettes";
     $recipes = modelRecipes::getRecipe();
     require (File::build_path(array("view", "navbar.php")));
-    require	(File::build_path(array("view", "viewRecipe.php")));
+    require	(File::build_path(array("view", "viewAllRecipe.php")));
     require (File::build_path(array("view", "footer.php")));
   }
 
-  public static function read($id){
+  public static function read(){
+    if (!isset($_GET["id"])) {
+      controllerErreur::erreur("Problème dans l'affichage de la recette");
+      return;
+    }
     $pageTitle = "Recette";
-    $recipe = modelRecipes::getRecipeById($id);
+    $recipe = modelRecipes::getRecipe($_GET["id"]);
     require (File::build_path(array("view", "navbar.php")));
     require	(File::build_path(array("view", "viewRecipe.php")));
     require (File::build_path(array("view", "footer.php")));
