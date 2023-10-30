@@ -4,7 +4,7 @@ class conf{
 		'hostname' => 'localhost',
 		'database' => 'pti-cuisto',
 		'login' => 'root',
-		'password' => 'root'
+		'password' => ''
 	);
 
 	static public function getLogin(){

@@ -34,7 +34,7 @@ class modelTypes{
 
   /** METHODES **/
   public static function readAll(){
-    $sql = "SELECT * FROM types";
+    $sql = "SELECT * FROM recipes";
     $rep = model::$pdo->query($sql);
     $rep->setFetchMode(PDO::FETCH_CLASS, 'modelTypes');
     return $rep->fetchAll();
