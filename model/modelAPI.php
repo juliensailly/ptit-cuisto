@@ -45,6 +45,16 @@ class modelAPI {
     return $req_prep->fetchAll();
   }
 
+  public static function getIngredients() {
+    $model = new model();
+    $model->init();
+    $sql = "SELECT * FROM ingredient";
+    $req_prep = $model::$pdo->prepare($sql);
+    $req_prep->execute();
+    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+    return $req_prep->fetchAll();
+  }
+
   public static function getRecipesByIngredients($tab_ing_id) {
     $model = new model();
     $model->init();

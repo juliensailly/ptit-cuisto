@@ -10,7 +10,6 @@
         echo '<br>';
     }
     ?>
-    <button type="submit" id="submit">Rechercher</button>
 </form>
 <div id="results"></div>
 <script src="resources/script/filtreIngredients.js"></script>

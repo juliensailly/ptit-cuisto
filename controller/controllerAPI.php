@@ -20,6 +20,12 @@ class controllerAPI{
         echo json_encode($data);
     }
 
+    public static function getIngredients() {
+        $data = modelAPI::getIngredients();
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
+    }
+
     public static function ingredientsFilter() {
         if (!isset($_GET["tab_ing_id"])) {
             $tab_ing_id = array();
