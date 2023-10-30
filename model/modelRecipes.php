@@ -51,7 +51,8 @@ class modelRecipes extends model {
     $sql = "SELECT * FROM recipes" . ($rec_id == NULL ? "" : " WHERE rec_id = $rec_id");
     $req_prep = model::$pdo->prepare($sql);
     $req_prep->execute();
-    return $req_prep->fetchAll();
+    if ($rec_id == NULL) return $req_prep->fetchAll();
+    else return $req_prep->fetch();
   }
 }
 ?>
