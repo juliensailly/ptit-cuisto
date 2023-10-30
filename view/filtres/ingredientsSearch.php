@@ -1,15 +1,23 @@
 <h1>Filtre - Recherche par ingrédients</h1>
 
-<form action="javascript:void(0);" id="formIngredients">
-    <label>Ingrédients présents :</label>
-    <br>
-    <?php
-    foreach ($ingredients as $ingredient) {
-        echo '<input type="checkbox" class="ingredient" id="ingredientsID' . $ingredient->ing_id . '" name="ingredients" value="' . $ingredient->ing_id . '">';
-        echo '<label for="ingredientsID' . $ingredient->ing_id . '">' . $ingredient->ing_title . '</label>';
-        echo '<br>';
-    }
-    ?>
+<form action="javascript:void(0);">
+    <input type="text" name="ingredientSearch" id="ingredientSearch"
+        placeholder="Veuillez entrer le nom d'un ingrédient" style="width: 400px;">
 </form>
-<div id="results"></div>
+
+<div id="ingredientsResults">
+    <ul class="list-group">
+
+    </ul>
+</div>
+<hr>
+<div id="ingredientsSelected">
+    <h3>Ingrédients sélectionnés</h3>
+    <ul class="list-group">
+        
+    </ul>
+</div>
+<hr>
+<div id="recipesResults">
+</div>
 <script src="resources/script/filtreIngredients.js"></script>

@@ -45,10 +45,10 @@ class modelAPI {
     return $req_prep->fetchAll();
   }
 
-  public static function getIngredients() {
+  public static function getIngredients($searchText = "") {
     $model = new model();
     $model->init();
-    $sql = "SELECT * FROM ingredient";
+    $sql = "SELECT * FROM ingredient where upper(ing_title) LIKE '%".strtoupper($searchText)."%'";
     $req_prep = $model::$pdo->prepare($sql);
     $req_prep->execute();
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');

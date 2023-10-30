@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    transition: all 0.4s ease-in-out;
+}
+
+/* Search by ingredient */
+
+#ingredientsResults li, #ingredientsSelected li {
+    cursor: pointer;
+}
+
+#ingredientsResults li:hover {
+    color: #00ff00;
+}
+
+#ingredientsSelected li:hover {
+    color: #ff0000;
+}

@@ -21,7 +21,11 @@ class controllerAPI{
     }
 
     public static function getIngredients() {
-        $data = modelAPI::getIngredients();
+        if (!isset($_GET["searchText"])) {
+            $data = modelAPI::getIngredients();
+        } else {
+            $data = modelAPI::getIngredients($_GET["searchText"]);
+        }
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data);
     }
