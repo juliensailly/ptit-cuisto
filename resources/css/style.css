@@ -8,6 +8,35 @@ body {
     transition: all 0.4s ease-in-out;
 }
 
+/* Navbar */
+
+#neubar {
+    background: #7890cd;
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4)
+}
+
+#neubar .dropdown-menu a:hover {
+    color: black;
+}
+
+#neubar .nav-item {
+    margin: auto 4px;
+}
+
+#neubar a {
+
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+#neubar .dropdown-menu {
+    background: #7890cd;
+}
+
+#txt:hover{
+    color: black;
+}
+
 /* Search by ingredient */
 
 #ingredientsResults li, #ingredientsSelected li {
