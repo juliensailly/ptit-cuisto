@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        <?php if (!isset($y)) {
-            echo $pageTitle;
-        } ?>
+    <title> 
+        <?php 
+        if (!isset($y))  echo $pageTitle;
+        else echo "Ptit-Cuisto";
+        ?>
     </title>
     <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <script src=""></script> <!-- Inclure ici votre js -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> <!-- Inclure ici votre favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -17,76 +19,38 @@
 </head>
 
 <body>
-    <style>
-        #neubar {
-            background: #7890cd;
-            box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4)
-        }
+    <nav class="navbar navbar-expand-sm navbar-light" id="neubar">
+        <div class="container">
+            <img src="../resources/img/Logo.png" height="60" />
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        #neubar .dropdown-menu a:hover {
-            color: black;
-        }
-
-        #neubar .nav-item {
-            margin: auto 4px;
-        }
-
-        #neubar a {
-
-            padding-left: 12px;
-            padding-right: 12px;
-        }
-
-        #neubar .dropdown-menu {
-            background: #7890cd;
-        }
-
-        #txt:hover{
-            color: black;
-        }
-
-    </style>
-
-    <body>
-        <nav class="navbar navbar-expand-sm navbar-light" id="neubar">
-            <div class="container">
-                <img src="../resources/img/Logo.png" height="60" />
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav ms-auto ">
-                        <li class="nav-item">
-                            <a class="nav-link mx-2 active text-white txt" id="txt" aria-current="page" href="#">Accueil</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link mx-2 text-white txt" href="#">Nos recettes</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link mx-2 dropdown-toggle text-white txt" href="#" id="navbarDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Filtres
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item text-white txt" href="#">Catégories</a></li>
-                                <li><a class="dropdown-item text-white txt" href="#">Titre</a></li>
-                                <li><a class="dropdown-item text-white txt" href="#">Ingrédients</a></li>
-                            </ul>
-                        </li>
-                        <li class='nav-item'>
-                            <a href='' class='nav-link mx-2 text-white txt'>Connexion</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2 active text-white txt" id="txt" aria-current="page" href="index.php">Accueil</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link mx-2 text-white txt" href="index.php?controller=recipes">Nos recettes</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link mx-2 dropdown-toggle text-white txt" href="" id="navbarDropdownMenuLink"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filtres
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item text-white txt" href="index.php?controller=filtre&action=categories">Catégories</a></li>
+                            <li><a class="dropdown-item text-white txt" href="index.php?controller=filtre&action=titleSearch">Titre</a></li>
+                            <li><a class="dropdown-item text-white txt" href="index.php?controller=filtre&action=ingredientsSearch">Ingrédients</a></li>
+                        </ul>
+                    </li>
+                    <li class='nav-item'>
+                        <a href='index.php?controller=connexion' class='nav-link mx-2 text-white txt'>Connexion</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
-
-</html>
+        </div>
+    </nav>
+    <div class="container">
