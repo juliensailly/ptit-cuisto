@@ -44,7 +44,7 @@ function updateSelectedIngredients() {
         document.querySelector('#ingredientsSelected ul').appendChild(li);
     }
     if (Object.keys(selectedIngredients).length === 0) {
-        document.querySelector('#ingredientsSelected ul').innerHTML = '<div class="alert alert-warning" role="alert">Aucune ingrédient sélectionné</div>';
+        document.querySelector('#ingredientsSelected ul').innerHTML = '<div class="alert alert-warning" role="alert">Aucun ingrédient sélectionné</div>';
     }
 }
 
