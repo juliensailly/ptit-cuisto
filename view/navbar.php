@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        <?php if (!isset($y)) {
-            echo $pageTitle;
-        } ?>
+    <title> 
+        <?php 
+        if (!isset($y))  echo $pageTitle;
+        else echo "Ptit-Cuisto";
+        ?>
     </title>
     <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <script src=""></script> <!-- Inclure ici votre js -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> <!-- Inclure ici votre favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -28,29 +30,27 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item">
-                        <a class="nav-link mx-2 active text-white txt" id="txt" aria-current="page" href="#">Accueil</a>
+                        <a class="nav-link mx-2 active text-white txt" id="txt" aria-current="page" href="index.php">Accueil</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link mx-2 text-white txt" href="#">Nos recettes</a>
+                        <a class="nav-link mx-2 text-white txt" href="index.php?controller=recipes">Nos recettes</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link mx-2 dropdown-toggle text-white txt" href="#" id="navbarDropdownMenuLink"
+                        <a class="nav-link mx-2 dropdown-toggle text-white txt" href="" id="navbarDropdownMenuLink"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Filtres
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item text-white txt" href="#">Catégories</a></li>
-                            <li><a class="dropdown-item text-white txt" href="#">Titre</a></li>
-                            <li><a class="dropdown-item text-white txt" href="#">Ingrédients</a></li>
+                            <li><a class="dropdown-item text-white txt" href="index.php?controller=filtre&action=categories">Catégories</a></li>
+                            <li><a class="dropdown-item text-white txt" href="index.php?controller=filtre&action=titleSearch">Titre</a></li>
+                            <li><a class="dropdown-item text-white txt" href="index.php?controller=filtre&action=ingredientsSearch">Ingrédients</a></li>
                         </ul>
                     </li>
                     <li class='nav-item'>
-                        <a href='' class='nav-link mx-2 text-white txt'>Connexion</a>
+                        <a href='index.php?controller=connexion' class='nav-link mx-2 text-white txt'>Connexion</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <script src="resources/script/bootstrap.bundle.min.js"></script>
-</html>
+    <div class="container">
