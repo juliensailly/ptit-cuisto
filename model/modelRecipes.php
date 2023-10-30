@@ -1,6 +1,7 @@
 <?php
+require_once(File::build_path(array("model", "model.php")));
 
-class Recipes extends model {
+class modelRecipes extends model {
 
   public function __construct($id){
     $this->table = "recipes";
@@ -42,6 +43,15 @@ class Recipes extends model {
     $req_prep = $this->pdo->prepare($sql);
     $req_prep->bindParam(':id', $this->id, PDO::PARAM_INT);
     return $req_prep->execute();
+  }
+
+  public static function getRecipe($rec_id = NULL) {
+    $model = new Model();
+    $model->init();
+    $sql = "SELECT * FROM recipes" . ($rec_id == NULL ? "" : " WHERE rec_id = $rec_id");
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->execute();
+    return $req_prep->fetchAll();
   }
 }
 ?>
