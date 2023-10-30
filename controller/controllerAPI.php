@@ -21,8 +21,11 @@ class controllerAPI{
     }
 
     public static function ingredientsFilter() {
-        if (!isset($_GET["tab_ing_id"])) return;
-        $tab_ing_id = explode(" ", $_GET["ing_id"]);
+        if (!isset($_GET["tab_ing_id"])) {
+            $tab_ing_id = array();
+        } else {
+            $tab_ing_id = explode(" ", $_GET["tab_ing_id"]);
+        }
         $data = modelAPI::getRecipesByIngredients($tab_ing_id);
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data);
