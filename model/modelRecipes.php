@@ -58,7 +58,7 @@ class modelRecipes extends model {
       $sql = "SELECT rec_title, cat_title, rec_image_src, users_pseudo, rec_creation_date, rec_modification_date, rec_content FROM recipes
       join category using (cat_id)
       join users using (users_id)
-      WHERE rec_id = 1";
+      WHERE rec_id = $rec_id";
       $req_prep = model::$pdo->prepare($sql);
       $req_prep->execute();
       return $req_prep->fetch();
