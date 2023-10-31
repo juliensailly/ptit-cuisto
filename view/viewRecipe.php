@@ -17,7 +17,7 @@
                 <div class="author">
                     <div class="user_pp" <?php
                     srand($recipe['users_id']);
-                    $randColor = "#" . str_pad(dechex(rand(0x808080, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                    $randColor = "#" . str_pad(dechex(rand(0xb9b9b9, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
                     echo "style=\"background-color: $randColor;\"";
                     ?>>
                         <span>
@@ -92,7 +92,7 @@
                             <div class="author">
                                 <div class="user_pp" <?php
                                 srand($comment['users_id']);
-                                $randColor = "#" . str_pad(dechex(rand(0x808080, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                                $randColor = "#" . str_pad(dechex(rand(0xb9b9b9, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
                                 echo "style=\"background-color: $randColor;\"";
                                 ?>>
                                     <span>
