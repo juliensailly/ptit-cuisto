@@ -1,18 +1,24 @@
-<h2 class="recipe_title">Titre de la recette</h2>
-<h4 class="recipe_category"><i>Catégorie</i></h4>
+<h2 class="recipe_title"><?= $recipe['rec_title']?></h2>
+<h4 class="recipe_category"><i><?= $recipe['cat_title']?></i></h4>
 
 <article id="recipe_view">
     <div class="column">
         <div class="component">
             <div class="img_container">
-                <img src="https://picsum.photos/200/300" alt="Image de la recette">
+                <img src="<?= $recipe['rec_image_src']?>" alt="<?= $recipe['rec_title']?>">
             </div>
             <div class="author_save">
                 <div class="author">
                     <img src="https://picsum.photos/50/50" alt="PP">
                     <div>
-                        <p>Michel</p>
-                        <p>Publié le 01/01/2021</p>
+                        <p><?= $recipe['users_pseudo']?></p>
+                        <?php
+                            $date = $recipe['rec_creation_date'];
+                            if (isset($recipe['rec_modification_date'])) {
+                                $date = $recipe['rec_modification_date'];
+                            }
+                        ?>
+                        <p>Publié le <?= $date?></p>
                     </div>
                 </div>
                 <form method="POST" action="" class="save_recipe">
@@ -100,22 +106,7 @@
         </div>
         <div class="recipe_content component">
             <h3>Indications</h3>
-            <p>
-                1 - Faites les boulettes<br>
-                2 - Faites cuire les carottes<br>
-                3 - Mélangez les deux<br>
-                4 - Servez<br>
-                lorem ipsum dolor sit amen eslorem sit ipsum
-                dolor sit amen eslorem ipsum sit amen es lorem
-                ipsum dolor sit amen eslorem sit ipsum dolor sit
-                amen eslorem ipsum sit amen es lorem ipsum
-                dolor sit amen eslorem sit ipsum dolor sit amen
-                eslorem ipsum sit amen eslorem ipsum dolor sit
-                amen eslorem sit ipsum dolor sit amen eslorem
-                ipsum sit amen eslorem ipsum dolor sit amen
-                eslorem sit ipsum dolor sit amen eslorem ipsum
-                sit amen es
-            </p>
+            <p> <?= $recipe['rec_content']?> </p>
         </div>
     </div>
 </article>

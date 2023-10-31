@@ -48,11 +48,21 @@ class modelRecipes extends model {
   public static function getRecipe($rec_id = NULL) {
     $model = new Model();
     $model->init();
-    $sql = "SELECT * FROM recipes" . ($rec_id == NULL ? "" : " WHERE rec_id = $rec_id");
-    $req_prep = model::$pdo->prepare($sql);
-    $req_prep->execute();
-    if ($rec_id == NULL) return $req_prep->fetchAll();
-    else return $req_prep->fetch();
+
+    if ($rec_id == NULL) {
+      $sql = "SELECT rec_id, rec_title, rec_summary, rec_image_src FROM recipes";
+      $req_prep = model::$pdo->prepare($sql);
+      $req_prep->execute();
+      return $req_prep->fetchAll();
+    } else {
+      $sql = "SELECT rec_title, cat_title, rec_image_src, users_pseudo, rec_creation_date, rec_modification_date, rec_content FROM recipes
+      join category using (cat_id)
+      join users using (users_id)
+      WHERE rec_id = 1";
+      $req_prep = model::$pdo->prepare($sql);
+      $req_prep->execute();
+      return $req_prep->fetch();
+    }
   }
 }
 ?>
