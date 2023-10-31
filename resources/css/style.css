@@ -223,6 +223,7 @@ div.ingredients table {
     border-collapse: collapse;
     margin: 1rem auto;
     border-radius: 10px;
+    border: solid 1px var(--primary-color);
 }
 
 div.ingredients table th {

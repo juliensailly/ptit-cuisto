@@ -27,7 +27,7 @@
                         }
                         ?>
                         <p>Publié le
-                            <?= $date ?>
+                            <?= date("d/m/Y", strtotime($date)) ?>
                         </p>
                     </div>
                 </div>
@@ -87,8 +87,14 @@
                                     <p>
                                         <?= $comment['users_pseudo'] ?>
                                     </p>
-                                    <p>Publié le
-                                        <?= $comment['com_date'] ?>
+                                    <p>Publié
+                                        <?php
+                                        if ($comment['com_date'] < date("Y-m-d H:i:s", strtotime("-1 day"))) {
+                                            echo " le " . date("d/m/Y", strtotime($comment['com_date']));
+                                        } else {
+                                            echo " à " . date("H:i", strtotime($comment['com_date']));
+                                        }
+                                        ?>
                                     </p>
                                 </div>
                             </div>
