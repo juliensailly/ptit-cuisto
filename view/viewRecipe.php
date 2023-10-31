@@ -157,7 +157,7 @@
         <div class="recipe_content component">
             <h3>Indications</h3>
             <p>
-                <?= $recipe['rec_content'] ?>
+                <?= nl2br($recipe['rec_content']) ?>
             </p>
         </div>
     </div>
