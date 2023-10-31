@@ -320,6 +320,12 @@ div.recipes_display div.card img {
 
 /* -------------------- Responsive design -------------------- */
 
+@media screen and (max-width: 768px) {
+    article#recipe_view {
+        flex-direction: column;
+    }
+}
+
 @media screen and (max-width: 576px) {
     div.recipes_row {
         flex-direction: column;
