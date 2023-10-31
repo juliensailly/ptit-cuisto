@@ -5,9 +5,9 @@ require_once(File::build_path(array("lib", "session.php")));
 class controllerAPI{
 
     public static function categoryFilter() {
-        if (!isset($_GET["cat_id"])) return;
-        $cat_id = $_GET["cat_id"];
-        $data = modelAPI::getRecipesByCategories($cat_id);
+        if (!isset($_GET["id"])) return;
+        $id = $_GET["id"];
+        $data = modelAPI::getRecipesByCategories($id);
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data);
     }

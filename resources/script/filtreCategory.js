@@ -1,14 +1,23 @@
 function init() {
-    document.querySelector("#category").addEventListener("change", displayRecipe);
+    document
+        .querySelector("#category")
+        .addEventListener("change", displayRecipe);
     displayRecipe();
 }
 
 function displayRecipe() {
+    if (document.querySelector("#category").value == "") return;
+    window.history.pushState(
+        {},
+        "",
+        "index.php?controller=filtre&action=categories&id=" +
+            document.querySelector("#category").value
+    );
     let xhr = new XMLHttpRequest();
     xhr.open(
         "GET",
-        "http://localhost/index.php?controller=API&action=categoryFilter&cat_id=" +
-        document.querySelector("#category").value,
+        "http://localhost/index.php?controller=API&action=categoryFilter&id=" +
+            document.querySelector("#category").value,
         true
     );
     xhr.send();
