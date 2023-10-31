@@ -1,7 +1,7 @@
 <h2 class="recipe_title">
     <?= $recipe['rec_title'] ?>
 </h2>
-<a href="index.php?controller=filtre&action=categories">
+<a href="index.php?controller=filtre&action=categories&id=<?= $recipe['cat_id'] ?>">
     <h4 class="recipe_category"><i>
             <?= $recipe['cat_title'] ?>
         </i></h4>
