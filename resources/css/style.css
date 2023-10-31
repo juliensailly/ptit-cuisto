@@ -238,6 +238,15 @@ div.ingredients table * {
     padding: 0.5rem;
 }
 
+div.person_number span.btn {
+    cursor: auto;
+}
+
+div.person_number span.btn:hover {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+
 /* Recipe instructions */
 
 .recipe_content p {

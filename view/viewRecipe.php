@@ -114,9 +114,9 @@
             <div>
                 <h3>Ingrédients</h3>
                 <div class="person_number btn-group">
-                    <button type="button" class="btn btn-outline-primary">-</button>
-                    <span class="btn btn-outline-primary">4 personnes</span>
-                    <button type="button" class="btn btn-outline-primary">+</button>
+                    <button type="button" class="btn btn-outline-primary" id="removePerson">-</button>
+                    <span class="btn btn-outline-primary"><?= $recipe['rec_nb_person'] . ($recipe['rec_nb_person'] > 1 ? " personnes" : "personne" ) ?></span>
+                    <button type="button" class="btn btn-outline-primary" id="addPerson">+</button>
                 </div>
             </div>
             <?php
@@ -139,7 +139,7 @@
                                     <?= $ingredient['ing_title'] ?>
                                 </td>
                                 <td>
-                                    <?= $ingredient['ing_quantity'] ?>
+                                    <?= $ingredient['ing_quantity'] . " " . $ingredient['ing_unit'] ?>
                                 </td>
                             </tr>
                             <?php
@@ -158,3 +158,4 @@
         </div>
     </div>
 </article>
+<script src="resources/script/ingredientQuantity.js"></script>
