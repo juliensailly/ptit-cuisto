@@ -55,7 +55,7 @@ class modelRecipes extends model {
       $req_prep->execute();
       return $req_prep->fetchAll();
     } else {
-      $sql = "SELECT rec_title, cat_title, rec_image_src, users_pseudo, rec_creation_date, rec_modification_date, rec_nb_person, rec_content FROM recipes
+      $sql = "SELECT rec_title, cat_title, rec_image_src, users_id, users_pseudo, rec_creation_date, rec_modification_date, rec_nb_person, rec_content FROM recipes
       join category using (cat_id)
       join users using (users_id)
       WHERE rec_id = $rec_id";
@@ -78,7 +78,7 @@ class modelRecipes extends model {
   public static function getRecipeComments($rec_id) {
     $model = new Model();
     $model->init();
-    $sql = "SELECT users_pseudo, com_date, com_content FROM comments
+    $sql = "SELECT users_id, users_pseudo, com_date, com_content FROM comments
     JOIN users using (users_id)
     WHERE rec_id = :id
     order by com_date desc";

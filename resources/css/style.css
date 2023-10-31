@@ -201,13 +201,27 @@ div.tags span:nth-child(4n + 3) {
 /* Comments */
 
 div.comments > div {
-    background-color: #d4d4d4;
+    background-color: #e3e3e3;
     border-radius: 10px;
     padding: 0.5rem;
 }
 
 p.comment {
     margin: 0.5rem 0 0 0;
+}
+
+div.user_pp {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.user_pp span {
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 /* Ingredients */

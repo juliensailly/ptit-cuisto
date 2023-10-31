@@ -15,7 +15,15 @@
             </div>
             <div class="author_save">
                 <div class="author">
-                    <img src="https://picsum.photos/50/50" alt="PP">
+                    <div class="user_pp" <?php
+                    srand($recipe['users_id']);
+                    $randColor = "#" . str_pad(dechex(rand(0x808080, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                    echo "style=\"background-color: $randColor;\"";
+                    ?>>
+                        <span>
+                            <?= substr($recipe['users_pseudo'], 0, 1) ?>
+                        </span>
+                    </div>
                     <div>
                         <p>
                             <?= $recipe['users_pseudo'] ?>
@@ -82,7 +90,15 @@
                         ?>
                         <div class="comment">
                             <div class="author">
-                                <img src="https://picsum.photos/50/50" alt="PP">
+                                <div class="user_pp" <?php
+                                srand($comment['users_id']);
+                                $randColor = "#" . str_pad(dechex(rand(0x808080, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                                echo "style=\"background-color: $randColor;\"";
+                                ?>>
+                                    <span>
+                                        <?= substr($comment['users_pseudo'], 0, 1) ?>
+                                    </span>
+                                </div>
                                 <div>
                                     <p>
                                         <?= $comment['users_pseudo'] ?>
