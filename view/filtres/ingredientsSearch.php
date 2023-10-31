@@ -18,6 +18,7 @@
     </ul>
 </div>
 <hr>
-<div id="recipesResults">
+<h3>Recettes correspondantes</h3>
+<div id="results">
 </div>
 <script src="resources/script/filtreIngredients.js"></script>

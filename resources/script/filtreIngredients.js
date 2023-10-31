@@ -65,10 +65,9 @@ function searchForRecipes() {
             // Parse JSON
             let recipes = JSON.parse(xhr.responseText);
             // Display recipes
-            let html = '<h3>Recettes correspondantes</h3>';
-            html += '<div class="row" style="width: 100%;">';
+            let html = '';
             for (let i = 0; i < recipes.length; i++) {
-                html += '<div class="col-sm-6">';
+                html += '<div class="col_display">';
                 html += '<div class="card">';
                 html += '<img class="card-img-top" src="' + recipes[i].rec_image_src + '" alt="Card image cap">';
                 html += '<div class="card-body">';
@@ -79,11 +78,10 @@ function searchForRecipes() {
                 html += '</div>';
                 html += '</div>';
             }
-            html += '</div>';
             if (recipes.length === 0) {
                 html = '<div class="alert alert-warning" role="alert">Aucune recette ne correspond à votre recherche</div>';
             }
-            document.querySelector('#recipesResults').innerHTML = html;
+            document.querySelector('#results').innerHTML = html;
         }
     };
 }
