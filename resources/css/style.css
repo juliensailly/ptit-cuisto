@@ -267,3 +267,40 @@ div.person_number span.btn:hover {
 .recipe_content p {
     text-align: justify;
 }
+
+/* -------------------- View all recipes -------------------- */
+
+div.recipes_display {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+div.recipes_row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+div.recipes_display div.card {
+    flex: 1;
+}
+
+div.recipes_display div.card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+/* -------------------- Responsive design -------------------- */
+
+@media screen and (max-width: 576px) {
+    div.recipes_row {
+        flex-direction: column;
+    }
+}
