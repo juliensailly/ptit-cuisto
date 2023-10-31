@@ -64,5 +64,27 @@ class modelRecipes extends model {
       return $req_prep->fetch();
     }
   }
+
+  public static function getRecipeLikes($rec_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "SELECT COUNT(*) as NBLIKES FROM likes WHERE rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    $req_prep->execute();
+    return $req_prep->fetch();
+  }
+
+  public static function getRecipeComments($rec_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "SELECT users_pseudo, com_date, com_content FROM comments
+    JOIN users using (users_id)
+    WHERE rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    $req_prep->execute();
+    return $req_prep->fetchAll();
+  }
 }
-?>
+

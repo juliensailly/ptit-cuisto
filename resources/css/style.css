@@ -206,6 +206,10 @@ div.comments > div {
     padding: 0.5rem;
 }
 
+p.comment {
+    margin: 0.5rem 0 0 0;
+}
+
 /* Ingredients */
 
 div.ingredients > div {

@@ -1,31 +1,41 @@
-<h2 class="recipe_title"><?= $recipe['rec_title']?></h2>
-<h4 class="recipe_category"><i><?= $recipe['cat_title']?></i></h4>
+<h2 class="recipe_title">
+    <?= $recipe['rec_title'] ?>
+</h2>
+<h4 class="recipe_category"><i>
+        <?= $recipe['cat_title'] ?>
+    </i></h4>
 
 <article id="recipe_view">
     <div class="column">
         <div class="component">
             <div class="img_container">
-                <img src="<?= $recipe['rec_image_src']?>" alt="<?= $recipe['rec_title']?>">
+                <img src="<?= $recipe['rec_image_src'] ?>" alt="<?= $recipe['rec_title'] ?>">
             </div>
             <div class="author_save">
                 <div class="author">
                     <img src="https://picsum.photos/50/50" alt="PP">
                     <div>
-                        <p><?= $recipe['users_pseudo']?></p>
+                        <p>
+                            <?= $recipe['users_pseudo'] ?>
+                        </p>
                         <?php
-                            $date = $recipe['rec_creation_date'];
-                            if (isset($recipe['rec_modification_date'])) {
-                                $date = $recipe['rec_modification_date'];
-                            }
+                        $date = $recipe['rec_creation_date'];
+                        if (isset($recipe['rec_modification_date'])) {
+                            $date = $recipe['rec_modification_date'];
+                        }
                         ?>
-                        <p>Publié le <?= $date?></p>
+                        <p>Publié le
+                            <?= $date ?>
+                        </p>
                     </div>
                 </div>
                 <form method="POST" action="" class="save_recipe">
                     <button class="save_recipe_button" type="submit">
                         <input value="Sauvegarder" style="display: none;">
                         <span class="save">Sauvegarder</span>
-                        <span>3</span>
+                        <span>
+                            <?= $likes['NBLIKES'] ?>
+                        </span>
                         <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
                     </button>
                 </form>
@@ -43,35 +53,46 @@
         </div>
         <div class="comments component">
             <h3>Commentaires</h3>
-            <div>
-                <div class="comment">
-                    <div class="author">
-                        <img src="https://picsum.photos/50/50" alt="PP">
-                        <div>
-                            <p>Michel</p>
-                            <p>Publié le 01/01/2021</p>
+            <?php
+            if (sizeof($comments) == 0) {
+                ?>
+                <div class="alert alert-warning" role="alert">Aucun commentaire pour le moment.</div>
+                <?php
+            } else {
+                ?>
+                <div>
+                    <?php
+                    foreach ($comments as $key => $comment) {
+                        ?>
+                        <div class="comment">
+                            <div class="author">
+                                <img src="https://picsum.photos/50/50" alt="PP">
+                                <div>
+                                    <p>
+                                        <?= $comment['users_pseudo'] ?>
+                                    </p>
+                                    <p>Publié le
+                                        <?= $comment['com_date'] ?>
+                                    </p>
+                                </div>
+                            </div>
+                            <p class="comment">
+                                <?= $comment['com_content'] ?>
+                            </p>
                         </div>
-                    </div>
-                    <p>it amen eslorem ipsum sit amen es lorem ipsum dolor sit
-                        amen eslorem sit ipsum dolor sit amen eslorem ipsum sit
-                        amen eslorem ipsum.
-                    </p>
+                        <?php
+                        if ($key != sizeof($comments) - 1) {
+                            ?>
+                            <hr>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
-                <hr>
-                <div class="comment">
-                    <div class="author">
-                        <img src="https://picsum.photos/50/50" alt="PP">
-                        <div>
-                            <p>Michel</p>
-                            <p>Publié le 01/01/2021</p>
-                        </div>
-                    </div>
-                    <p>it amen eslorem ipsum sit amen es lorem ipsum dolor sit
-                        amen eslorem sit ipsum dolor sit amen eslorem ipsum sit
-                        amen eslorem ipsum.
-                    </p>
-                </div>
-            </div>
+                <?php
+            }
+            ?>
+
         </div>
     </div>
     <div class="column">
@@ -106,7 +127,9 @@
         </div>
         <div class="recipe_content component">
             <h3>Indications</h3>
-            <p> <?= $recipe['rec_content']?> </p>
+            <p>
+                <?= $recipe['rec_content'] ?>
+            </p>
         </div>
     </div>
 </article>

@@ -18,6 +18,8 @@ class controllerRecipes{
     }
     $pageTitle = "Recette";
     $recipe = modelRecipes::getRecipe($_GET["id"]);
+    $likes = modelRecipes::getRecipeLikes($_GET["id"]);
+    $comments = modelRecipes::getRecipeComments($_GET["id"]);
     require (File::build_path(array("view", "navbar.php")));
     require	(File::build_path(array("view", "viewRecipe.php")));
     require (File::build_path(array("view", "footer.php")));
