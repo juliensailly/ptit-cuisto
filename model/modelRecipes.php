@@ -86,5 +86,29 @@ class modelRecipes extends model {
     $req_prep->execute();
     return $req_prep->fetchAll();
   }
+
+  public static function getRecipeTags($rec_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "SELECT tag_title from tag
+    join tags_list using (tag_id)
+    where rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    $req_prep->execute();
+    return $req_prep->fetchAll();
+  }
+
+  public static function getRecipeIngredients($rec_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "select ing_title, ing_quantity from ingredient
+    join ingredients_list using (ing_id)
+    where rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    $req_prep->execute();
+    return $req_prep->fetchAll();
+  }
 }
 

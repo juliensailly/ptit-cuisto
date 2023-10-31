@@ -43,20 +43,34 @@
         </div>
         <div class="tags component">
             <h3>Tags</h3>
-            <div>
-                <span>Tag</span>
-                <span>Tag plus long</span>
-                <span>Tag moyen</span>
-                <span>Tag moyen</span>
-                <span>Tag plus long</span>
-            </div>
+            <?php
+            if (sizeof($tags) == 0) {
+                ?>
+                <div class="alert alert-warning" role="alert">Aucun tag</div>
+                <?php
+            } else {
+                ?>
+                <div>
+                    <?php
+                    foreach ($tags as $key => $tag) {
+                        ?>
+                        <span class="tag">
+                            <?= $tag['tag_title'] ?>
+                        </span>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <?php
+            }
+            ?>
         </div>
         <div class="comments component">
             <h3>Commentaires</h3>
             <?php
             if (sizeof($comments) == 0) {
                 ?>
-                <div class="alert alert-warning" role="alert">Aucun commentaire pour le moment.</div>
+                <div class="alert alert-warning" role="alert">Aucun commentaire pour le moment</div>
                 <?php
             } else {
                 ?>
@@ -105,25 +119,36 @@
                     <button type="button" class="btn btn-outline-primary">+</button>
                 </div>
             </div>
-            <table>
-                <tr>
-                    <th>Ingrédient</th>
-                    <th>Quantité</th>
-                </tr>
-                <tr>
-                    <td>Ingrédient 1</td>
-                    <td>Quantité 1</td>
-                </tr>
-                <tr>
-                    <td>Ingrédient 2</td>
-                    <td>Quantité 2</td>
-                </tr>
-                <tr>
-                    <td>Ingrédient 3</td>
-                    <td>Quantité 3</td>
-                </tr>
-            </table>
-
+            <?php
+                if (sizeof($ingredients) == 0) {
+                    ?>
+                    <div class="alert alert-warning" role="alert">Aucun ingrédient</div>
+                    <?php
+                } else {
+                    ?>
+                    <table>
+                        <tr>
+                            <th>Ingrédient</th>
+                            <th>Quantité</th>
+                        </tr>
+                        <?php
+                        foreach ($ingredients as $key => $ingredient) {
+                            ?>
+                            <tr>
+                                <td>
+                                    <?= $ingredient['ing_title'] ?>
+                                </td>
+                                <td>
+                                    <?= $ingredient['ing_quantity'] ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </table>
+                    <?php
+                }
+            ?>
         </div>
         <div class="recipe_content component">
             <h3>Indications</h3>
