@@ -18,7 +18,10 @@ class controllerFiltre
     require(File::build_path(array("view", "navbar.php")));
     
     $rep = modelFiltres::getCategories();
-    
+    $id = -1;
+    if (isset($_GET["id"])) {
+      $id = $_GET["id"];
+    }
     require(File::build_path(array("view", "filtres/categories.php")));
 
     require(File::build_path(array("view", "footer.php")));
