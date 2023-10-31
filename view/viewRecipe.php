@@ -8,7 +8,7 @@
 </a>
 
 <article id="recipe_view">
-    <div class="column">
+    <div class="column col_left">
         <div class="component">
             <div class="img_container">
                 <img src="<?= $recipe['rec_image_src'] ?>" alt="<?= $recipe['rec_title'] ?>">
@@ -133,7 +133,7 @@
 
         </div>
     </div>
-    <div class="column">
+    <div class="column col_right">
         <div class="ingredients component">
             <div>
                 <h3>Ingrédients</h3>

@@ -5,9 +5,18 @@ let nbPerson = 1,
     ingredientsQuantityElements = document.querySelectorAll(
         "table td:nth-child(even)"
     ),
-    ingredientsQuantity = [];
+    ingredientsQuantity = [],
+    col_left = document.querySelector(".column.col_left"),
+    col_right = document.querySelector(".column.col_right"),
+    ingredients = document.querySelector(".component.ingredients"),
+    recipe_content = document.querySelector(".component.recipe_content"),
+    tags = document.querySelector(".component.tags"),
+    comments = document.querySelector(".component.comments");
 
 function init() {
+    addEventListener("resize", relocateWhenResizing);
+    relocateWhenResizing();
+
     nbPerson = parseInt(
         document.querySelector("div.person_number span.btn").textContent
     );
@@ -50,10 +59,27 @@ function addPerson() {
 function updateQuantity() {
     ingredientsQuantityElements.forEach((element, index) => {
         element.textContent =
-            (ingredientsQuantity[index].quantity * nbPerson / defaultNbPerson).toString() +
+            (
+                (ingredientsQuantity[index].quantity * nbPerson) /
+                defaultNbPerson
+            ).toString() +
             " " +
             ingredientsQuantity[index].unit;
     });
+}
+
+function relocateWhenResizing() {
+    if (window.innerWidth < 768 && !col_left.contains(ingredients)) {
+        col_left.appendChild(ingredients);
+        col_left.appendChild(recipe_content);
+        col_right.appendChild(tags);
+        col_right.appendChild(comments);
+    } else if (window.innerWidth >= 768 && !col_right.contains(ingredients)) {
+        col_right.appendChild(ingredients);
+        col_right.appendChild(recipe_content);
+        col_left.appendChild(tags);
+        col_left.appendChild(comments);
+    }
 }
 
 init();

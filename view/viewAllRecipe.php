@@ -1,10 +1,14 @@
 <h2>Nos recettes</h2>
-<div class="container d-flex flex-wrap align-items-center">
+<div class="recipes_display">
 
     <?php
     foreach ($recipes as $key => $recipe) {
+        if ($key%2 == 0) {
+            echo "<div class='recipes_row'>";
+        }
         ?>
-        <div class="card"><img class="card-img-top w-100 d-block" src="<?= $recipe['rec_image_src'] ?>">
+        <div class="card">
+            <img class="card-img-top" src="<?= $recipe['rec_image_src'] ?>">
             <div class="card-body">
                 <h4 class="card-title">
                     <?= $recipe['rec_title'] ?>
@@ -19,6 +23,9 @@
         </div>
 
         <?php
+        if ($key%2 != 0) {
+            echo "</div>";
+        }
     }
     ?>
 

@@ -26,9 +26,9 @@ function displayRecipe() {
             // Parse JSON
             let recipes = JSON.parse(xhr.responseText);
             // Display recipes
-            let html = '<div class="row" style="width: 100%;">';
+            let html = '';
             for (let i = 0; i < recipes.length; i++) {
-                html += '<div class="col-sm-6">';
+                html += '<div class="col_display">';
                 html += '<div class="card">';
                 html +=
                     '<img class="card-img-top" src="' +
@@ -47,7 +47,6 @@ function displayRecipe() {
                 html += "</div>";
                 html += "</div>";
             }
-            html += "</div>";
             document.querySelector("#results").innerHTML = html;
         }
     };

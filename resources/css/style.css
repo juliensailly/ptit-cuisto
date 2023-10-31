@@ -54,6 +54,27 @@ body > .container {
     color: black;
 }
 
+/* -------------------- Recipe filter -------------------- */
+
+div#results {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+    gap: 1rem;
+}
+
+div#results > div {
+    width: calc(50% - 0.5rem);
+}
+
+div#results img {
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+}
+
 /* Search by ingredient */
 
 #ingredientsResults li, #ingredientsSelected li {
@@ -266,4 +287,55 @@ div.person_number span.btn:hover {
 
 .recipe_content p {
     text-align: justify;
+}
+
+/* -------------------- View all recipes -------------------- */
+
+div.recipes_display {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+div.recipes_row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+div.recipes_display div.card {
+    flex: 1;
+}
+
+div.recipes_display div.card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+/* -------------------- Responsive design -------------------- */
+
+@media screen and (max-width: 768px) {
+    article#recipe_view {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    div.recipes_row {
+        flex-direction: column;
+    }
+
+    div#results {
+        flex-direction: column;
+    }
+
+    div#results > div {
+        width: 100%;
+    }
 }
