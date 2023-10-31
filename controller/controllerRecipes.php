@@ -6,6 +6,12 @@ class controllerRecipes{
   public static function readAll(){
     $pageTitle = "Toutes les recettes";
     $recipes = modelRecipes::getRecipe();
+    $page = 1;
+    if (isset($_GET['page'])) {
+      if ($_GET['page'] > 0) {
+        $page = $_GET['page'];
+      }
+    }
     require (File::build_path(array("view", "navbar.php")));
     require	(File::build_path(array("view", "viewAllRecipe.php")));
     require (File::build_path(array("view", "footer.php")));

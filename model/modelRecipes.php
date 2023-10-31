@@ -1,9 +1,11 @@
 <?php
 require_once(File::build_path(array("model", "model.php")));
 
-class modelRecipes extends model {
+class modelRecipes extends model
+{
 
-  public function __construct($id){
+  public function __construct($id)
+  {
     $this->table = "recipes";
     $this->id = $id;
     $this->init(); //Connexion à la base
@@ -11,7 +13,8 @@ class modelRecipes extends model {
 
   //Requêtes CUD
 
-  public function create($title, $content, $summary, $catId, $dateC, $image, $dateM, $userId, $nbPerson){
+  public function create($title, $content, $summary, $catId, $dateC, $image, $dateM, $userId, $nbPerson)
+  {
     $sql = "INSERT INTO " . $this->table . " (rec_id, rec_title, rec_content, rec_summary, cat_id, rec_creation_date, 
     rec_image_src, rec_modification_date, users_id, rec_nb_person) 
     VALUES (:id, :title, :content, :summary, :catId, :dateC, :image, :dateM, :userId, :nbPerson)";
@@ -29,7 +32,8 @@ class modelRecipes extends model {
     return $req_prep->execute();
   }
 
-  public function updateRecipe($newRecipe) {
+  public function updateRecipe($newRecipe)
+  {
     $sql = "UPDATE " . $this->table . " SET rec_title = :new WHERE rec_id = :id";
     $req_prep = $this->pdo->prepare($sql);
     $req_prep->bindParam(':id', $this->id, PDO::PARAM_INT);
@@ -38,19 +42,27 @@ class modelRecipes extends model {
     return $req_prep->rowCount() > 0;
   }
 
-  public function delete(){
+  public function delete()
+  {
     $sql = "DELETE FROM " . $this->table . " WHERE rec_id = :id";
     $req_prep = $this->pdo->prepare($sql);
     $req_prep->bindParam(':id', $this->id, PDO::PARAM_INT);
     return $req_prep->execute();
   }
 
-  public static function getRecipe($rec_id = NULL) {
+  public static function getRecipe($rec_id = NULL)
+  {
     $model = new Model();
     $model->init();
 
     if ($rec_id == NULL) {
-      $sql = "SELECT rec_id, rec_title, rec_summary, rec_image_src FROM recipes";
+      $page = 1;
+      if (isset($_GET['page'])) {
+        if ($_GET['page'] > 0) {
+          $page = $_GET['page'];
+        }
+      }
+      $sql = "SELECT rec_id, rec_title, rec_summary, rec_image_src FROM recipes order by rec_modification_date desc, rec_creation_date desc LIMIT " . (($page - 1) * 10) . "," . 10;
       $req_prep = model::$pdo->prepare($sql);
       $req_prep->execute();
       return $req_prep->fetchAll();
@@ -65,7 +77,8 @@ class modelRecipes extends model {
     }
   }
 
-  public static function getRecipeLikes($rec_id) {
+  public static function getRecipeLikes($rec_id)
+  {
     $model = new Model();
     $model->init();
     $sql = "SELECT COUNT(*) as NBLIKES FROM likes WHERE rec_id = :id";
@@ -75,7 +88,8 @@ class modelRecipes extends model {
     return $req_prep->fetch();
   }
 
-  public static function getRecipeComments($rec_id) {
+  public static function getRecipeComments($rec_id)
+  {
     $model = new Model();
     $model->init();
     $sql = "SELECT users_id, users_pseudo, com_date, com_content FROM comments
@@ -88,7 +102,8 @@ class modelRecipes extends model {
     return $req_prep->fetchAll();
   }
 
-  public static function getRecipeTags($rec_id) {
+  public static function getRecipeTags($rec_id)
+  {
     $model = new Model();
     $model->init();
     $sql = "SELECT tag_title from tag
@@ -100,7 +115,8 @@ class modelRecipes extends model {
     return $req_prep->fetchAll();
   }
 
-  public static function getRecipeIngredients($rec_id) {
+  public static function getRecipeIngredients($rec_id)
+  {
     $model = new Model();
     $model->init();
     $sql = "select ing_title, ing_quantity, ing_unit from ingredient

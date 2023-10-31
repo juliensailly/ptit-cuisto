@@ -295,7 +295,6 @@ div.recipes_display {
     margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: space-between;
     gap: 1rem;
 }
@@ -316,6 +315,20 @@ div.recipes_display div.card img {
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
+}
+
+div.page_number {
+    margin: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+div.page_number span{
+    max-width: 100px;
+}
+
+div.page_number a, div.page_number button {
+    max-width: 50px;
 }
 
 /* -------------------- Responsive design -------------------- */
