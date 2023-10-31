@@ -1,9 +1,11 @@
 <h2 class="recipe_title">
     <?= $recipe['rec_title'] ?>
 </h2>
-<h4 class="recipe_category"><i>
-        <?= $recipe['cat_title'] ?>
-    </i></h4>
+<a href="index.php?controller=filtre&action=categories">
+    <h4 class="recipe_category"><i>
+            <?= $recipe['cat_title'] ?>
+        </i></h4>
+</a>
 
 <article id="recipe_view">
     <div class="column">
@@ -115,39 +117,41 @@
                 <h3>Ingrédients</h3>
                 <div class="person_number btn-group">
                     <button type="button" class="btn btn-outline-primary" id="removePerson">-</button>
-                    <span class="btn btn-outline-primary"><?= $recipe['rec_nb_person'] . ($recipe['rec_nb_person'] > 1 ? " personnes" : "personne" ) ?></span>
+                    <span class="btn btn-outline-primary">
+                        <?= $recipe['rec_nb_person'] . ($recipe['rec_nb_person'] > 1 ? " personnes" : "personne") ?>
+                    </span>
                     <button type="button" class="btn btn-outline-primary" id="addPerson">+</button>
                 </div>
             </div>
             <?php
-                if (sizeof($ingredients) == 0) {
-                    ?>
-                    <div class="alert alert-warning" role="alert">Aucun ingrédient</div>
+            if (sizeof($ingredients) == 0) {
+                ?>
+                <div class="alert alert-warning" role="alert">Aucun ingrédient</div>
+                <?php
+            } else {
+                ?>
+                <table>
+                    <tr>
+                        <th>Ingrédient</th>
+                        <th>Quantité</th>
+                    </tr>
                     <?php
-                } else {
-                    ?>
-                    <table>
+                    foreach ($ingredients as $key => $ingredient) {
+                        ?>
                         <tr>
-                            <th>Ingrédient</th>
-                            <th>Quantité</th>
+                            <td>
+                                <?= $ingredient['ing_title'] ?>
+                            </td>
+                            <td>
+                                <?= $ingredient['ing_quantity'] . " " . $ingredient['ing_unit'] ?>
+                            </td>
                         </tr>
                         <?php
-                        foreach ($ingredients as $key => $ingredient) {
-                            ?>
-                            <tr>
-                                <td>
-                                    <?= $ingredient['ing_title'] ?>
-                                </td>
-                                <td>
-                                    <?= $ingredient['ing_quantity'] . " " . $ingredient['ing_unit'] ?>
-                                </td>
-                            </tr>
-                            <?php
-                        }
-                        ?>
-                    </table>
-                    <?php
-                }
+                    }
+                    ?>
+                </table>
+                <?php
+            }
             ?>
         </div>
         <div class="recipe_content component">
