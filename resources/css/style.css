@@ -1,3 +1,10 @@
+:root {
+    --primary-color: #2a3990;
+    --secondary-color: #7890cd;
+    --background-color: #ffffff;
+    --grey-color: #999999;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -63,19 +70,122 @@ body > .container {
 
 /* View recipe */
 
+h2.recipe_title {
+    margin-bottom: 0;
+}
+
+h4.recipe_category {
+    margin-bottom: 1rem;
+    font-weight: lighter;
+}
+
 article#recipe_view {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 1.5rem;
+}
+
+article#recipe_view div {
+    flex: 1;
 }
 
 #recipe_view .img_container {
     width: 100%;
     height: 300px;
+    border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 50%) 0px 2px 5px 2px;
+    margin-bottom: 1rem;
 }
 
 .img_container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 10px;
+}
+
+div.author_save {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.author {
+    display: flex;
+    flex-direction: row;
+}
+
+div.author img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+div.author div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div.author p {
+    margin-left: 0.5rem;
+    margin-bottom: 0;
+}
+
+div.author p:first-child {
+    font-weight: bold;
+}
+
+div.author p:last-child {
+    font-size: smaller;
+}
+
+.save_recipe_button {
+    background-color: var(--primary-color);
+    border-radius: 5rem;
+    padding: 0.5rem 0.75rem;
+    color: var(--background-color);
+    border: none;
+}
+
+span.save {
+    padding-right: 0.4rem;
+    border-right: var(--background-color) solid 1px;
+}
+
+.component {
+    margin-bottom: 1.5rem;
+}
+.component h3 {
+    margin-bottom: 0.5rem;
+}
+
+div.tags div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+div.tags span {
+    padding: 0.25rem 0.5rem;
+    border-radius: 5rem;
+}
+
+div.tags span:nth-child(4n) {
+    background-color: #ff7a7a;
+}
+
+div.tags span:nth-child(4n + 1) {
+    background-color: #7a90ff;
+}
+
+div.tags span:nth-child(4n + 2) {
+    background-color: #8eff7a;
+}
+
+div.tags span:nth-child(4n + 3) {
+    background-color: #fbff7a;
 }
