@@ -68,7 +68,7 @@ body > .container {
     color: #ff0000;
 }
 
-/* View recipe */
+/* -------------------- View recipe -------------------- */
 
 h2.recipe_title {
     margin-bottom: 0;
@@ -86,13 +86,15 @@ article#recipe_view {
     gap: 1.5rem;
 }
 
-article#recipe_view div {
+article#recipe_view > div {
     flex: 1;
 }
 
+/* Recipe image */
+
 #recipe_view .img_container {
     width: 100%;
-    height: 300px;
+    aspect-ratio: 16 / 9;
     border-radius: 10px;
     box-shadow: rgb(0 0 0 / 50%) 0px 2px 5px 2px;
     margin-bottom: 1rem;
@@ -104,6 +106,8 @@ article#recipe_view div {
     object-fit: cover;
     border-radius: 10px;
 }
+
+/* Author informations and save button */
 
 div.author_save {
     display: flex;
@@ -156,12 +160,16 @@ span.save {
     border-right: var(--background-color) solid 1px;
 }
 
+/* General style for recipe component */
+
 .component {
     margin-bottom: 1.5rem;
 }
 .component h3 {
     margin-bottom: 0.5rem;
 }
+
+/* Tags */
 
 div.tags div {
     display: flex;
@@ -188,4 +196,46 @@ div.tags span:nth-child(4n + 2) {
 
 div.tags span:nth-child(4n + 3) {
     background-color: #fbff7a;
+}
+
+/* Comments */
+
+div.comments > div {
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+/* Ingredients */
+
+div.ingredients > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+div.ingredients table {
+    border-collapse: collapse;
+    margin: 1rem auto;
+    border-radius: 10px;
+}
+
+div.ingredients table th {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+div.ingredients table tr:nth-child(even) {
+    background-color: #d8d8d8;
+}
+
+div.ingredients table * {
+    padding: 0.5rem;
+}
+
+/* Recipe instructions */
+
+.recipe_content p {
+    text-align: justify;
 }

@@ -74,7 +74,7 @@
                 <h3>Ingrédients</h3>
                 <div class="person_number btn-group">
                     <button type="button" class="btn btn-outline-primary">-</button>
-                    <span class="btn btn-outline-primary">Personnes</span>
+                    <span class="btn btn-outline-primary">4 personnes</span>
                     <button type="button" class="btn btn-outline-primary">+</button>
                 </div>
             </div>
@@ -101,11 +101,10 @@
         <div class="recipe_content component">
             <h3>Indications</h3>
             <p>
-                1 - Faites les boulettes
-                2 - Faites cuire les carottes
-                3 - Mélangez les deux
-                4 - Servez
-
+                1 - Faites les boulettes<br>
+                2 - Faites cuire les carottes<br>
+                3 - Mélangez les deux<br>
+                4 - Servez<br>
                 lorem ipsum dolor sit amen eslorem sit ipsum
                 dolor sit amen eslorem ipsum sit amen es lorem
                 ipsum dolor sit amen eslorem sit ipsum dolor sit
