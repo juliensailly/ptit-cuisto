@@ -4,7 +4,12 @@
 <select id="category" name="category" multiple>
     <?php
     foreach ($rep as $key => $value) {
-      echo "<option value=$value->cat_id>$value->cat_title</option>";
+      if ($value->cat_id == $id) {
+        echo "<option value=$value->cat_id selected>$value->cat_title</option>";
+      }
+      else {
+        echo "<option value=$value->cat_id>$value->cat_title</option>";
+      }
     }
     ?>
 </select>
