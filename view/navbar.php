@@ -10,15 +10,15 @@
         else echo "Ptit-Cuisto";
         ?>
     </title>
-    <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-light" id="neubar">
+    <nav class="navbar navbar-expand-md navbar-light" id="neubar">
         <div class="container">
             <a href="index.php">
                 <img src="../resources/img/logo.png" height="60" alt="Logo de l'application">
