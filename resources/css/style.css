@@ -225,6 +225,14 @@ div.tags span:nth-child(4n + 3) {
     background-color: #fbff7a;
 }
 
+div.tags.all_recipes {
+    margin-bottom: 1rem;
+}
+
+div.recipes_display p.card-text {
+    margin-bottom: 0.5rem;
+}
+
 /* Comments */
 
 div.comments > div {

@@ -6,6 +6,7 @@ class controllerRecipes{
   public static function readAll(){
     $pageTitle = "Toutes les recettes";
     $recipes = modelRecipes::getRecipe();
+    $tags = modelRecipes::getAllTags();
     $page = 1;
     if (isset($_GET['page'])) {
       if ($_GET['page'] > 0) {

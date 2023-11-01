@@ -79,6 +79,15 @@ class modelRecipes extends model
     }
   }
 
+  public static function getAllTags() {
+    $model = new Model();
+    $model->init();
+    $sql = "select tag_id, tag_title, rec_id from tag join tags_list using (tag_id);";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->execute();
+    return $req_prep->fetchAll();
+  }
+
   public static function getRecipeLikes($rec_id)
   {
     $model = new Model();

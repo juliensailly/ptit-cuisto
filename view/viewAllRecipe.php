@@ -18,10 +18,25 @@
                             <?= $recipe['cat_title'] ?>
                         </i></a>
                 </h6>
-
                 <p class="card-text">
                     <?= $recipe['rec_summary'] ?>
                 </p>
+                <div class="tags all_recipes">
+                    <div>
+                        <?php
+                        foreach ($tags as $key => $tag) {
+                            if ($tag['rec_id'] != $recipe['rec_id']) {
+                                continue;
+                            }
+                            ?>
+                            <span class="tag">
+                                <?= $tag['tag_title'] ?>
+                            </span>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
                 <a href="index.php?controller=recipes&action=read&id=<?= $recipe['rec_id'] ?>">
                     <button class="btn btn-primary" type="button">Consulter la recette</button>
                 </a>
