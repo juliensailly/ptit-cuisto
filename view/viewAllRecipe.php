@@ -24,7 +24,7 @@
                 <div class="tags all_recipes">
                     <div>
                         <?php
-                        foreach ($tags as $key => $tag) {
+                        foreach ($tags as $key1 => $tag) {
                             if ($tag['rec_id'] != $recipe['rec_id']) {
                                 continue;
                             }
@@ -48,7 +48,7 @@
             echo "</div>";
         }
         if ($key == sizeof($recipes) - 1) {
-            echo "<div class=\"card\" style=\"visibility:hidden;\"></div></div>";
+            echo "<div class=\"card\" style=\"visibility:hidden;\"></div>";
         }
     }
     if (sizeof($recipes) == 0) {
