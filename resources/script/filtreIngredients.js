@@ -73,7 +73,7 @@ function searchForRecipes() {
                 html += '<div class="card-body">';
                 html += '<h5 class="card-title">' + recipes[i].rec_title + '</h5>';
                 html += '<p class="card-text">' + recipes[i].rec_summary + '</p>';
-                html += '<a href="index.php?controller=recipe&action=show&rec_id='+ recipes[i].rec_id +'" class="btn btn-primary">Consulter la recette</a>';
+                html += '<a href="index.php?controller=recipes&action=read&id='+ recipes[i].rec_id +'" class="btn btn-primary">Consulter la recette</a>';
                 html += '</div>';
                 html += '</div>';
                 html += '</div>';

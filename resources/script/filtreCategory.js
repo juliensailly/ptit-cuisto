@@ -40,7 +40,7 @@ function displayRecipe() {
                 html +=
                     '<p class="card-text">' + recipes[i].rec_summary + "</p>";
                 html +=
-                    '<a href="index.php?controller=recipe&action=show&rec_id=' +
+                    '<a href="index.php?controller=recipes&action=read&id=' +
                     recipes[i].rec_id +
                     '" class="btn btn-primary">Consulter la recette</a>';
                 html += "</div>";

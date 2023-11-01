@@ -23,6 +23,7 @@ body > .container {
     margin-top: 1rem;
     margin-bottom: 1rem;
     flex: 1;
+    max-width: 1000px;
 }
 
 /* Navbar */
@@ -59,11 +60,16 @@ body > .container {
     border-radius: 8px;
 }
 
-.carousel img,
 .home_content .card img {
     object-fit: cover;
     width: 100%;
     aspect-ratio: 16 / 9;
+}
+
+.carousel img {
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 16 / 7;
 }
 
 .carousel h5 {
@@ -447,6 +453,10 @@ div.page_number button {
 
     div.home_content {
         flex-direction: column-reverse;
+    }
+
+    .carousel img {
+        aspect-ratio: 16 / 9;
     }
 }
 
