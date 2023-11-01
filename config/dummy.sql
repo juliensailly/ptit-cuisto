@@ -6,6 +6,7 @@ DELETE FROM likes;
 DELETE FROM comments;
 DELETE FROM recipes;
 DELETE FROM category;
+DELETE FROM edito;
 DELETE FROM users;
 
 -- INSERTION `users`
@@ -171,6 +172,12 @@ INSERT INTO tags_list (rec_id, tag_id)
 VALUES
 (2,1), (2,2), (4,3), (4,4), (4,5), (4,6), (4,7), (4,8), (6,2), (6,11), (6,12), (7,17), (10,10), (10,12), (10,14), (10,21),(10,9), (10,11), (10,19), (10,20), (10,23), (10,24), (10,28);
 
+-- INSERTION `edito`
+
+INSERT INTO `edito` (`edi_id`, `users_id`, `edi_date`, `edi_title`, `edi_content`) VALUES
+(1, 4, '2023-11-01 16:17:46', 'Titre de l\'édito', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius deserunt delectus labore recusandae nostrum, hic corrupti magni. Tenetur officiis dolore, libero impedit quibusdam iste, quasi quos accusantium deleniti facilis officia quis maiores laborum cum ab molestiae repellat! Reprehenderit harum ducimus accusantium dicta voluptatem sunt, quisquam rem pariatur. Deleniti, eveniet natus!');
+
+
 COMMIT;
 
 SELECT * FROM users;
@@ -179,3 +186,4 @@ SELECT * FROM recipes;
 SELECT * FROM comments;
 SELECT * FROM ingredient;
 SELECT * FROM tag;
+SELECT * FROM edito;

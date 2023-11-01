@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 23 oct. 2023 à 13:50
+-- Généré le : mer. 01 nov. 2023 à 13:02
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -22,6 +22,7 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+
 --
 -- Structure de la table `category`
 --
@@ -44,6 +45,20 @@ CREATE TABLE `comments` (
   `com_date` datetime NOT NULL DEFAULT current_timestamp(),
   `com_title` varchar(256) DEFAULT NULL,
   `com_content` varchar(512) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `edito`
+--
+
+CREATE TABLE `edito` (
+  `edi_id` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
+  `edi_date` date NOT NULL,
+  `edi_title` varchar(200) DEFAULT NULL,
+  `edi_content` varchar(700) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -161,6 +176,13 @@ ALTER TABLE `comments`
   ADD KEY `fk_users_users_id` (`users_id`);
 
 --
+-- Index pour la table `edito`
+--
+ALTER TABLE `edito`
+  ADD PRIMARY KEY (`edi_id`),
+  ADD KEY `fk_foreign_edi_users_id` (`users_id`);
+
+--
 -- Index pour la table `ingredient`
 --
 ALTER TABLE `ingredient`
@@ -219,6 +241,12 @@ ALTER TABLE `category`
   MODIFY `cat_id` int(3) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `edito`
+--
+ALTER TABLE `edito`
+  MODIFY `edi_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `ingredient`
 --
 ALTER TABLE `ingredient`
@@ -253,6 +281,19 @@ ALTER TABLE `users`
 --
 
 --
+-- Contraintes pour la table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `fk_recipe_rec_id` FOREIGN KEY (`rec_id`) REFERENCES `recipes` (`rec_id`),
+  ADD CONSTRAINT `fk_users_users_id` FOREIGN KEY (`users_id`) REFERENCES `recipes` (`users_id`);
+
+--
+-- Contraintes pour la table `edito`
+--
+ALTER TABLE `edito`
+  ADD CONSTRAINT `fk_foreign_edi_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`);
+
+--
 -- Contraintes pour la table `ingredients_list`
 --
 ALTER TABLE `ingredients_list`
@@ -272,14 +313,6 @@ ALTER TABLE `likes`
 ALTER TABLE `recipes`
   ADD CONSTRAINT `fk_foreign_cat_id` FOREIGN KEY (`cat_id`) REFERENCES `category` (`cat_id`),
   ADD CONSTRAINT `fk_foreign_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`);
-
---
--- Contraintes pour la table `comments`
---
-ALTER TABLE `comments`
-  ADD CONSTRAINT `fk_recipe_rec_id` FOREIGN KEY (`rec_id`) REFERENCES `recipes` (`rec_id`),
-  ADD CONSTRAINT `fk_users_users_id` FOREIGN KEY (`users_id`) REFERENCES `recipes` (`users_id`);
-
 
 --
 -- Contraintes pour la table `tags_list`

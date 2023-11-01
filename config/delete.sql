@@ -8,5 +8,6 @@ DROP TABLE likes;
 DROP TABLE comments;
 DROP TABLE recipes;
 DROP TABLE category;
+DROP TABLE edito;
 DROP TABLE users;
 COMMIT;
