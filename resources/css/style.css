@@ -91,6 +91,12 @@ div#results img {
 
 /* -------------------- View recipe -------------------- */
 
+h6.recipe_category.card-subtitle a {
+    color: var(--grey-color);
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+}
+
 h2.recipe_title {
     margin-bottom: 0;
 }

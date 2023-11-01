@@ -13,6 +13,12 @@
                 <h4 class="card-title">
                     <?= $recipe['rec_title'] ?>
                 </h4>
+                <h6 class="recipe_category card-subtitle">
+                    <a href="index.php?controller=filtre&action=categories&id=<?= $recipe['cat_id'] ?>"><i>
+                            <?= $recipe['cat_title'] ?>
+                        </i></a>
+                </h6>
+
                 <p class="card-text">
                     <?= $recipe['rec_summary'] ?>
                 </p>

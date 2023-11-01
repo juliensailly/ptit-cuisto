@@ -62,7 +62,9 @@ class modelRecipes extends model
           $page = $_GET['page'];
         }
       }
-      $sql = "SELECT rec_id, rec_title, rec_summary, rec_image_src FROM recipes order by rec_modification_date desc, rec_creation_date desc LIMIT " . (($page - 1) * 10) . "," . 10;
+      $sql = "SELECT rec_id, rec_title, cat_id, cat_title, rec_summary, rec_image_src FROM recipes
+      join category using (cat_id)
+      order by rec_modification_date desc, rec_creation_date desc LIMIT " . (($page - 1) * 10) . "," . 10;
       $req_prep = model::$pdo->prepare($sql);
       $req_prep->execute();
       return $req_prep->fetchAll();
