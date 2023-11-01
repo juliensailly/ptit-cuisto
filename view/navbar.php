@@ -54,4 +54,7 @@
             </div>
         </div>
     </nav>
+    <?php 
+    require_once("view/sign-up.php");
+    ?>
     <div class="container">
