@@ -1,0 +1,368 @@
+:root {
+    --primary-color: #2a3990;
+    --secondary-color: #7890cd;
+    --background-color: #ffffff;
+    --grey-color: #999999;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    transition: all 0.4s ease-in-out;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+body > .container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+/* Navbar */
+
+#neubar {
+    background: #7890cd;
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4)
+}
+
+#neubar .dropdown-menu a:hover {
+    color: black;
+}
+
+#neubar .nav-item {
+    margin: auto 4px;
+}
+
+#neubar a {
+
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+#neubar .dropdown-menu {
+    background: #7890cd;
+}
+
+#txt:hover{
+    color: black;
+}
+
+/* -------------------- Recipe filter -------------------- */
+
+div#results {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+    gap: 1rem;
+}
+
+div#results > div {
+    width: calc(50% - 0.5rem);
+}
+
+div#results img {
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+}
+
+/* Search by ingredient */
+
+#ingredientsResults li, #ingredientsSelected li {
+    cursor: pointer;
+}
+
+#ingredientsResults li:hover {
+    color: #00ff00;
+}
+
+#ingredientsSelected li:hover {
+    color: #ff0000;
+}
+
+/* -------------------- View recipe -------------------- */
+
+h6.recipe_category.card-subtitle a {
+    color: var(--grey-color);
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+}
+
+h2.recipe_title {
+    margin-bottom: 0;
+}
+
+h4.recipe_category {
+    margin-bottom: 1rem;
+    font-weight: lighter;
+}
+
+article#recipe_view {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+article#recipe_view > div {
+    flex: 1;
+}
+
+/* Recipe image */
+
+#recipe_view .img_container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 5px 2px;
+    margin-bottom: 1rem;
+}
+
+.img_container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Author informations and save button */
+
+div.author_save {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.author {
+    display: flex;
+    flex-direction: row;
+}
+
+div.author img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+div.author div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div.author p {
+    margin-left: 0.5rem;
+    margin-bottom: 0;
+}
+
+div.author p:first-child {
+    font-weight: bold;
+}
+
+div.author p:last-child {
+    font-size: smaller;
+}
+
+.save_recipe_button {
+    background-color: var(--primary-color);
+    border-radius: 5rem;
+    padding: 0.5rem 0.75rem;
+    color: var(--background-color);
+    border: none;
+}
+
+span.save {
+    padding-right: 0.4rem;
+    border-right: var(--background-color) solid 1px;
+}
+
+/* General style for recipe component */
+
+.component {
+    margin-bottom: 1.5rem;
+}
+.component h3 {
+    margin-bottom: 0.5rem;
+}
+
+/* Tags */
+
+div.tags div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+div.tags span {
+    padding: 0.25rem 0.5rem;
+    border-radius: 5rem;
+}
+
+div.tags span:nth-child(4n) {
+    background-color: #ff7a7a;
+}
+
+div.tags span:nth-child(4n + 1) {
+    background-color: #7a90ff;
+}
+
+div.tags span:nth-child(4n + 2) {
+    background-color: #8eff7a;
+}
+
+div.tags span:nth-child(4n + 3) {
+    background-color: #fbff7a;
+}
+
+div.tags.all_recipes {
+    margin-bottom: 1rem;
+}
+
+div.recipes_display p.card-text {
+    margin-bottom: 0.5rem;
+}
+
+/* Comments */
+
+div.comments > div {
+    background-color: #e3e3e3;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+p.comment {
+    margin: 0.5rem 0 0 0;
+}
+
+div.user_pp {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.user_pp span {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Ingredients */
+
+div.ingredients > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+div.ingredients table {
+    border-collapse: collapse;
+    margin: 1rem auto;
+    border-radius: 10px;
+    border: solid 1px var(--primary-color);
+}
+
+div.ingredients table th {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+div.ingredients table tr:nth-child(even) {
+    background-color: #d8d8d8;
+}
+
+div.ingredients table * {
+    padding: 0.5rem;
+}
+
+div.person_number span.btn {
+    cursor: auto;
+}
+
+div.person_number span.btn:hover {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+
+/* Recipe instructions */
+
+.recipe_content p {
+    text-align: justify;
+}
+
+/* -------------------- View all recipes -------------------- */
+
+div.recipes_display {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+div.recipes_row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+div.recipes_display div.card {
+    flex: 1;
+}
+
+div.recipes_display div.card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+div.page_number {
+    margin: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+div.page_number span{
+    max-width: 100px;
+}
+
+div.page_number a, div.page_number button {
+    max-width: 50px;
+}
+
+/* -------------------- Responsive design -------------------- */
+
+@media screen and (max-width: 768px) {
+    article#recipe_view {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    div.recipes_row {
+        flex-direction: column;
+    }
+
+    div#results {
+        flex-direction: column;
+    }
+
+    div#results > div {
+        width: 100%;
+    }
+}
