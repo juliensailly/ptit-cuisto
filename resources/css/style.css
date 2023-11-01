@@ -56,7 +56,7 @@ body > .container {
 
 /* -------------------- Homepage -------------------- */
 
-.carousel img {
+.carousel img, .home_content .card img {
     object-fit: cover;
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -69,6 +69,15 @@ body > .container {
 .carousel h5 a {
     color: var(--background-color);
     text-decoration: none;
+}
+
+.recent_recipes div {
+    display: flex;
+    flex-direction: column;
+}
+
+.recent_recipes > div {
+    gap: 1rem;
 }
 
 /* -------------------- Recipe filter -------------------- */

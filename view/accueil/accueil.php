@@ -49,11 +49,32 @@
 </div>
 
 <div class="home_content">
-    <article>
+    <article class="recent_recipes">
         <h2>Recettes les plus récentes</h2>
-        
+        <div>
+            <?php foreach ($mostRecentRecipes as $recipe) { ?>
+                <div class="card">
+                    <img class="card-img-top" src="<?= $recipe->rec_image_src ?>"
+                        alt="Illustration de <?= $recipe->rec_title ?>">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <?= $recipe->rec_title ?>
+                        </h4>
+                        <p class="card-text">
+                            <?= $recipe->rec_summary ?>
+                        </p>
+                        <a href="index.php?controller=recipes&action=read&id=<?= $recipe->rec_id ?>"
+                            class="btn btn-primary">
+                            Consulter la recette
+                        </a>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
     </article>
     <article>
-
+        <img src="resources/img/pticuisto.png" alt="Illustration de Pti Cuisto">
+        <h2><?= $edito->edi_title ?></h2>
+        <p><?= nl2br($edito->edi_content, false) ?></p>
     </article>
 </div>

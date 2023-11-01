@@ -36,12 +36,24 @@ class modelAccueil {
   public static function getMostRecentRecipe() {
     $model = new model();
     $model->init();
-    $sql = "SELECT rec_id, rec_title, rec_image_src, rec_creation_date, rec_modification_date from recipes
+    $sql = "SELECT rec_id, rec_title, rec_summary, rec_image_src, rec_creation_date, rec_modification_date from recipes
     order by rec_modification_date desc, rec_creation_date desc
     LIMIT 5";
     $req_prep = $model::$pdo->prepare($sql);
     $req_prep->execute();
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
     return $req_prep->fetchAll();
+  }
+
+  public static function getEdito() {
+    $model = new model();
+    $model->init();
+    $sql = "SELECT edi_title, edi_content from edito
+    order by edi_date desc
+    limit 1";
+    $req_prep = $model::$pdo->prepare($sql);
+    $req_prep->execute();
+    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+    return $req_prep->fetch();
   }
 }

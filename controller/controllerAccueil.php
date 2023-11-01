@@ -9,6 +9,7 @@ class controllerAccueil
     require(File::build_path(array("view", "navbar.php")));
     $mostLikedRecipes = modelAccueil::getMostLikedRecipe();
     $mostRecentRecipes = modelAccueil::getMostRecentRecipe();
+    $edito = modelAccueil::getEdito();
     require(File::build_path(array("view/accueil", "accueil.php")));
     require(File::build_path(array("view", "footer.php")));
   }
