@@ -55,6 +55,6 @@
         </div>
     </nav>
     <?php 
-    require_once("view/sign-up.php");
+    require_once("view/sign-modal.php");
     ?>
     <div class="container">

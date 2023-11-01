@@ -4,7 +4,7 @@
             <h3>Connexion</h3>
             <img src="resources/img/xmark-solid.svg" alt="xmark icon" class="xmark">
         </div>
-        <form action="javascript:signIn()">
+        <form action="index.php?controller=sign&action=signIn" method="POST">
             <div>
                 <label for="sign-in-mail">Adresse mail :</label>
                 <input type="email" id="sign-in-mail" name="sign-in-mail" class="form-control" required>
@@ -23,7 +23,7 @@
             <h3>Inscription</h3>
             <img src="resources/img/xmark-solid.svg" alt="xmark icon" class="xmark">
         </div>
-        <form action="javascript:signUp()">
+        <form action="index.php?controller=sign&action=signUp" method="POST">
             <div id="name-inputs">
                 <div>
                     <label for="name">Prénom :</label>
@@ -50,7 +50,7 @@
                 <label for="password2">Confirmer le mot de passe :</label>
                 <input type="password" id="password2" name="password2" class="form-control" required>
             </div>
-            <input type="submit" class="btn btn-primary" value="S'inscrire'">
+            <input type="submit" class="btn btn-primary" value="S'inscrire">
         </form>
         <p>Vous avez déjà un compte ?<br><span class="sign-in-link">Connectez-vous</span></p>
     </div>
