@@ -59,10 +59,10 @@ function addPerson() {
 function updateQuantity() {
     ingredientsQuantityElements.forEach((element, index) => {
         element.textContent =
-            (
+            (Math.round(
                 (ingredientsQuantity[index].quantity * nbPerson) /
-                defaultNbPerson
-            ).toString() +
+                defaultNbPerson * 100
+            ) / 100).toString() +
             " " +
             ingredientsQuantity[index].unit;
     });

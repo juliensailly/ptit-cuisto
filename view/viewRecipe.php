@@ -40,14 +40,14 @@
                     </div>
                 </div>
                 <form method="POST" action="" class="save_recipe">
-                    <button class="save_recipe_button" type="submit">
+                    <div class="save_recipe_button">
                         <input value="Sauvegarder" style="display: none;">
                         <span class="save">Sauvegarder</span>
                         <span>
                             <?= $likes['NBLIKES'] ?>
                         </span>
                         <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                    </button>
+                    </div>
                 </form>
             </div>
         </div>
