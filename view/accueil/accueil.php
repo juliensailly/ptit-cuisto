@@ -73,8 +73,15 @@
         </div>
     </article>
     <article>
-        <img src="resources/img/pticuisto.png" alt="Illustration de Pti Cuisto">
-        <h2><?= $edito->edi_title ?></h2>
-        <p><?= nl2br($edito->edi_content, false) ?></p>
+        <h2>Edito</h2>
+        <div class="edito">
+            <img src="resources/img/pticuisto.png" alt="Illustration de Pti Cuisto">
+            <h2>
+                <?= $edito->edi_title ?>
+            </h2>
+            <p>
+                <?= nl2br($edito->edi_content) ?>
+            </p>
+        </div>
     </article>
 </div>

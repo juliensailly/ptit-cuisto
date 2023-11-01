@@ -56,6 +56,10 @@ body > .container {
 
 /* -------------------- Homepage -------------------- */
 
+.carousel-inner {
+    border-radius: 8px;
+}
+
 .carousel img, .home_content .card img {
     object-fit: cover;
     width: 100%;
@@ -78,6 +82,42 @@ body > .container {
 
 .recent_recipes > div {
     gap: 1rem;
+}
+
+div.home_content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 2rem 0;
+}
+
+div.home_content article {
+    flex: 1;
+}
+
+div.edito {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.edito *:not(div.edito:last-child) {
+    margin-bottom: 1rem;
+}
+
+div.edito img {
+    max-width: 400px;
+    width: 80%;
+}
+
+div.edito p {
+    text-align: justify;
 }
 
 /* -------------------- Recipe filter -------------------- */
@@ -376,6 +416,10 @@ div.page_number a, div.page_number button {
 @media screen and (max-width: 768px) {
     article#recipe_view {
         flex-direction: column;
+    }
+
+    div.home_content {
+        flex-direction: column-reverse;
     }
 }
 
