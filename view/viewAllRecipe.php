@@ -8,7 +8,7 @@
         }
         ?>
         <div class="card">
-            <img class="card-img-top" src="<?= $recipe['rec_image_src'] ?>">
+            <img class="card-img-top" src="<?= $recipe['rec_image_src'] ?>" alt="Illustration de <?= $recipe['rec_title'] ?>">
             <div class="card-body">
                 <h4 class="card-title">
                     <?= $recipe['rec_title'] ?>
@@ -37,8 +37,8 @@
                         ?>
                     </div>
                 </div>
-                <a href="index.php?controller=recipes&action=read&id=<?= $recipe['rec_id'] ?>">
-                    <button class="btn btn-primary" type="button">Consulter la recette</button>
+                <a href="index.php?controller=recipes&action=read&id=<?= $recipe['rec_id'] ?>" class="btn btn-primary">
+                    Consulter la recette
                 </a>
             </div>
         </div>

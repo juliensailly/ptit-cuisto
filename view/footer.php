@@ -36,8 +36,8 @@
     </div>
     <!-- Copyright -->
 </footer>
-</body>
 <script src="resources/script/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/880ee86f7a.js" crossorigin="anonymous"></script>
+</body>
 
 </html>

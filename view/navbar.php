@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -12,8 +12,7 @@
     </title>
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-    <script src=""></script> <!-- Inclure ici votre js -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> <!-- Inclure ici votre favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 </head>
@@ -21,7 +20,7 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-light" id="neubar">
         <div class="container">
-            <img src="../resources/img/Logo.png" height="60" />
+            <img src="../resources/img/Logo.png" height="60" alt="Logo de l'application">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
