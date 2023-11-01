@@ -23,13 +23,14 @@ body > .container {
     margin-top: 1rem;
     margin-bottom: 1rem;
     flex: 1;
+    max-width: 1000px;
 }
 
 /* Navbar */
 
 #neubar {
     background: #7890cd;
-    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4)
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 #neubar .dropdown-menu a:hover {
@@ -41,7 +42,6 @@ body > .container {
 }
 
 #neubar a {
-
     padding-left: 12px;
     padding-right: 12px;
 }
@@ -50,8 +50,105 @@ body > .container {
     background: #7890cd;
 }
 
-#txt:hover{
+#txt:hover {
     color: black;
+}
+
+/* -------------------- Homepage -------------------- */
+
+.carousel-inner {
+    border-radius: 8px;
+}
+
+.home_content .card img {
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.carousel img {
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+}
+
+.carousel h5 {
+    text-shadow: 0px 0px 6px #000000, 0px 0px 6px #000000;
+}
+
+.carousel h5 a {
+    color: var(--background-color);
+    text-decoration: none;
+}
+
+.recent_recipes div {
+    display: flex;
+    flex-direction: column;
+}
+
+.recent_recipes > div {
+    gap: 1rem;
+}
+
+div.home_content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 2rem 0;
+}
+
+div.home_content article {
+    flex: 1;
+}
+
+div.edito {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.edito *:not(div.edito:last-child) {
+    margin-bottom: 1rem;
+}
+
+div.edito img {
+    max-width: 400px;
+    width: 80%;
+}
+
+div.edito p {
+    text-align: justify;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+    background-color: var(--primary-color);
+}
+
+nav a.nav-link {
+    background-image: linear-gradient(
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0)
+        ),
+        linear-gradient(
+            var(--background-color), 
+            var(--background-color)
+    );
+    background-size: 100% 2px, 0 2px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease-in-out;
+}
+
+nav a.nav-link:hover,
+nav a.nav-link:focus {
+    background-size: 0 2px, 100% 2px;
 }
 
 /* -------------------- Recipe filter -------------------- */
@@ -77,7 +174,8 @@ div#results img {
 
 /* Search by ingredient */
 
-#ingredientsResults li, #ingredientsSelected li {
+#ingredientsResults li,
+#ingredientsSelected li {
     cursor: pointer;
 }
 
@@ -337,11 +435,12 @@ div.page_number {
     justify-content: center;
 }
 
-div.page_number span{
+div.page_number span {
     max-width: 100px;
 }
 
-div.page_number a, div.page_number button {
+div.page_number a,
+div.page_number button {
     max-width: 50px;
 }
 
@@ -350,6 +449,14 @@ div.page_number a, div.page_number button {
 @media screen and (max-width: 768px) {
     article#recipe_view {
         flex-direction: column;
+    }
+
+    div.home_content {
+        flex-direction: column-reverse;
+    }
+
+    .carousel img {
+        aspect-ratio: 16 / 9;
     }
 }
 
