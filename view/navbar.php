@@ -48,7 +48,7 @@
                         </ul>
                     </li>
                     <li class='nav-item'>
-                        <a href='index.php?controller=connexion' class='nav-link mx-2 text-white txt'>Connexion</a>
+                        <p class='nav-link mx-2 text-white txt sign-in-btn'>Connexion</p>
                     </li>
                 </ul>
             </div>

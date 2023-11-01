@@ -1,29 +1,29 @@
-<div class="sign-up-background">
-    <div class="sign-up-window" style="display: none;">
+<div class="sign-up-background" style="display: none;">
+    <div class="sign-in-window">
         <div class="sign-in-header">
             <h3>Connexion</h3>
             <img src="resources/img/xmark-solid.svg" alt="xmark icon" class="xmark">
         </div>
-        <form action="javascript:signUp()">
+        <form action="javascript:signIn()">
             <div>
-                <label for="mail">Adresse mail :</label>
-                <input type="email" id="mail" name="mail" class="form-control" required>
+                <label for="sign-in-mail">Adresse mail :</label>
+                <input type="email" id="sign-in-mail" name="sign-in-mail" class="form-control" required>
             </div>
             <div>
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="password" name="password" class="form-control" required>
+                <label for="sign-in-password">Mot de passe :</label>
+                <input type="password" id="sign-in-password" name="sign-in-password" class="form-control" required>
             </div>
             <input type="submit" class="btn btn-primary" value="Se connecter">
         </form>
-        <p>Vous n'avez pas de compte ?<br><span class="sign-in-link">Inscrivez-vous</span></p>
+        <p>Vous n'avez pas de compte ?<br><span class="sign-up-link">Inscrivez-vous</span></p>
     </div>
 
-    <div class="sign-in-window">
+    <div class="sign-up-window" style="display: none;">
         <div class="sign-in-header">
             <h3>Inscription</h3>
             <img src="resources/img/xmark-solid.svg" alt="xmark icon" class="xmark">
         </div>
-        <form action="javascript:signIn()">
+        <form action="javascript:signUp()">
             <div id="name-inputs">
                 <div>
                     <label for="name">Prénom :</label>
@@ -39,12 +39,12 @@
                 <input type="text" id="pseudo" name="pseudo" class="form-control" required>
             </div>
             <div>
-                <label for="mail">Adresse mail :</label>
-                <input type="email" id="mail" name="mail" class="form-control" required>
+                <label for="sign-up-mail">Adresse mail :</label>
+                <input type="email" id="sign-up-mail" name="sign-up-mail" class="form-control" required>
             </div>
             <div>
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="password" name="password" class="form-control" required>
+                <label for="sign-up-password">Mot de passe :</label>
+                <input type="password" id="sign-up-password" name="sign-up-password" class="form-control" required>
             </div>
             <div>
                 <label for="password2">Confirmer le mot de passe :</label>
@@ -52,6 +52,6 @@
             </div>
             <input type="submit" class="btn btn-primary" value="S'inscrire'">
         </form>
-        <p>Vous avez déjà un compte ?<br><span class="sign-up-link">Connectez-vous</span></p>
+        <p>Vous avez déjà un compte ?<br><span class="sign-in-link">Connectez-vous</span></p>
     </div>
 </div>

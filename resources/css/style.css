@@ -41,7 +41,7 @@ body > .container {
     margin: auto 4px;
 }
 
-#neubar a {
+#neubar .nav-link {
     padding-left: 12px;
     padding-right: 12px;
 }
@@ -207,7 +207,8 @@ div.edito p {
     background-color: var(--primary-color);
 }
 
-nav a.nav-link {
+nav .nav-link {
+    cursor: pointer;
     background-image: linear-gradient(
             rgba(255, 255, 255, 0),
             rgba(255, 255, 255, 0)
@@ -222,8 +223,8 @@ nav a.nav-link {
     transition: background-size 0.3s ease-in-out;
 }
 
-nav a.nav-link:hover,
-nav a.nav-link:focus {
+nav .nav-link:hover,
+nav .nav-link:focus {
     background-size: 0 2px, 100% 2px;
 }
 
