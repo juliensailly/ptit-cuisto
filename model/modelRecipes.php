@@ -138,5 +138,51 @@ class modelRecipes extends model
     $req_prep->execute();
     return $req_prep->fetchAll();
   }
+
+  public static function getCategoryByID($cat_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "SELECT cat_title FROM category WHERE cat_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $cat_id, PDO::PARAM_INT);
+    $req_prep->execute();
+    return $req_prep->fetch();
+  }
+
+  public static function getIngredientByTitle($title) {
+    $model = new Model();
+    $model->init();
+    $sql = "SELECT ing_id FROM ingredient WHERE upper(ing_title) = upper(:title)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':title', $title, PDO::PARAM_STR);
+    $req_prep->execute();
+    return $req_prep->fetch();
+  }
+
+  public static function createIngredient($title) {
+    $model = new Model();
+    $model->init();
+    $sql = "INSERT INTO ingredient (ing_title) VALUES (:title)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':title', $title, PDO::PARAM_STR);
+    $req_prep->execute();
+    return $req_prep->fetch();
+  }
+
+  public static function createRecipe($rec_title, $rec_content, $rec_summary, $cat_id, $users_id, $rec_nb_person, $rec_image_src = "") {
+    $model = new Model();
+    $model->init();
+    $sql = "INSERT INTO recipes (rec_title, rec_content, rec_summary, cat_id, rec_creation_date, rec_modification_date, users_id, rec_nb_person) VALUES (:title, :content, :summary, :cat_id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :users_id, :rec_nb_person, :rec_image_src)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':title', $rec_title, PDO::PARAM_STR);
+    $req_prep->bindParam(':content', $rec_content, PDO::PARAM_STR);
+    $req_prep->bindParam(':summary', $rec_summary, PDO::PARAM_STR);
+    $req_prep->bindParam(':cat_id', $cat_id, PDO::PARAM_INT);
+    $req_prep->bindParam(':users_id', $users_id, PDO::PARAM_INT);
+    $req_prep->bindParam(':rec_nb_person', $rec_nb_person, PDO::PARAM_INT);
+    $req_prep->bindParam(':rec_image_src', $rec_image_src, PDO::PARAM_STR);
+    $req_prep->execute();
+    return $req_prep->fetch();
+  }
 }
 
