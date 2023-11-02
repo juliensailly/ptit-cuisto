@@ -47,9 +47,30 @@
                             <li><a class="dropdown-item text-white txt" href="index.php?controller=filtre&action=ingredientsSearch">Ingrédients</a></li>
                         </ul>
                     </li>
+                    <?php
+                        if(isset($_SESSION['login'])){
+                            if($_SESSION['login'] === false){
+                    ?>
                     <li class='nav-item'>
                         <p class='nav-link mx-2 text-white txt sign-in-btn'>Connexion</p>
                     </li>
+                    <?php
+                        }else{
+
+                    ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link mx-2 dropdown-toggle text-white txt" href="" id="navbarDropdownMenuLink"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Compte
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item text-white txt" href="index.php?controller=account&action=showProfil">Voir profil</a></li>
+                            <li><a class="dropdown-item text-white txt" href="index.php?controller=sign&action=signOut">Deconnexion</a></li>
+                        </ul>
+                    </li>
+                    <?php
+                        }
+                    }?>
                 </ul>
             </div>
         </div>

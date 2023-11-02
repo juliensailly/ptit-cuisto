@@ -14,13 +14,15 @@ class controllerSign{
     $password = $_POST['sign-in-password'];
 
     $user = modelAuthentification::checkPassword($mail, $password);
-    if ($user == false) {
+    if ($user === -1) {
         controllerErreur::erreur("Adresse mail ou mot de passe incorrect");
+        return;
+    }else if($user === 0){
+        controllerErreur::erreur("Pas d'utilisateur avec cette adresse mail");
         return;
     }
 
     $_SESSION['login'] = $user;
-
   }
 
   public static function signUp(){
@@ -71,5 +73,10 @@ class controllerSign{
     $user = new modelCreation($name, $surname, $pseudo, $mail, $password, $type);
     $user->createAccount($name, $surname, $pseudo, $mail, $password, $type);
     header("location:".$url);
+  }
+
+  public static function signOut(){
+    $_SESSION['login'] = false;
+    header("location:".$_SERVER['HTTP_REFERER']);
   }
 }
