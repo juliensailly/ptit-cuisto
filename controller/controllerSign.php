@@ -35,12 +35,31 @@ class controllerSign{
         return;
     }
     
+    $pattern_name = "/^([A-Za-zÀ-ÖØ-öø-ÿ])$/";
+    $pattern_email = "/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/";
+    
+    if(!preg_match($pattern_name, $_POST['name']) || !preg_match($pattern_name, $_POST['surname'])){
+      controllerErreur::erreur("Le prénom ou le nom n'est pas valide");
+      return;
+    }
+
+    if(!preg_match($pattern_email, $_POST['sign-up-mail'])){
+      controllerErreur::erreur("L'adresse mail n'est pas valide");
+      return;
+    }
+
+
     $name = $_POST['name'];
     $surname = $_POST['surname'];
     $pseudo = $_POST['pseudo'];
     $mail = $_POST['sign-up-mail'];
     $password = $_POST['sign-up-password'];
     $password2 = $_POST['password2'];
+    
+    if(modelCreation::checkIfEmailUsed($mail) != 0){
+      controllerErreur::erreur("L'adresse mail est déjà utilisée");
+      return;
+    }
 
     if($password != $password2){
       controllerErreur::erreur("Les mots de passe ne correspondent pas");

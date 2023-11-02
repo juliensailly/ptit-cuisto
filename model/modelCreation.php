@@ -84,4 +84,17 @@ class modelCreation{
 
         $req_prep->execute($values);
     }
+
+    public static function checkIfEmailUsed($mail){
+        $model = new model();
+        $model->init();
+        $sql = "SELECT count(*) FROM users WHERE users_email = :mail";
+        $req_prep = model::$pdo->prepare($sql);
+        $values = array(
+            "mail" => $mail
+        );
+        $req_prep->execute($values);
+        $result = $req_prep->fetch(PDO::FETCH_NUM);
+        return $result[0];
+    }
 }
