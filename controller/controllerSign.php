@@ -37,7 +37,7 @@ class controllerSign{
         return;
     }
     
-    $pattern_name = "/^([A-Za-zÀ-ÖØ-öø-ÿ])$/";
+    $pattern_name = "/^([A-Za-zÀ-ÖØ-öø-ÿ]+)$/";
     $pattern_email = "/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/";
     
     if(!preg_match($pattern_name, $_POST['name']) || !preg_match($pattern_name, $_POST['surname'])){
