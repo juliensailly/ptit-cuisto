@@ -1,5 +1,6 @@
 <?php
 require_once(File::build_path(array("model", "modelRecipes.php")));
+require_once(File::build_path(array("model", "modelFiltres.php")));
 require_once(File::build_path(array("lib", "session.php")));
 
 class controllerRecipes{
@@ -32,5 +33,32 @@ class controllerRecipes{
     require (File::build_path(array("view", "navbar.php")));
     require	(File::build_path(array("view", "viewRecipe.php")));
     require (File::build_path(array("view", "footer.php")));
+  }
+
+  public static function createForm() {
+    $pageTitle = "Créer une recette";
+    if ($_SESSION['login'] === false) {
+      controllerErreur::erreur("Vous devez être connecté pour créer une recette");
+      return;
+    }
+
+    $tags = modelRecipes::getAllTags();
+    $categories = modelFiltres::getCategories();
+    
+    require (File::build_path(array("view", "navbar.php")));
+    require	(File::build_path(array("view", "addRecipe.php")));
+    require (File::build_path(array("view", "footer.php")));
+  }
+
+  public static function create() {
+    if ($_SESSION['login'] === false) {
+      controllerErreur::erreur("Vous devez être connecté pour créer une recette");
+      return;
+    }
+    if (!isset($_POST['title']) || !isset($_POST['content']) || !isset($_POST['summary']) || !isset($_POST['catId']) || !isset($_POST['nbPerson'])) {
+      controllerErreur::erreur("Erreur lors de la création de la recette");
+      return;
+    }
+    
   }
 }
