@@ -36,6 +36,7 @@ function init() {
 
     addIngredientBtn.addEventListener("click", function (e) {
         if (ingredientSearch.value == "" || ingredientQuantity.value == "") return;
+        if (ingredientSelected.find((ingredient) => ingredient.title === ingredientSearch.value)) return;
         ingredientSelected.push({
             title: ingredientSearch.value,
             quantity: ingredientQuantity.value,

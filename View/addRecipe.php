@@ -1,17 +1,17 @@
 <h2>Ajouter une recette</h2>
 
-<form action="index.php?controller=recipes&action=create" method="post">
+<form action="index.php?controller=recipes&action=create" method="post" id="addRecipeForm">
     <div>
         <label for="title">Titre :</label>
-        <input type="text" id="title" name="title" class="form-control" required>
+        <input type="text" id="title" name="title" class="form-control" maxlength="200" required>
     </div>
     <div>
         <label for="summary">Description :</label>
-        <textarea id="summary" name="summary" class="form-control" required></textarea>
+        <textarea id="summary" name="summary" class="form-control" maxlength="300" required></textarea>
     </div>
     <div>
         <label for="content">Instructions :</label>
-        <textarea id="content" name="content" class="form-control" required></textarea>
+        <textarea id="content" name="content" class="form-control" maxlength="2000" required></textarea>
     </div>
     <div>
         <label for="category">Catégorie :</label>
@@ -23,40 +23,45 @@
             ?>
         </select>
     </div>
-    <div class="ingredientsChoiceList">
+    <div>
         <label>Ajouter des ingredients :</label>
-        <div class="ingredientChoice">
-            <input type="text" name="ingredientSearch" id="ingredientSearch" class="form-control"
-                placeholder="Veuillez entrer le nom d'un ingrédient">
-            <div id="ingredientsResults">
-                <ul class="list-group">
-                </ul>
+        <div class="ingredientsChoiceList">
+            <div class="d-flex">
+                <div id="ingredientsResults">
+                    <input type="text" name="ingredientSearch" id="ingredientSearch" class="form-control"
+                        placeholder="Veuillez entrer le nom d'un ingrédient">
+                    <ul class="list-group">
+                    </ul>
+                </div>
+                <input type="text" name="ingredientQuantity" id="ingredientQuantity" class="form-control"
+                    placeholder="Veuillez entrer la quantité correspondante">
             </div>
-            <input type="text" name="ingredientQuantity" id="ingredientQuantity" class="form-control"
-                placeholder="Veuillez entrer la quantité correspondante">
-            <button class="btn" id="addIngredientBtn">Ajouter l'ingrédient</button>
+            <button class="btn btn-secondary" id="addIngredientBtn">Ajouter l'ingrédient</button>
             <input type="text" name="selectedIngredients" id="selectedIngredients" hidden>
-        </div>
-        <ul class="ingredientsList">
+            <hr>
+            <ul class="ingredientsList">
 
-        </ul>
+            </ul>
+        </div>
     </div>
-    <div class="tagsChoice">
+    <div>
         <label>Ajouter des tags :</label>
         <div class="tagsChoice">
-            <input type="text" name="tagSearch" id="tagSearch" class="form-control"
-                placeholder="Veuillez entrer le nom d'un tag">
             <div id="tagsResults">
+                <input type="text" name="tagSearch" id="tagSearch" class="form-control"
+                    placeholder="Veuillez entrer le nom d'un tag">
                 <ul class="list-group">
                 </ul>
             </div>
-            <button class="btn" id="addTagBtn">Ajouter le tag</button>
+            <button class="btn btn-secondary" id="addTagBtn">Ajouter le tag</button>
             <input type="text" name="selectedTags" id="selectedTags" hidden>
-        </div>
-        <ul class="tagsList">
+            <hr>
+            <ul class="tagsList">
 
-        </ul>
+            </ul>
+        </div>
     </div>
+
     <div>
         <label for="image">Image :</label>
         <input type="file" id="image" name="image" class="form-control" accept="image/png, image/jpeg" required>
