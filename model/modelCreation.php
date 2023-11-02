@@ -69,7 +69,7 @@ class modelCreation{
     public static function createAccount($prenom, $nom, $pseudo, $mail, $password, $type){
         $model = new model();
         $model->init();
-        $sql = "INSERT INTO users (users_name, users_lastname, users_pseudo, users_email, users_password, users_type) VALUES (:name, :surname, :pseudo, :mail, :password, :type)";
+        $sql = "INSERT INTO users (users_name, users_lastname, users_pseudo, users_email, users_password, users_type, users_inscription_date) VALUES (:name, :surname, :pseudo, :mail, :password, :type, :date_ins)";
         $req_prep = $model::$pdo->prepare($sql);
         $values = array(
             "surname" => $nom,
@@ -77,7 +77,8 @@ class modelCreation{
             "pseudo" => $pseudo,
             "mail" => $mail,
             "password" => password_hash($password, PASSWORD_DEFAULT),
-            "type" => $type
+            "type" => $type,
+            "date_ins" => date("Y-m-d H:i:s")
         );
         print_r($values);
         print_r($sql);

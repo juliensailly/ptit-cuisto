@@ -35,15 +35,13 @@ class modelAuthentification
         $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
         $user = $req_prep->fetch();
         if ($user == false) {
-            echo "No user with this email found <br>";
-            return false;
+            return 0;
         } else {
             if (password_verify($password, $user->users_password)) {
-                echo "Authentification successfull <br>";
+                header("location:" . $_SERVER['HTTP_REFERER']);
                 return $user;
             } else {
-                echo "Passwords does not match <br>";
-                return false;
+                return -1;
             }
         }
     }
