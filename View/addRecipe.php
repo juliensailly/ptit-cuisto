@@ -34,7 +34,8 @@
             </div>
             <input type="text" name="ingredientQuantity" id="ingredientQuantity" class="form-control"
                 placeholder="Veuillez entrer la quantité correspondante">
-            <button class="btn">Ajouter l'ingrédient</button>
+            <button class="btn" id="addIngredientBtn">Ajouter l'ingrédient</button>
+            <input type="text" name="selectedIngredients" id="selectedIngredients" hidden>
         </div>
         <ul class="ingredientsList">
 
@@ -49,7 +50,8 @@
                 <ul class="list-group">
                 </ul>
             </div>
-            <button class="btn">Ajouter le tag</button>
+            <button class="btn" id="addTagBtn">Ajouter le tag</button>
+            <input type="text" name="selectedTags" id="selectedTags" hidden>
         </div>
         <ul class="tagsList">
 
@@ -57,9 +59,10 @@
     </div>
     <div>
         <label for="image">Image :</label>
-        <input type="file" id="image" name="image" class="form-control" required>
+        <input type="file" id="image" name="image" class="form-control" accept="image/png, image/jpeg" required>
     </div>
     <input type="submit" class="btn btn-primary" value="Ajouter">
 </form>
 
 <script src="resources/script/recipeIngredientsChoice.js"></script>
+<script src="resources/script/recipeTagsChoice.js"></script>

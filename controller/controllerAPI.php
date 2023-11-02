@@ -40,4 +40,15 @@ class controllerAPI{
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data);
     }
+
+    public static function getTags() {
+        if (!isset($_GET["searchText"])) {
+            $searchText = "";
+        } else {
+            $searchText = $_GET["searchText"];
+        };
+        $data = modelAPI::getTags($searchText);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
+    }
 }

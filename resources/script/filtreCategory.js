@@ -16,7 +16,7 @@ function displayRecipe() {
     let xhr = new XMLHttpRequest();
     xhr.open(
         "GET",
-        "http://localhost/index.php?controller=API&action=categoryFilter&id=" +
+        "index.php?controller=API&action=categoryFilter&id=" +
             document.querySelector("#category").value,
         true
     );

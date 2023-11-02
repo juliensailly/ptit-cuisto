@@ -2,7 +2,7 @@ function init() {
     document.querySelector('#title').addEventListener('input', function () {
         // Request AJAX
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://localhost/index.php?controller=API&action=titleFilter&words=' + this.value, true);
+        xhr.open('GET', 'index.php?controller=API&action=titleFilter&words=' + this.value, true);
         xhr.send();
         xhr.onload = function () {
             if (xhr.status === 200) {
