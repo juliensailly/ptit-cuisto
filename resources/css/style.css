@@ -26,7 +26,7 @@ body > .container {
     max-width: 1000px;
 }
 
-/* Navbar */
+/* -------------------- Navbar -------------------- */
 
 #neubar {
     background: #7890cd;
@@ -41,9 +41,10 @@ body > .container {
     margin: auto 4px;
 }
 
-#neubar a {
+#neubar .nav-link {
     padding-left: 12px;
     padding-right: 12px;
+    margin-bottom: 0;
 }
 
 #neubar .dropdown-menu {
@@ -53,6 +54,82 @@ body > .container {
 #txt:hover {
     color: black;
 }
+
+/* -------------- Sign-up / Sign-in --------------- */
+
+.sign-up-background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.sign-up-window, .sign-in-window {
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.sign-in-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.sign-in-header .xmark {
+    display: block;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+}
+
+.sign-up-window form, .sign-in-window form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sign-up-window form div, .sign-in-window form div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+div#name-inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+div#name-inputs > div {
+    flex: 1;
+}
+
+.sign-up-window p, .sign-in-window p {
+    margin: 1.5rem 0 0.5rem 0;
+    text-align: center;
+}
+
+.sign-in-link, .sign-up-link {
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 
 /* -------------------- Homepage -------------------- */
 
@@ -131,7 +208,8 @@ div.edito p {
     background-color: var(--primary-color);
 }
 
-nav a.nav-link {
+nav .nav-link {
+    cursor: pointer;
     background-image: linear-gradient(
             rgba(255, 255, 255, 0),
             rgba(255, 255, 255, 0)
@@ -146,8 +224,8 @@ nav a.nav-link {
     transition: background-size 0.3s ease-in-out;
 }
 
-nav a.nav-link:hover,
-nav a.nav-link:focus {
+nav .nav-link:hover,
+nav .nav-link:focus {
     background-size: 0 2px, 100% 2px;
 }
 

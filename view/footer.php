@@ -28,6 +28,7 @@
 </footer>
 <script src="resources/script/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/880ee86f7a.js" crossorigin="anonymous"></script>
+<script src="resources/script/sign-in.js"></script>
 </body>
 
 </html>
