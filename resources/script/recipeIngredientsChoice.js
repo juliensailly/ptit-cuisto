@@ -35,6 +35,7 @@ function init() {
     });
 
     addIngredientBtn.addEventListener("click", function (e) {
+        ingredientsResults.innerHTML = "";
         if (ingredientSearch.value == "" || ingredientQuantity.value == "") return;
         if (ingredientSelected.find((ingredient) => ingredient.title === ingredientSearch.value)) return;
         ingredientSelected.push({

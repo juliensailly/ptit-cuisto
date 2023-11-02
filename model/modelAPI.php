@@ -48,7 +48,7 @@ class modelAPI {
   public static function getIngredients($searchText = "") {
     $model = new model();
     $model->init();
-    $sql = "SELECT * FROM ingredient where upper(ing_title) LIKE '%".strtoupper($searchText)."%' LIMIT 10";
+    $sql = "SELECT * FROM ingredient where upper(ing_title) LIKE '%".strtoupper($searchText)."%' LIMIT 5";
     $req_prep = $model::$pdo->prepare($sql);
     $req_prep->execute();
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
@@ -80,7 +80,7 @@ class modelAPI {
   public static function getTags($searchText) {
     $model = new model();
     $model->init();
-    $sql = "SELECT * FROM tag where upper(tag_title) LIKE '%".strtoupper($searchText)."%' LIMIT 10";
+    $sql = "SELECT * FROM tag where upper(tag_title) LIKE '%".strtoupper($searchText)."%' LIMIT 5";
     $req_prep = $model::$pdo->prepare($sql);
     $req_prep->execute();
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');

@@ -34,6 +34,7 @@ function init() {
     });
 
     addTagBtn.addEventListener("click", function (e) {
+        tagsResults.innerHTML = "";
         if (tagSearch.value == "") return;
         if (selectedTags.find((tag) => tag.title === tagSearch.value)) return;
         selectedTags.push({

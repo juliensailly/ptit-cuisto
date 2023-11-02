@@ -90,8 +90,8 @@ class controllerRecipes
       $ingredients = array();
       $tags = array();
     }
-
-    modelRecipes::createRecipe($_POST['title'], $_POST['content'], $_POST['summary'], $_POST['category'], $_SESSION['login']['users_id'], $_POST['nbPersons']);
+    var_dump($_SESSION['login']);
+    modelRecipes::createRecipe($_POST['title'], $_POST['content'], $_POST['summary'], $_POST['category'], $_SESSION['login']->users_id, $_POST['nbPerson']);
 
     foreach ($ingredients as $ingredient) {
       if (!preg_match($regex, $ingredient['title']) || !preg_match($regex, $ingredient['quantity'])) {

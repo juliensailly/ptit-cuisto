@@ -15,7 +15,7 @@
 
             <div>
                 <label for="image">Image :</label>
-                <input type="file" id="image" name="image" class="form-control" accept="image/png, image/jpeg" required>
+                <input type="file" id="image" name="image" class="form-control" accept="image/png, image/jpeg">
             </div>
 
             <div>
@@ -32,6 +32,16 @@
                     }
                     ?>
                 </select>
+            </div>
+
+            <div>
+                <label for="nbPerson">Nombre de personne(s) :</label>
+                <br>
+                <div class="person_number btn-group">
+                    <button type="button" class="btn btn-outline-primary" id="removePerson" onclick="javascript:(parseInt(document.getElementById('nbPerson').value) > 1 ? (document.getElementById('nbPerson').value = parseInt(document.getElementById('nbPerson').value) - 1) : void(0))">-</button>
+                    <input type="number" min="1" name="nbPerson" id="nbPerson" class="btn btn-outline-primary" value="1"></input>
+                    <button type="button" class="btn btn-outline-primary" id="addPerson" onclick="javascript:(document.getElementById('nbPerson').value = parseInt(document.getElementById('nbPerson').value) + 1)">+</button>
+                </div>
             </div>
         </div>
         <div class="column">
