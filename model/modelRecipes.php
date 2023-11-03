@@ -62,14 +62,15 @@ class modelRecipes extends model
           $page = $_GET['page'];
         }
       }
-      $sql = "SELECT rec_id, rec_title, cat_id, cat_title, rec_summary, rec_image_src FROM recipes
+      $sql = "SELECT rec_id, rec_title, cat_id, cat_title, rec_summary, rec_image_src, isAuthorised FROM recipes
       join category using (cat_id)
+      where isAuthorised = 1
       order by rec_modification_date desc, rec_creation_date desc LIMIT " . (($page - 1) * 10) . "," . 10;
       $req_prep = model::$pdo->prepare($sql);
       $req_prep->execute();
       return $req_prep->fetchAll();
     } else {
-      $sql = "SELECT rec_title, cat_id, cat_title, rec_image_src, users_id, users_pseudo, rec_creation_date, rec_modification_date, rec_nb_person, rec_content FROM recipes
+      $sql = "SELECT rec_title, cat_id, cat_title, rec_image_src, users_id, users_pseudo, rec_creation_date, rec_modification_date, rec_nb_person, rec_content, isAuthorised FROM recipes
       join category using (cat_id)
       join users using (users_id)
       WHERE rec_id = $rec_id";
@@ -185,7 +186,6 @@ class modelRecipes extends model
     $req_prep->bindParam(':users_id', $users_id, PDO::PARAM_INT);
     $req_prep->bindParam(':rec_nb_person', $rec_nb_person, PDO::PARAM_INT);
     $req_prep->bindParam(':rec_image_src', $rec_image_src, PDO::PARAM_STR);
-    // echo $req_prep->queryString;
     $req_prep->execute();
     if ($req_prep->rowCount() > 0) {
       return model::$pdo->lastInsertId();

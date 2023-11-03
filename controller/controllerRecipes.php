@@ -34,7 +34,12 @@ class controllerRecipes
     $comments = modelRecipes::getRecipeComments($_GET["id"]);
     $ingredients = modelRecipes::getRecipeIngredients($_GET["id"]);
     require(File::build_path(array("view", "navbar.php")));
-    require(File::build_path(array("view", "viewRecipe.php")));
+    if ($recipe['isAuthorised'] == 0 && (!isset($_SESSION['login']) || $_SESSION['login']->users_id != $recipe['users_id'])) {
+      controllerErreur::erreur("Cette recette n'est pas encore autorisée");
+      return;
+    }else {
+      require(File::build_path(array("view", "viewRecipe.php")));
+    }
     require(File::build_path(array("view", "footer.php")));
   }
 

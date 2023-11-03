@@ -1,4 +1,11 @@
-<?php global $recipe_img_path ?>
+<?php 
+global $recipe_img_path; 
+
+if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['login']->users_id == $recipe['users_id']) {
+    echo "<div class='alert alert-warning' role='alert'>Cette recette n'a pas encore été authorisée</div>";
+}
+?>
+
 <h2 class="recipe_title">
     <?= $recipe['rec_title'] ?>
 </h2>
