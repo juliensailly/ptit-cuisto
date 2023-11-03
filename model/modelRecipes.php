@@ -70,7 +70,7 @@ class modelRecipes extends model
       $req_prep->execute();
       return $req_prep->fetchAll();
     } else {
-      $sql = "SELECT rec_title, cat_id, cat_title, rec_image_src, users_id, users_pseudo, rec_creation_date, rec_modification_date, rec_nb_person, rec_content, isAuthorised FROM recipes
+      $sql = "SELECT rec_id, rec_title, rec_summary, cat_id, cat_title, rec_image_src, users_id, users_pseudo, rec_creation_date, rec_modification_date, rec_nb_person, rec_content, isAuthorised FROM recipes
       join category using (cat_id)
       join users using (users_id)
       WHERE rec_id = $rec_id";
@@ -246,6 +246,47 @@ class modelRecipes extends model
     $sql = "UPDATE recipes SET rec_image_src = :img_path WHERE rec_id = :id";
     $req_prep = model::$pdo->prepare($sql);
     $req_prep->bindParam(':img_path', $img_path, PDO::PARAM_STR);
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    return $req_prep->execute();
+  }
+
+  public static function updateRecipeField($rec_id, $column_name, $new_value, $isString = true) {
+    $model = new Model();
+    $model->init();
+    $sql = "UPDATE recipes SET $column_name = ";
+    if ($isString) {
+      $sql .= "'$new_value' WHERE rec_id = $rec_id";
+    } else {
+      $sql .= "$new_value WHERE rec_id = $rec_id";
+    }
+    $req_prep = model::$pdo->prepare($sql);
+    return $req_prep->execute();
+  }
+
+  public static function deleteRecipeIngredients($rec_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "DELETE FROM ingredients_list WHERE rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    return $req_prep->execute();
+  }
+
+  public static function deleteRecipeTags($rec_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "DELETE FROM tags_list WHERE rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    return $req_prep->execute();
+  }
+
+  public static function setIsAuthorised($rec_id, $value) {
+    $model = new Model();
+    $model->init();
+    $sql = "UPDATE recipes SET isAuthorised = :value WHERE rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':value', $value, PDO::PARAM_INT);
     $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
     return $req_prep->execute();
   }

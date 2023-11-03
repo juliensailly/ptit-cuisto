@@ -274,7 +274,11 @@ h6.recipe_category.card-subtitle a {
 }
 
 h2.recipe_title {
+    display: flex;
     margin-bottom: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 h4.recipe_category {

@@ -43,6 +43,9 @@ function init() {
         tagSearch.value = "";
         updateSelectedTags();
     });
+
+    if (selectedTagsHiddenInput.value !== "") selectedTags = JSON.parse(selectedTagsHiddenInput.value);
+
     updateSelectedTags();
 }
 

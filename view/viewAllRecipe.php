@@ -9,7 +9,8 @@
         }
         ?>
         <div class="card">
-            <img class="card-img-top" src="<?= $recipe_img_path . $recipe['rec_image_src'] ?>" alt="Illustration de <?= $recipe['rec_title'] ?>">
+            <img class="card-img-top" src="<?= $recipe_img_path . $recipe['rec_image_src'] ?>"
+                alt="Illustration de <?= $recipe['rec_title'] ?>">
             <div class="card-body">
                 <h4 class="card-title">
                     <?= $recipe['rec_title'] ?>
@@ -62,12 +63,20 @@
     <?php
     if ($page > 1) {
         ?>
-        <a href="index.php?controller=recipes&action=readAll&page=<?= $page - 1 ?>" class="btn btn-outline-primary"><i
-                class="fa-solid fa-arrow-left"></i></a>
+        <a href="index.php?controller=recipes&action=readAll&page=<?= $page - 1 ?>" class="btn btn-outline-primary"><svg
+                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill"
+                viewBox="0 0 16 16">
+                <path
+                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+            </svg></a>
         <?php
     } else {
         ?>
-        <button type="button" class="btn btn-outline-primary" disabled><i class="fa-solid fa-arrow-left"></i></button>
+        <button type="button" class="btn btn-outline-primary" disabled><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                <path
+                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+            </svg></button>
         <?php
     }
     ?>
@@ -83,6 +92,10 @@
         }
         ?>
     </span>
-    <a href="index.php?controller=recipes&action=readAll&page=<?= $page + 1 ?>" class="btn btn-outline-primary"><i
-            class="fa-solid fa-arrow-right"></i></a>
+    <a href="index.php?controller=recipes&action=readAll&page=<?= $page + 1 ?>" class="btn btn-outline-primary"><svg
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill"
+            viewBox="0 0 16 16">
+            <path
+                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+        </svg></a>
 </div>
