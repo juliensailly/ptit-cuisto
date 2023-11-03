@@ -142,6 +142,6 @@ class controllerRecipes
       }
     }
 
-    echo "Insertion réussie";
+    header('Location: index.php?controller=recipes&action=read&id=' . $rec_id);
   }
 }
