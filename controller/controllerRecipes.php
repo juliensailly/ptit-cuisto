@@ -61,7 +61,7 @@ class controllerRecipes
       return;
     }
 
-    $regex = "/^([A-Za-zÀ-ÖØ-öø-ÿ]+)$/";
+    $regex = "/^([A-Za-zÀ-ÖØ-öø-ÿ0-9]+)$/";
     if (!isset($_POST['title']) || !isset($_POST['summary']) || !isset($_POST['content']) || !isset($_POST['category']) || !isset($_POST['selectedIngredients']) || !isset($_POST['selectedTags'])) {
       controllerErreur::erreur("Erreur lors de la création de la recette.<br>" .
         "Les champs obligatoires sont : titre, résumé, contenu et catégorie de la recette.<br>" .
@@ -90,8 +90,8 @@ class controllerRecipes
       $ingredients = array();
       $tags = array();
     }
-    var_dump($_SESSION['login']);
-    modelRecipes::createRecipe($_POST['title'], $_POST['content'], $_POST['summary'], $_POST['category'], $_SESSION['login']->users_id, $_POST['nbPerson']);
+
+    $rec_id = modelRecipes::createRecipe($_POST['title'], $_POST['content'], $_POST['summary'], $_POST['category'], $_SESSION['login']->users_id, $_POST['nbPerson']);
 
     foreach ($ingredients as $ingredient) {
       if (!preg_match($regex, $ingredient['title']) || !preg_match($regex, $ingredient['quantity'])) {
@@ -101,12 +101,38 @@ class controllerRecipes
       }
 
       $ing_id = modelRecipes::getIngredientByTitle($ingredient['title']);
-      if ($ing_id === false) {
-        modelRecipes::createIngredient($ingredient['title']);
-        $ing_id = modelRecipes::getIngredientByTitle($ingredient['title']);
+      if ($ing_id == false) {
+        $ing_id = modelRecipes::createIngredient($ingredient['title']);
       }
 
-      // modelRecipes::createRecipeIngredient($ing_id, $ingredient['quantity']);
+      $quantity = preg_replace('/[a-zA-Z]+/', '', $ingredient['quantity']);
+      $unit = preg_replace('/[0-9]+/', '', $ingredient['quantity']);
+      $quantity = trim($quantity);
+      $unit = trim($unit);
+      if (modelRecipes::createRecipeIngredient($rec_id, $ing_id, $quantity, $unit) == false) {
+        controllerErreur::erreur("Erreur lors de la création de la recette.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+    }
+
+    foreach ($tags as $tag) {
+      if (!preg_match($regex, $tag['title'])) {
+        controllerErreur::erreur("Le texte entré n'est pas valide.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+
+      $tag_id = modelRecipes::getTagByTitle($tag['title']);
+      if ($tag_id == false) {
+        $tag_id = modelRecipes::createTag($tag['title']);
+      }
+
+      if (modelRecipes::createRecipeTag($rec_id, $tag_id) == false) {
+        controllerErreur::erreur("Erreur lors de la création de la recette.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
     }
   }
 }
