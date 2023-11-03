@@ -26,6 +26,7 @@ class controllerAdmin
         $pageTitle = "Tableau de bord - Administration";
 
         $awaitingRecipes = modelAdmin::getAwaitingRecipes();
+        $awaitingComments = modelAdmin::getAwaitingComments();
 
         require(File::build_path(array("view", "navbar.php")));
         require(File::build_path(array("view", "adminDashboard.php")));
@@ -46,6 +47,43 @@ class controllerAdmin
         $recipe = modelRecipes::getRecipe($_GET['id']);
         if (!modelAdmin::validRecipe($_GET['id'])) {
             controllerErreur::erreur("La recette n'a pas pu être validée.");
+            return;
+        }
+
+        controllerAdmin::adminDashboard();
+    }
+
+    public static function validComment()
+    {
+        if (!controllerAdmin::isAdmin()) {
+            controllerErreur::erreur("Vous n'avez pas les droits pour accéder à cette page.");
+            return;
+        }
+        if (!isset($_GET['rec_id']) || !isset($_GET['users_id'])) {
+            controllerErreur::erreur("Les paramètres n'ont pas été correctement renseignés.");
+            return;
+        }
+
+        if (!modelAdmin::validComment($_GET['rec_id'], $_GET['users_id'])) {
+            controllerErreur::erreur("Le commentaire n'a pas pu être validé.");
+            return;
+        }
+
+        controllerAdmin::adminDashboard();
+    }
+
+    public static function deleteComment() {
+        if (!controllerAdmin::isAdmin()) {
+            controllerErreur::erreur("Vous n'avez pas les droits pour accéder à cette page.");
+            return;
+        }
+        if (!isset($_GET['rec_id']) || !isset($_GET['users_id'])) {
+            controllerErreur::erreur("Les paramètres n'ont pas été correctement renseignés.");
+            return;
+        }
+
+        if (!modelAdmin::deleteComment($_GET['rec_id'], $_GET['users_id'])) {
+            controllerErreur::erreur("Le commentaire n'a pas pu être supprimé.");
             return;
         }
 
