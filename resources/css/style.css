@@ -615,6 +615,18 @@ ul.ingredientsList li:hover, ul.tagsList li:hover {
     padding-left: 1rem;
 }
 
+/* --------------- Deletion confirmation form --------------- */
+
+div.deletionConfirmation div.card {
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+div.deletionConfirmation img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
 /* -------------------- Responsive design -------------------- */
 
 @media screen and (max-width: 992px) {

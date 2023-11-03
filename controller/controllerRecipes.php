@@ -392,6 +392,27 @@ class controllerRecipes
     header('Location: index.php?controller=recipes&action=read&id=' . $_GET["id"]);
   }
 
+  public static function deleteForm() {
+    $pageTitle = "Supprimer une recette";
+    if ($_SESSION['login'] === false) {
+      controllerErreur::erreur("Vous devez être connecté pour supprimer une recette");
+      return;
+    }
+    $recipe = modelRecipes::getRecipe($_GET["id"]);
+    if ($recipe == false) {
+      controllerErreur::erreur("Cette recette n'existe pas");
+      return;
+    }
+    if ($_SESSION['login']->users_id != $recipe['users_id']) {
+      controllerErreur::erreur("Seul le propriétaire de cette recette peut la supprimer");
+      return;
+    }
+
+    require(File::build_path(array("view", "navbar.php")));
+    require(File::build_path(array("view", "deleteRecipe.php")));
+    require(File::build_path(array("view", "footer.php")));
+  }
+
   public static function delete()
   {
     if ($_SESSION['login'] === false) {
@@ -442,7 +463,6 @@ class controllerRecipes
       unlink($target_file); 
     }
 
-    echo "<div class='alert alert-success' role='alert'>La recette a bien été supprimée</div>";
-    // header('Location: index.php?controller=recipes&action=readAll');
+    header('Location: index.php?controller=recipes&action=readAll');
   }
 }
