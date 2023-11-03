@@ -70,7 +70,7 @@ class modelRecipes extends model
       $req_prep->execute();
       return $req_prep->fetchAll();
     } else {
-      $sql = "SELECT rec_id, rec_title, cat_id, cat_title, rec_image_src, users_id, users_pseudo, rec_creation_date, rec_modification_date, rec_nb_person, rec_content, isAuthorised FROM recipes
+      $sql = "SELECT rec_id, rec_title, rec_summary, cat_id, cat_title, rec_image_src, users_id, users_pseudo, rec_creation_date, rec_modification_date, rec_nb_person, rec_content, isAuthorised FROM recipes
       join category using (cat_id)
       join users using (users_id)
       WHERE rec_id = $rec_id";

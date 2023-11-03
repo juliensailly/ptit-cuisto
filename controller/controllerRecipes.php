@@ -213,7 +213,7 @@ class controllerRecipes
     $categories = modelFiltres::getCategories();
 
     require(File::build_path(array("view", "navbar.php")));
-    require(File::build_path(array("view", "addRecipe.php")));
+    require(File::build_path(array("view", "editRecipe.php")));
     require(File::build_path(array("view", "footer.php")));
   }
 }
