@@ -33,13 +33,18 @@ class controllerRecipes
     $tags = modelRecipes::getRecipeTags($_GET["id"]);
     $comments = modelRecipes::getRecipeComments($_GET["id"]);
     $ingredients = modelRecipes::getRecipeIngredients($_GET["id"]);
-    require(File::build_path(array("view", "navbar.php")));
-    if ($recipe['isAuthorised'] == 0 && (!isset($_SESSION['login']) || $_SESSION['login']->users_id != $recipe['users_id'])) {
-      controllerErreur::erreur("Cette recette n'est pas encore autorisée");
-      return;
-    }else {
-      require(File::build_path(array("view", "viewRecipe.php")));
+    if ($recipe['isAuthorised'] == 0) {
+      if ($_SESSION['login'] === false) {
+        controllerErreur::erreur("Cette recette n'est pas encore autorisée");
+        return;
+      } else if ($_SESSION['login']->users_id != $recipe['users_id']) {
+        controllerErreur::erreur("Cette recette n'est pas encore autorisée");
+        return;
+      }
     }
+    require(File::build_path(array("view", "navbar.php")));
+    require(File::build_path(array("view", "viewRecipe.php")));
+
     require(File::build_path(array("view", "footer.php")));
   }
 
@@ -192,10 +197,14 @@ class controllerRecipes
     header('Location: index.php?controller=recipes&action=read&id=' . $rec_id);
   }
 
-  public static function editForm() {
+  public static function editForm()
+  {
     $pageTitle = "Modifier une recette";
-    if ($_SESSION['login'] === false && $_SESSION['login']->users_id != modelRecipes::getRecipe($_GET["id"])['users_id']) {
+    if ($_SESSION['login'] === false) {
       controllerErreur::erreur("Vous devez être connecté pour modifier une recette");
+      return;
+    } else if ($_SESSION['login']->users_id != modelRecipes::getRecipe($_GET["id"])['users_id']) {
+      controllerErreur::erreur("Seul le propriétaire de cette recette peut la modifier");
       return;
     }
 
