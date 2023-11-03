@@ -2,7 +2,7 @@ function init() {
     document.querySelector('#title').addEventListener('input', function () {
         // Request AJAX
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://localhost/index.php?controller=API&action=titleFilter&words=' + this.value, true);
+        xhr.open('GET', 'index.php?controller=API&action=titleFilter&words=' + this.value, true);
         xhr.send();
         xhr.onload = function () {
             if (xhr.status === 200) {
@@ -13,7 +13,7 @@ function init() {
                 for (let i = 0; i < recipes.length; i++) {
                     html += '<div class="col_display">';
                     html += '<div class="card">';
-                    html += '<img class="card-img-top" src="' + recipes[i].rec_image_src + '" alt="Card image cap">';
+                    html += '<img class="card-img-top" src="resources/img/recipes_images/' + recipes[i].rec_image_src + '" alt="Card image cap">';
                     html += '<div class="card-body">';
                     html += '<h5 class="card-title">' + recipes[i].rec_title + '</h5>';
                     html += '<p class="card-text">' + recipes[i].rec_summary + '</p>';

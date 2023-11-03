@@ -21,7 +21,7 @@ class modelAPI {
   public static function getRecipesByCategories($categoriesID) {
     $model = new model();
     $model->init();
-    $sql = "SELECT * FROM recipes WHERE cat_id = $categoriesID";
+    $sql = "SELECT * FROM recipes WHERE cat_id = $categoriesID and isAuthorised = 1";
     $req_prep = $model::$pdo->prepare($sql);
     $req_prep->execute();
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
@@ -31,7 +31,7 @@ class modelAPI {
   public static function getRecipesByTitle($words) {
     $model = new model();
     $model->init();
-    $sql = "SELECT * FROM recipes WHERE upper(rec_title) LIKE ";
+    $sql = "SELECT * FROM recipes WHERE isAuthorised = 1 and upper(rec_title) LIKE ";
     foreach ($words as $key => $value) {
       $sql .= "'%".strtoupper($value)."%' ";
       if ($key != count($words) - 1) {
@@ -48,7 +48,7 @@ class modelAPI {
   public static function getIngredients($searchText = "") {
     $model = new model();
     $model->init();
-    $sql = "SELECT * FROM ingredient where upper(ing_title) LIKE '%".strtoupper($searchText)."%' LIMIT 10";
+    $sql = "SELECT * FROM ingredient where upper(ing_title) LIKE '%".strtoupper($searchText)."%' LIMIT 5";
     $req_prep = $model::$pdo->prepare($sql);
     $req_prep->execute();
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
@@ -58,9 +58,9 @@ class modelAPI {
   public static function getRecipesByIngredients($tab_ing_id) {
     $model = new model();
     $model->init();
-    $sql = "SELECT * FROM recipes";
+    $sql = "SELECT * FROM recipes WHERE isAuthorised = 1";
     if (count($tab_ing_id) > 0 && $tab_ing_id[0] != "") {
-      $sql .= " WHERE ";
+      $sql .= " and ";
       foreach ($tab_ing_id as $key => $value) {
         $sql .= "rec_id in (
           select rec_id from ingredients_list
@@ -71,6 +71,16 @@ class modelAPI {
         }
       }
     }
+    $req_prep = $model::$pdo->prepare($sql);
+    $req_prep->execute();
+    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+    return $req_prep->fetchAll();
+  }
+
+  public static function getTags($searchText) {
+    $model = new model();
+    $model->init();
+    $sql = "SELECT * FROM tag where upper(tag_title) LIKE '%".strtoupper($searchText)."%' LIMIT 5";
     $req_prep = $model::$pdo->prepare($sql);
     $req_prep->execute();
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');

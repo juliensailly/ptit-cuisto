@@ -4,6 +4,8 @@ require_once(File::build_path(array("controller", "controllerErreur.php")));
 /* Contrôleur par défaut */
 $controller = 'controllerAccueil';
 $action = 'readAll';
+global $recipe_img_path;
+$recipe_img_path = 'resources/img/recipes_images/';
 
 /* Chargement du contrôleur */
 if (!isset($_GET['controller']) && !isset($_GET['action'])) {

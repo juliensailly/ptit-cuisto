@@ -1,3 +1,4 @@
+<?php global $recipe_img_path ?>
 <h2>Nos recettes</h2>
 <div class="recipes_display">
 
@@ -8,7 +9,7 @@
         }
         ?>
         <div class="card">
-            <img class="card-img-top" src="<?= $recipe['rec_image_src'] ?>" alt="Illustration de <?= $recipe['rec_title'] ?>">
+            <img class="card-img-top" src="<?= $recipe_img_path . $recipe['rec_image_src'] ?>" alt="Illustration de <?= $recipe['rec_title'] ?>">
             <div class="card-body">
                 <h4 class="card-title">
                     <?= $recipe['rec_title'] ?>

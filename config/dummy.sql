@@ -28,18 +28,17 @@ VALUES
 (3, 'Dessert', 'Une gourmandise ?');
 
 -- INSERTION `recipes`
-INSERT INTO recipes (rec_id, rec_title, rec_content, rec_summary, cat_id,  rec_creation_date, rec_image_src, users_id, rec_nb_person)
-VALUES
-(1, 'Boulettes au curry et carottes', '1 - Faites les boulettes \n 2 - Faites cuire les carottes \n3 - Mélangez les deux\n 4 - Servez', 'Voic une recette simple qui fera plaisir à toute la famille', 2, '2020-04-18', 'https://picsum.photos/200/300', 1, 6),
-(2, 'Entremet au chocolat', '1 - Préchauffez le four \n2 - Mélangez tous les ingrédients \n 3-Versez lé mélange dans des moules\n 4 - Faites cuire', 'Voici un délicieux entremet au chocolat qui fera plaisir à tous les gourmand', 3, '2020-05-01', 'https://picsum.photos/500/250', 3, 8),
-(3, 'Chips maison', '1 - Coupez les pommes de terre \n2 - Frire \n3 - Dégustez', 'Une recette simple et savoureuse pour des chips maison', 4, '2020-05-12', 'https://picsum.photos/800/400', 5, 4),
-(4, 'Tarte aux fraise', '1- Préparez la pâtes \n2 -Mélangez tous les ingrédients \n3-Versez lé mélange dans la pâtes \n 4 - Faites cuire', 'Une recette originale et délicieuse pour une tarte aux fraises', 3, '2020-06-08', 'https://picsum.photos/720/480', 2, 8), 
-(5, 'Velouté de potimarron', '1 - Coupé le potimarron \n2 - Faites le cuire \n3 - Mixez \n4 - Versez dans un récipient', 'Un velouté de potimarron onctueux et savoureux', 1, '2020-06-21', 'https://picsum.photos/1280/720', 6, 4),
-(6, 'Tiramisu RED', '1 - Mélangez les sucreries\n2 - Incorporez la crème\n3 - Discoltez dans un grand verre', 'Mettez de la couleur et de gourmandise dans votre dessert avec ce bambou classique italien', 3, '2020-07-17', 'https://picsum.photos/720/1280', 4, 2),
-(7, 'Sardines pimentées', '1 - Coupez les piments\n2 - Fourrez les sardines avec successivement les poivrons, les oignons\n3 - Gardez au frais \n4 - Attendre 1h', 'Les sardines fourrées et pimentées est une recette simple et idéale pour faire preuve d''originalité lors d''un repas entre amis ou en famille.', 2, '2020-08-01', 'https://picsum.photos/444/444', 2, 8), 
-(8, 'Salade parsemée de palets de conté', '1 - Coupé en cubes les palets de comtés \n2 - Incorporez les petits lardons \n 3 - Ajouter le vinaigrette \n4 - Mélangez', 'Cet ingrédient classique s''invite dans la salade : la salade paremée de palts de conté est un pur délice pour les papilles.',1, '2020-08-17', 'https://picsum.photos/100/100', 1, 4), 
-(9, 'Sablés au beurre', '1- Battre le beurre en morceaux \n2 - Mettre le tout dans un saladier et ajouter les œufs \n 3 - Ajouter le sucre et la farine \n 4 - laissez refroidir', 'Un sablé parfumé au beurre, un goût un rien suranné et une facilité de réalisation absolue. La recette à conserver précieusement dans vos favoris !', 4, '2020-09-02', 'https://picsum.photos/1080/600', 3, 4), 
-(10, 'Fajitas de poulets', '1 - Découpez le poulet en fine lamelles \n 2 - Ajoutez la sauce BBQ \n 3 - Versez dans le painitas \n 4 - Jaunez le tout', 'Gouteuse et fondante, déguster ces savoureuses fajitas de poulets pour faire plaisir à toute la famille.', 2, '2020-09-10', 'https://picsum.photos/1080/1080', 4, 8);
+INSERT INTO `recipes` (`rec_id`, `rec_title`, `rec_content`, `rec_summary`, `cat_id`, `rec_creation_date`, `rec_image_src`, `rec_modification_date`, `users_id`, `isAuthorised`, `rec_nb_person`) VALUES
+(1, 'Boulettes au curry et carottes', '1 - Faites les boulettes \n 2 - Faites cuire les carottes \n3 - Mélangez les deux\n 4 - Servez', 'Voic une recette simple qui fera plaisir à toute la famille', 2, '2020-04-18 00:00:00', 'placeholder.jpg', NULL, 1, 1, 6),
+(2, 'Entremet au chocolat', '1 - Préchauffez le four \n2 - Mélangez tous les ingrédients \n 3-Versez lé mélange dans des moules\n 4 - Faites cuire', 'Voici un délicieux entremet au chocolat qui fera plaisir à tous les gourmand', 3, '2020-05-01 00:00:00', 'placeholder.jpg', NULL, 3, 1, 8),
+(3, 'Chips maison', '1 - Coupez les pommes de terre \n2 - Frire \n3 - Dégustez', 'Une recette simple et savoureuse pour des chips maison', 4, '2020-05-12 00:00:00', 'placeholder.jpg', NULL, 5, 1, 4),
+(4, 'Tarte aux fraise', '1- Préparez la pâtes \n2 -Mélangez tous les ingrédients \n3-Versez lé mélange dans la pâtes \n 4 - Faites cuire', 'Une recette originale et délicieuse pour une tarte aux fraises', 3, '2020-06-08 00:00:00', 'placeholder.jpg', NULL, 2, 1, 8),
+(5, 'Velouté de potimarron', '1 - Coupé le potimarron \n2 - Faites le cuire \n3 - Mixez \n4 - Versez dans un récipient', 'Un velouté de potimarron onctueux et savoureux', 1, '2020-06-21 00:00:00', 'placeholder.jpg', NULL, 6, 1, 4),
+(6, 'Tiramisu RED', '1 - Mélangez les sucreries\n2 - Incorporez la crème\n3 - Discoltez dans un grand verre', 'Mettez de la couleur et de gourmandise dans votre dessert avec ce bambou classique italien', 3, '2020-07-17 00:00:00', 'placeholder.jpg', NULL, 4, 1, 2),
+(7, 'Sardines pimentées', '1 - Coupez les piments\n2 - Fourrez les sardines avec successivement les poivrons, les oignons\n3 - Gardez au frais \n4 - Attendre 1h', 'Les sardines fourrées et pimentées est une recette simple et idéale pour faire preuve d''originalité lors d''un repas entre amis ou en famille.', 2, '2020-08-01 00:00:00', 'placeholder.jpg', NULL, 2, 1, 8),
+(8, 'Salade parsemée de palets de conté', '1 - Coupé en cubes les palets de comtés \n2 - Incorporez les petits lardons \n 3 - Ajouter le vinaigrette \n4 - Mélangez', 'Cet ingrédient classique s''invite dans la salade : la salade paremée de palts de conté est un pur délice pour les papilles.', 1, '2020-08-17 00:00:00', 'placeholder.jpg', NULL, 1, 1, 4),
+(9, 'Sablés au beurre', '1- Battre le beurre en morceaux \n2 - Mettre le tout dans un saladier et ajouter les œufs \n 3 - Ajouter le sucre et la farine \n 4 - laissez refroidir', 'Un sablé parfumé au beurre, un goût un rien suranné et une facilité de réalisation absolue. La recette à conserver précieusement dans vos favoris !', 4, '2020-09-02 00:00:00', 'placeholder.jpg', NULL, 3, 1, 4),
+(10, 'Fajitas de poulets', '1 - Découpez le poulet en fine lamelles \n 2 - Ajoutez la sauce BBQ \n 3 - Versez dans le painitas \n 4 - Jaunez le tout', 'Gouteuse et fondante, déguster ces savoureuses fajitas de poulets pour faire plaisir à toute la famille.', 2, '2020-09-10 00:00:00', 'placeholder.jpg', NULL, 4, 1, 8);
 
 -- INSERTION `comments`
 
@@ -175,7 +174,7 @@ VALUES
 -- INSERTION `edito`
 
 INSERT INTO `edito` (`edi_id`, `users_id`, `edi_date`, `edi_title`, `edi_content`) VALUES
-(1, 4, '2023-11-01 16:17:46', 'Bienvenue sur Pti-Cuisto !', 'Bienvenue sur Pti Cuisto, le site de recettes de cuisine collaboratif !\n\nVous trouverez ici des recettes de cuisine de tous types, pour tous les goûts et pour tous les niveaux. Vous pouvez également participer à l\'élaboration du site en proposant vos propres recettes, en les commentant ou en les likant.\n\nBonne visite !');
+(1, 4, '2023-11-01 16:17:46', 'Bienvenue sur Pti-Cuisto !', 'Bienvenue sur Pti Cuisto, le site de recettes de cuisine collaboratif !\n\nVous trouverez ici des recettes de cuisine de tous types, pour tous les goûts et pour tous les niveaux. Vous pouvez également participer à l''élaboration du site en proposant vos propres recettes, en les commentant ou en les likant.\n\nBonne visite !');
 
 
 COMMIT;

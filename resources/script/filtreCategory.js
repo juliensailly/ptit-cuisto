@@ -16,7 +16,7 @@ function displayRecipe() {
     let xhr = new XMLHttpRequest();
     xhr.open(
         "GET",
-        "http://localhost/index.php?controller=API&action=categoryFilter&id=" +
+        "index.php?controller=API&action=categoryFilter&id=" +
             document.querySelector("#category").value,
         true
     );
@@ -31,7 +31,7 @@ function displayRecipe() {
                 html += '<div class="col_display">';
                 html += '<div class="card">';
                 html +=
-                    '<img class="card-img-top" src="' +
+                    '<img class="card-img-top" src="resources/img/recipes_images/' +
                     recipes[i].rec_image_src +
                     '" alt="Card image cap">';
                 html += '<div class="card-body">';

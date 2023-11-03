@@ -1,3 +1,4 @@
+<?php global $recipe_img_path ?>
 <h2>Recettes les plus aimées</h2>
 <div id="mostLikedRecipesCarousel" class="carousel slide">
     <div class="carousel-indicators">
@@ -23,7 +24,7 @@
                 echo '<div class="carousel-item">';
             }
             ?>
-            <img src="<?= $recipe->rec_image_src ?>" class="d-block w-100"
+            <img src="<?= $recipe_img_path . $recipe->rec_image_src ?>" class="d-block w-100"
                 alt="Illustration de la recette <?= $recipe->rec_title ?>">
             <div class="carousel-caption d-md-block">
                 <h5>
@@ -54,7 +55,7 @@
         <div>
             <?php foreach ($mostRecentRecipes as $recipe) { ?>
                 <div class="card">
-                    <img class="card-img-top" src="<?= $recipe->rec_image_src ?>"
+                    <img class="card-img-top" src="<?= $recipe_img_path . $recipe->rec_image_src ?>"
                         alt="Illustration de <?= $recipe->rec_title ?>">
                     <div class="card-body">
                         <h4 class="card-title">

@@ -62,14 +62,15 @@ class modelRecipes extends model
           $page = $_GET['page'];
         }
       }
-      $sql = "SELECT rec_id, rec_title, cat_id, cat_title, rec_summary, rec_image_src FROM recipes
+      $sql = "SELECT rec_id, rec_title, cat_id, cat_title, rec_summary, rec_image_src, isAuthorised FROM recipes
       join category using (cat_id)
+      where isAuthorised = 1
       order by rec_modification_date desc, rec_creation_date desc LIMIT " . (($page - 1) * 10) . "," . 10;
       $req_prep = model::$pdo->prepare($sql);
       $req_prep->execute();
       return $req_prep->fetchAll();
     } else {
-      $sql = "SELECT rec_title, cat_id, cat_title, rec_image_src, users_id, users_pseudo, rec_creation_date, rec_modification_date, rec_nb_person, rec_content FROM recipes
+      $sql = "SELECT rec_title, cat_id, cat_title, rec_image_src, users_id, users_pseudo, rec_creation_date, rec_modification_date, rec_nb_person, rec_content, isAuthorised FROM recipes
       join category using (cat_id)
       join users using (users_id)
       WHERE rec_id = $rec_id";
@@ -137,6 +138,116 @@ class modelRecipes extends model
     $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
     $req_prep->execute();
     return $req_prep->fetchAll();
+  }
+
+  public static function getCategoryByID($cat_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "SELECT cat_title FROM category WHERE cat_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $cat_id, PDO::PARAM_INT);
+    $req_prep->execute();
+    return $req_prep->fetch();
+  }
+
+  public static function getIngredientByTitle($title) {
+    $model = new Model();
+    $model->init();
+    $sql = "SELECT ing_id FROM ingredient WHERE upper(ing_title) = upper(:title)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':title', $title, PDO::PARAM_STR);
+    $req_prep->execute();
+    return $req_prep->fetch();
+  }
+
+  public static function createIngredient($title) {
+    $model = new Model();
+    $model->init();
+    $sql = "INSERT INTO ingredient (ing_title) VALUES (:title)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':title', $title, PDO::PARAM_STR);
+    $req_prep->execute();
+    if ($req_prep->rowCount() > 0) {
+      return model::$pdo->lastInsertId();
+    } else {
+      return false;
+    }
+  }
+
+  public static function createRecipe($rec_title, $rec_content, $rec_summary, $cat_id, $users_id, $rec_nb_person, $rec_image_src = "placeholder.jpg") {
+    $model = new Model();
+    $model->init();
+    $sql = "INSERT INTO recipes (rec_title, rec_content, rec_summary, cat_id, rec_creation_date, rec_modification_date, users_id, rec_nb_person, rec_image_src) VALUES (:title, :content, :summary, :cat_id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :users_id, :rec_nb_person, :rec_image_src)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':title', $rec_title, PDO::PARAM_STR);
+    $req_prep->bindParam(':content', $rec_content, PDO::PARAM_STR);
+    $req_prep->bindParam(':summary', $rec_summary, PDO::PARAM_STR);
+    $req_prep->bindParam(':cat_id', $cat_id, PDO::PARAM_INT);
+    $req_prep->bindParam(':users_id', $users_id, PDO::PARAM_INT);
+    $req_prep->bindParam(':rec_nb_person', $rec_nb_person, PDO::PARAM_INT);
+    $req_prep->bindParam(':rec_image_src', $rec_image_src, PDO::PARAM_STR);
+    $req_prep->execute();
+    if ($req_prep->rowCount() > 0) {
+      return model::$pdo->lastInsertId();
+    } else {
+      return false;
+    }
+  }
+
+  public static function createRecipeIngredient($rec_id, $ing_id, $ing_quantity, $ing_unit) {
+    $model = new Model();
+    $model->init();
+    $sql = "INSERT INTO ingredients_list (rec_id, ing_id, ing_quantity, ing_unit) VALUES (:rec_id, :ing_id, :ing_quantity, :ing_unit)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':rec_id', $rec_id, PDO::PARAM_INT);
+    $req_prep->bindParam(':ing_id', $ing_id, PDO::PARAM_INT);
+    $req_prep->bindParam(':ing_quantity', $ing_quantity, PDO::PARAM_INT);
+    $req_prep->bindParam(':ing_unit', $ing_unit, PDO::PARAM_STR);
+    return $req_prep->execute();
+  }
+
+  public static function getTagByTitle($title) {
+    $model = new Model();
+    $model->init();
+    $sql = "SELECT tag_id FROM tag WHERE upper(tag_title) = upper(:title)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':title', $title, PDO::PARAM_STR);
+    $req_prep->execute();
+    return $req_prep->fetch();
+  }
+
+  public static function createTag($title) {
+    $model = new Model();
+    $model->init();
+    $sql = "INSERT INTO tag (tag_title) VALUES (:title)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':title', $title, PDO::PARAM_STR);
+    $req_prep->execute();
+    if ($req_prep->rowCount() > 0) {
+      return model::$pdo->lastInsertId();
+    } else {
+      return false;
+    }
+  }
+
+  public static function createRecipeTag($rec_id, $tag_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "INSERT INTO tags_list (rec_id, tag_id) VALUES (:rec_id, :tag_id)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':rec_id', $rec_id, PDO::PARAM_INT);
+    $req_prep->bindParam(':tag_id', $tag_id, PDO::PARAM_INT);
+    return $req_prep->execute();
+  }
+
+  public static function updateRecipeImgPath($rec_id, $img_path = "") {
+    $model = new Model();
+    $model->init();
+    $sql = "UPDATE recipes SET rec_image_src = :img_path WHERE rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':img_path', $img_path, PDO::PARAM_STR);
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    return $req_prep->execute();
   }
 }
 

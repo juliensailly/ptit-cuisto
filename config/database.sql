@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 01 nov. 2023 à 13:02
+-- Généré le : ven. 03 nov. 2023 à 15:22
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -114,6 +114,7 @@ CREATE TABLE `recipes` (
   `rec_image_src` varchar(100) DEFAULT NULL,
   `rec_modification_date` datetime DEFAULT NULL,
   `users_id` int(3) NOT NULL,
+  `isAuthorised` int(2) NOT NULL DEFAULT 0,
   `rec_nb_person` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
