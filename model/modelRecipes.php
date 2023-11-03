@@ -263,5 +263,23 @@ class modelRecipes extends model
     $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
     return $req_prep->execute();
   }
+
+  public static function deleteRecipeIngredients($rec_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "DELETE FROM ingredients_list WHERE rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    return $req_prep->execute();
+  }
+
+  public static function deleteRecipeTags($rec_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "DELETE FROM tags_list WHERE rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    return $req_prep->execute();
+  }
 }
 

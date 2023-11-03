@@ -238,6 +238,14 @@ class controllerRecipes
 
     controllerRecipes::parametersCheck();
     $regex = "/(?:\d+\s)?(?:[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+(?:\s[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+)*)/";
+    
+    if (!empty($_POST['selectedIngredients']) && !empty($_POST['selectedTags'])) {
+      $ingredients = json_decode($_POST['selectedIngredients'], true);
+      $tags = json_decode($_POST['selectedTags'], true);
+    } else {
+      $ingredients = array();
+      $tags = array();
+    }
 
     $old_recipe = modelRecipes::getRecipe($_GET["id"]);
 
@@ -276,6 +284,60 @@ class controllerRecipes
         return;
       }
     }
-    
+
+    modelRecipes::deleteRecipeIngredients($_GET["id"]);
+
+    foreach ($ingredients as $ingredient) {
+      if (!preg_match($regex, $ingredient['title']) || !preg_match($regex, $ingredient['quantity'])) {
+        controllerErreur::erreur("Le texte entré n'est pas valide (nom d'un ingrédient : " . preg_match($regex, $ingredient['title']) . " : " . preg_match($regex, $ingredient['quantity']) . "<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+
+      $ing_id = modelRecipes::getIngredientByTitle($ingredient['title']);
+      if ($ing_id == false) {
+        $ing_id = modelRecipes::createIngredient($ingredient['title']);
+      } else {
+        $ing_id = $ing_id['ing_id'];
+      }
+
+      $quantity = preg_replace('/[a-zA-Z]+/', '', $ingredient['quantity']);
+      $unit = preg_replace('/[0-9]+/', '', $ingredient['quantity']);
+      $quantity = trim($quantity);
+      if ($quantity == "")
+        $quantity = 1;
+      $unit = trim($unit);
+      if ($unit == "")
+        $unit = "unité";
+
+      if (modelRecipes::createRecipeIngredient($_GET["id"], $ing_id, $quantity, $unit) == false) {
+        controllerErreur::erreur("Erreur lors de la création de la recette (ingrédient).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+    }
+
+    modelRecipes::deleteRecipeTags($_GET["id"]);
+
+    foreach ($tags as $tag) {
+      if (!preg_match($regex, $tag['title'])) {
+        controllerErreur::erreur("Le texte entré n'est pas valide (nom d'un tag).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+
+      $tag_id = modelRecipes::getTagByTitle($tag['title']);
+      if ($tag_id == false) {
+        $tag_id = modelRecipes::createTag($tag['title']);
+      } else {
+        $tag_id = $tag_id['tag_id'];
+      }
+
+      if (modelRecipes::createRecipeTag($_GET["id"], $tag_id) == false) {
+        controllerErreur::erreur("Erreur lors de la création de la recette (tag).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+    }
   }
 }
