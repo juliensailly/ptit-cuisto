@@ -61,23 +61,28 @@
                                 <p class='nav-link mx-2 text-white txt sign-in-btn'>Connexion</p>
                             </li>
                             <?php
-                        } else {
-
-                            ?>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link mx-2 dropdown-toggle text-white txt" href="" id="navbarDropdownMenuLink"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Compte
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <li><a class="dropdown-item text-white txt"
-                                            href="index.php?controller=account&action=showProfil">Consulter mon profil</a></li>
-                                    <li><a class="dropdown-item text-white txt"
-                                            href="index.php?controller=recipes&action=createForm">Ajouter une recette</a></li>
-                                    <li><a class="dropdown-item text-white txt"
-                                            href="index.php?controller=sign&action=signOut">Déconnexion</a></li>
-                                </ul>
-                            </li>
+                        } else { ?>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link mx-2 dropdown-toggle text-white txt" href="" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Compte
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item text-white txt"
+                                                href="index.php?controller=account&action=showProfil">Consulter mon profil</a></li>
+                                        <li><a class="dropdown-item text-white txt"
+                                                href="index.php?controller=recipes&action=createForm">Ajouter une recette</a></li>
+                                        <li><a class="dropdown-item text-white txt"
+                                                href="index.php?controller=sign&action=signOut">Déconnexion</a></li>
+                                    </ul>
+                                </li>
+                            <?php
+                        }
+                        if ($_SESSION['login']->users_type == 1) { ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link mx-2 active text-white txt" id="txt" aria-current="page"
+                                            href="index.php?controller=Admin&action=adminDashboard">Administrateur</a>
+                                    </li>
                             <?php
                         }
                     } ?>
