@@ -27,6 +27,7 @@ class controllerAdmin
 
         $awaitingRecipes = modelAdmin::getAwaitingRecipes();
         $awaitingComments = modelAdmin::getAwaitingComments();
+        $edito = modelAdmin::getCurrentEdito();
 
         require(File::build_path(array("view", "navbar.php")));
         require(File::build_path(array("view", "adminDashboard.php")));
@@ -50,7 +51,7 @@ class controllerAdmin
             return;
         }
 
-        controllerAdmin::adminDashboard();
+        header('Location: index.php?controller=admin&action=adminDashboard');
     }
 
     public static function validComment()
@@ -69,7 +70,7 @@ class controllerAdmin
             return;
         }
 
-        controllerAdmin::adminDashboard();
+        header('Location: index.php?controller=admin&action=adminDashboard');
     }
 
     public static function deleteComment() {
@@ -87,6 +88,24 @@ class controllerAdmin
             return;
         }
 
-        controllerAdmin::adminDashboard();
+        header('Location: index.php?controller=admin&action=adminDashboard');
+    }
+
+    public static function edito() {
+        if (!controllerAdmin::isAdmin()) {
+            controllerErreur::erreur("Vous n'avez pas les droits pour accéder à cette page.");
+            return;
+        }
+        if (!isset($_POST['edito_titre']) || !isset($_POST['edito'])) {
+            controllerErreur::erreur("Les paramètres n'ont pas été correctement renseignés.");
+            return;
+        }
+
+        if (!modelAdmin::addEdito($_SESSION['login']->users_id, $_POST['edito_titre'], $_POST['edito'])) {
+            controllerErreur::erreur("L'éditorial n'a pas pu être mis à jour'.");
+            return;
+        }
+
+        header('Location: index.php');
     }
 }

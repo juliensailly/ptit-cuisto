@@ -89,4 +89,28 @@ class modelAdmin
         $req_prep->bindParam(':users_id', $users_id);
         return $req_prep->execute();
     }
+
+    public static function getCurrentEdito() {
+        $model = new model();
+        $model->init();
+        $sql = "SELECT edi_title, edi_content from edito
+        order by edi_date desc
+        limit 1";
+        $req_prep = $model::$pdo->prepare($sql);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+        return $req_prep->fetch();
+    }
+
+    public static function addEdito($users_id, $edi_title, $edi_content) {
+        $model = new model();
+        $model->init();
+        $sql = "INSERT INTO edito (users_id, edi_title, edi_content, edi_date)
+        VALUES (:users_id, :edi_title, :edi_content, NOW())";
+        $req_prep = $model::$pdo->prepare($sql);
+        $req_prep->bindParam(':users_id', $users_id);
+        $req_prep->bindParam(':edi_title', $edi_title);
+        $req_prep->bindParam(':edi_content', $edi_content);
+        return $req_prep->execute();
+    }
 }

@@ -631,16 +631,16 @@ div.deletionConfirmation img {
 
 /* Awaiting recipes */
 
-#adminTabsContent h3 {
-    margin: 1.5rem 1rem;
-}
-
-#adminTabsContent div.tab-pane div.tabContentContainer {
+#adminTabsContent div.tab-pane div.tabContentContainer:not(#edito div.tabContentContainer) {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     gap: 1rem;
     margin: 1rem 0;
+}
+
+#adminTabsContent div.tab-pane {
+    padding: 1.5rem 1rem;
 }
 
 #adminTabsContent div.tab-pane div.card {
@@ -681,6 +681,17 @@ div.tabContentContainer div.commentsContainer .commentChoice {
     margin: 1rem 0 0 0;
 }
 
+/* Edito */
+
+#edito div.tabContentContainer form {
+    display: flex;
+    flex-direction: column;
+}
+
+#edito div.tabContentContainer form textarea {
+    resize: none;
+    margin: 0.5rem 0 1rem 0;
+}
 
 
 /* -------------------- Responsive design -------------------- */

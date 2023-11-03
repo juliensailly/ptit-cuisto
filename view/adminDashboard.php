@@ -169,7 +169,14 @@
 <div class="tab-pane fade" id="edito" role="tabpanel" aria-labelledby="edito-tab">
     <h3>Modification de l'éditorial de la page d'accueil</h3>
     <div class="tabContentContainer">
+        <form action="index.php?controller=admin&action=edito" method="post">
+            <label for="edito_titre">Titre</label>
+            <textarea class="form-control" name="edito_titre" id="edito_titre" rows="1"><?= $edito->edi_title ?></textarea>
+            <label for="edito">Contenu</label>
+            <textarea class="form-control" id="edito" name="edito" rows="10"><?= $edito->edi_content ?></textarea>
 
+            <button type="submit" class="btn btn-primary">Modifier l'éditorial</button>
+        </form>
     </div>
 </div>
 <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
