@@ -249,5 +249,19 @@ class modelRecipes extends model
     $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
     return $req_prep->execute();
   }
+
+  public static function updateRecipeField($rec_id, $column_name, $new_value, $isString = true) {
+    $model = new Model();
+    $model->init();
+    $sql = "UPDATE recipes SET $column_name = :new_value WHERE rec_id = :id";
+    $req_prep = model::$pdo->prepare($sql);
+    if ($isString) {
+      $req_prep->bindParam(':new_value', $new_value, PDO::PARAM_STR);
+    } else {
+      $req_prep->bindParam(':new_value', $new_value, PDO::PARAM_INT);
+    }
+    $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
+    return $req_prep->execute();
+  }
 }
 

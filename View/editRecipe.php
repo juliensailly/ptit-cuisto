@@ -1,7 +1,7 @@
 <?php global $recipe_img_path; ?>
 <h2>Modifier une recette :</h2>
 
-<form enctype="multipart/form-data" action="index.php?controller=recipes&action=create" method="post"
+<form enctype="multipart/form-data" action="index.php?controller=recipes&action=edit&id=<?= $recipe['rec_id'] ?>" method="post"
     id="addRecipeForm">
     <div class="recipeFormContainer">
         <div class="column">

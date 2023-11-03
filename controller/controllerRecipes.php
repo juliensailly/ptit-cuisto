@@ -70,27 +70,8 @@ class controllerRecipes
       return;
     }
 
+    controllerRecipes::parametersCheck();
     $regex = "/(?:\d+\s)?(?:[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+(?:\s[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+)*)/";
-    if (!isset($_POST['title']) || !isset($_POST['summary']) || !isset($_POST['content']) || !isset($_POST['category']) || !isset($_POST['selectedIngredients']) || !isset($_POST['selectedTags'])) {
-      controllerErreur::erreur("Erreur lors de la création de la recette.<br>" .
-        "Les champs obligatoires sont : titre, résumé, contenu et catégorie de la recette.<br>" .
-        "Les champs facultatifs sont : image, ingrédients et tags.<br>" .
-        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
-      return;
-    }
-
-    if (!preg_match($regex, $_POST['title']) || !preg_match($regex, $_POST['summary']) || !preg_match($regex, $_POST['content'])) {
-      controllerErreur::erreur("Le texte entré n'est pas valide (titre, description, indications).<br>" .
-        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
-      return;
-    }
-
-    $category = modelRecipes::getCategoryByID($_POST['category']);
-    if (!is_numeric($_POST['category']) || $category === false) {
-      controllerErreur::erreur("La catégorie entrée n'est pas valide.<br>" .
-        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
-      return;
-    }
 
     if (!empty($_POST['selectedIngredients']) && !empty($_POST['selectedTags'])) {
       $ingredients = json_decode($_POST['selectedIngredients'], true);
@@ -196,6 +177,30 @@ class controllerRecipes
     header('Location: index.php?controller=recipes&action=read&id=' . $rec_id);
   }
 
+  public static function parametersCheck() {
+    $regex = "/(?:\d+\s)?(?:[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+(?:\s[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+)*)/";
+    if (!isset($_POST['title']) || !isset($_POST['summary']) || !isset($_POST['content']) || !isset($_POST['category']) || !isset($_POST['selectedIngredients']) || !isset($_POST['selectedTags'])) {
+      controllerErreur::erreur("Erreur lors de la création de la recette.<br>" .
+        "Les champs obligatoires sont : titre, résumé, contenu et catégorie de la recette.<br>" .
+        "Les champs facultatifs sont : image, ingrédients et tags.<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+      return;
+    }
+
+    if (!preg_match($regex, $_POST['title']) || !preg_match($regex, $_POST['summary']) || !preg_match($regex, $_POST['content'])) {
+      controllerErreur::erreur("Le texte entré n'est pas valide (titre, description, indications).<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+      return;
+    }
+
+    $category = modelRecipes::getCategoryByID($_POST['category']);
+    if (!is_numeric($_POST['category']) || $category === false) {
+      controllerErreur::erreur("La catégorie entrée n'est pas valide.<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+      return;
+    }
+  }
+
   public static function editForm()
   {
     $pageTitle = "Modifier une recette";
@@ -216,5 +221,61 @@ class controllerRecipes
     require(File::build_path(array("view", "navbar.php")));
     require(File::build_path(array("view", "editRecipe.php")));
     require(File::build_path(array("view", "footer.php")));
+  }
+
+  public static function edit() {
+    if ($_SESSION['login'] === false) {
+      controllerErreur::erreur("Vous devez être connecté pour modifier une recette");
+      return;
+    } else if ($_SESSION['login']->users_id != modelRecipes::getRecipe($_GET["id"])['users_id']) {
+      controllerErreur::erreur("Seul le propriétaire de cette recette peut la modifier");
+      return;
+    }
+    if (!isset($_GET["id"])) {
+      controllerErreur::erreur("Problème dans la modification de la recette");
+      return;
+    }
+
+    controllerRecipes::parametersCheck();
+    $regex = "/(?:\d+\s)?(?:[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+(?:\s[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+)*)/";
+
+    $old_recipe = modelRecipes::getRecipe($_GET["id"]);
+
+    if ($_POST['title'] != $old_recipe['rec_title']) {
+      if (modelRecipes::updateRecipeField($_GET["id"], "rec_title", $_POST['title'], true) == false) {
+        controllerErreur::erreur("Erreur lors de la modification de la recette (titre).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+    }
+    if ($_POST["summary"] != $old_recipe["rec_summary"]) {
+      if (modelRecipes::updateRecipeField($_GET["id"], "rec_summary", $_POST['summary'], true) == false) {
+        controllerErreur::erreur("Erreur lors de la modification de la recette (description).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+    }
+    if ($_POST["content"] != $old_recipe["rec_content"]) {
+      if (modelRecipes::updateRecipeField($_GET["id"], "rec_content", $_POST['content'], true) == false) {
+        controllerErreur::erreur("Erreur lors de la modification de la recette (instructions).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+    }
+    if ($_POST["category"] != $old_recipe["cat_id"]) {
+      if (modelRecipes::updateRecipeField($_GET["id"], "cat_id", $_POST['category'], false) == false) {
+        controllerErreur::erreur("Erreur lors de la modification de la recette (catégorie).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+    }
+    if ($_POST["nbPerson"] != $old_recipe["rec_nb_person"]) {
+      if (modelRecipes::updateRecipeField($_GET["id"], "rec_nb_person", $_POST['nbPerson'], false) == false) {
+        controllerErreur::erreur("Erreur lors de la modification de la recette (nombre de personnes).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+    }
+    
   }
 }
