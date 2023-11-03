@@ -375,6 +375,11 @@ class controllerRecipes
           "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
         return;
       }
+      if (modelRecipes::updateRecipeImgPath($_GET['id'], "rec_" . $_GET['id'] . "." . strtolower(pathinfo(basename($_FILES["image"]["name"]), PATHINFO_EXTENSION))) == false) {
+        controllerErreur::erreur("Erreur lors de la modification de la recette (image).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
     }
 
     if (!modelRecipes::updateRecipeField($_GET['id'], "rec_modification_date", "CURRENT_TIMESTAMP", false)) {
@@ -418,7 +423,13 @@ class controllerRecipes
     if ($_SESSION['login'] === false) {
       controllerErreur::erreur("Vous devez être connecté pour supprimer une recette");
       return;
-    } else if ($_SESSION['login']->users_id != modelRecipes::getRecipe($_GET["id"])['users_id']) {
+    }
+    $recipe = modelRecipes::getRecipe($_GET["id"]);
+    if ($recipe == false) {
+      controllerErreur::erreur("Cette recette n'existe pas");
+      return;
+    }
+    if ($_SESSION['login']->users_id !=$recipe['users_id']) {
       controllerErreur::erreur("Seul le propriétaire de cette recette peut la supprimer");
       return;
     }
@@ -458,7 +469,7 @@ class controllerRecipes
     }
 
     $target_dir = "resources/img/recipes_images/";
-    $target_file = $target_dir . "rec_" . $_GET['id'] . "." . strtolower(pathinfo(basename($_FILES["image"]["name"]), PATHINFO_EXTENSION));
+    $target_file = $target_dir . $recipe['rec_image_src'];
     if (file_exists($target_file)) {
       unlink($target_file); 
     }
