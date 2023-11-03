@@ -551,6 +551,17 @@ div.page_number button {
     margin-bottom: 0.5rem;
 }
 
+#addRecipeForm img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+#addRecipeForm #image {
+    border-radius: 0 0 0.375rem 0.375rem;
+}
+
 div.ingredientsChoiceList, div.tagsChoice {
     background-color: var(--secondary-color);
     border-radius: 8px;
