@@ -61,7 +61,7 @@ class controllerRecipes
       return;
     }
 
-    $regex = "/^([A-Za-zÀ-ÖØ-öø-ÿ0-9]+)$/";
+    $regex = "/(?:\d+\s)?(?:[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+(?:\s[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+)*)/";
     if (!isset($_POST['title']) || !isset($_POST['summary']) || !isset($_POST['content']) || !isset($_POST['category']) || !isset($_POST['selectedIngredients']) || !isset($_POST['selectedTags'])) {
       controllerErreur::erreur("Erreur lors de la création de la recette.<br>" .
         "Les champs obligatoires sont : titre, résumé, contenu et catégorie de la recette.<br>" .
@@ -71,7 +71,7 @@ class controllerRecipes
     }
 
     if (!preg_match($regex, $_POST['title']) || !preg_match($regex, $_POST['summary']) || !preg_match($regex, $_POST['content'])) {
-      controllerErreur::erreur("Le texte entré n'est pas valide.<br>" .
+      controllerErreur::erreur("Le texte entré n'est pas valide (titre, description, indications).<br>" .
         "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
       return;
     }
@@ -95,7 +95,7 @@ class controllerRecipes
 
     foreach ($ingredients as $ingredient) {
       if (!preg_match($regex, $ingredient['title']) || !preg_match($regex, $ingredient['quantity'])) {
-        controllerErreur::erreur("Le texte entré n'est pas valide.<br>" .
+        controllerErreur::erreur("Le texte entré n'est pas valide (nom d'un ingrédient : ". preg_match($regex, $ingredient['title']) . " : " . preg_match($regex, $ingredient['quantity'])."<br>" .
           "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
         return;
       }
@@ -103,14 +103,19 @@ class controllerRecipes
       $ing_id = modelRecipes::getIngredientByTitle($ingredient['title']);
       if ($ing_id == false) {
         $ing_id = modelRecipes::createIngredient($ingredient['title']);
+      } else {
+        $ing_id = $ing_id['ing_id'];
       }
 
       $quantity = preg_replace('/[a-zA-Z]+/', '', $ingredient['quantity']);
       $unit = preg_replace('/[0-9]+/', '', $ingredient['quantity']);
       $quantity = trim($quantity);
+      if ($quantity == "") $quantity = 1;
       $unit = trim($unit);
+      if ($unit == "") $unit = "unité";
+      
       if (modelRecipes::createRecipeIngredient($rec_id, $ing_id, $quantity, $unit) == false) {
-        controllerErreur::erreur("Erreur lors de la création de la recette.<br>" .
+        controllerErreur::erreur("Erreur lors de la création de la recette (ingrédient).<br>" .
           "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
         return;
       }
@@ -118,7 +123,7 @@ class controllerRecipes
 
     foreach ($tags as $tag) {
       if (!preg_match($regex, $tag['title'])) {
-        controllerErreur::erreur("Le texte entré n'est pas valide.<br>" .
+        controllerErreur::erreur("Le texte entré n'est pas valide (nom d'un tag).<br>" .
           "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
         return;
       }
@@ -126,13 +131,17 @@ class controllerRecipes
       $tag_id = modelRecipes::getTagByTitle($tag['title']);
       if ($tag_id == false) {
         $tag_id = modelRecipes::createTag($tag['title']);
+      } else {
+        $tag_id = $tag_id['tag_id'];
       }
 
       if (modelRecipes::createRecipeTag($rec_id, $tag_id) == false) {
-        controllerErreur::erreur("Erreur lors de la création de la recette.<br>" .
+        controllerErreur::erreur("Erreur lors de la création de la recette (tag).<br>" .
           "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
         return;
       }
     }
+
+    echo "Insertion réussie";
   }
 }

@@ -202,8 +202,7 @@ class modelRecipes extends model
     $req_prep->bindParam(':ing_id', $ing_id, PDO::PARAM_INT);
     $req_prep->bindParam(':ing_quantity', $ing_quantity, PDO::PARAM_INT);
     $req_prep->bindParam(':ing_unit', $ing_unit, PDO::PARAM_STR);
-    $req_prep->execute();
-    return $req_prep->fetch();
+    return $req_prep->execute();
   }
 
   public static function getTagByTitle($title) {
@@ -237,8 +236,7 @@ class modelRecipes extends model
     $req_prep = model::$pdo->prepare($sql);
     $req_prep->bindParam(':rec_id', $rec_id, PDO::PARAM_INT);
     $req_prep->bindParam(':tag_id', $tag_id, PDO::PARAM_INT);
-    $req_prep->execute();
-    return $req_prep->fetch();
+    return $req_prep->execute();
   }
 }
 
