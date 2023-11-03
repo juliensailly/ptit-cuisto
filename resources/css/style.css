@@ -627,6 +627,73 @@ div.deletionConfirmation img {
     object-fit: cover;
 }
 
+/* -------------------- Admin dashboard -------------------- */
+
+/* Awaiting recipes */
+
+#adminTabsContent div.tab-pane div.tabContentContainer:not(#edito div.tabContentContainer) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+#adminTabsContent div.tab-pane {
+    padding: 1.5rem 1rem;
+}
+
+#adminTabsContent div.tab-pane div.card {
+    flex: 45%;
+}
+
+/* Awaiting comments */
+
+div.tabContentContainer h4 a, div.tabContentContainer h6 a {
+    text-decoration: none;
+    color: black;
+}
+
+div.tabContentContainer h4 a:hover, div.tabContentContainer h6 a:hover {
+    text-decoration: underline;
+}
+
+div.tabContentContainer div.commentsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+div.tabContentContainer div.comment {
+    background-color: #e3e3e3;
+    padding: 0.5rem;
+}
+
+div.tabContentContainer div.comment:last-child {
+    border-radius: 0 0 6px 6px;
+}
+
+div.tabContentContainer div.comment:first-child {
+    border-radius: 6px 6px 0 0;
+}
+
+div.tabContentContainer div.commentsContainer .commentChoice {
+    margin: 1rem 0 0 0;
+}
+
+/* Edito */
+
+#edito div.tabContentContainer form {
+    display: flex;
+    flex-direction: column;
+}
+
+#edito div.tabContentContainer form textarea {
+    resize: none;
+    margin: 0.5rem 0 1rem 0;
+}
+
+
 /* -------------------- Responsive design -------------------- */
 
 @media screen and (max-width: 992px) {
@@ -646,6 +713,10 @@ div.deletionConfirmation img {
 
     .carousel img {
         aspect-ratio: 16 / 9;
+    }
+
+    #adminTabsContent div.tab-pane div.tabContentContainer {
+        flex-direction: column;
     }
 }
 

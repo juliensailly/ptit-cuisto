@@ -42,23 +42,23 @@ INSERT INTO `recipes` (`rec_id`, `rec_title`, `rec_content`, `rec_summary`, `cat
 
 -- INSERTION `comments`
 
-INSERT INTO comments (rec_id, users_id, com_title, com_content, com_date)
-VALUES
-(4, 5, 'Trop bonne cette recette !', 'Dès fois qu''on mette avè tout de coté un petit tabasco avec son avicenne chaude ur béton super bien .', '2020-06-27'),
-(3, 6, 'Mes amis ont adoré !', 'La recette simple mais très gouteuse. J''ai juste rajouté un peu de sel et de curcuma.', '2020-09-01'),
-(2, 2, 'Hummm... un vrai délice', 'Excellent, simple mais efficace, je recommande en plat ou en dessert.', '2020-05-02'),
-(1, 1, 'Merci Mostafa !', 'Très bonne recette, j''ai adoré !', '2020-04-19'),
-(2,3,'DE LA MERDE', 'Rien de bon avec cette recette, je la déconseille franchement.', '2020-07-04'),
-(3,4,'Super facile', 'J''avais un peu peur croyant que c''était complexe mais non de loin pas du tout, merci beaucoup !', '2020-08-11'),
-(3,3,'Gourmand', 'Une découverte culinaire comme je les aime... Ce plat est tout simplement exelente', '2020-08-26'),
-(3,5,'Vraiment dégueulasse', 'J''ai suivi les instructions à la lettre et le résultats et mauvais, je déconseille.', '2020-07-19'),
-(10,1,'BeUrK !!!', 'Vraiment pas aimé ... C''été infect !', '2020-09-20'),
-(10,6,'Trop bon !!!', 'Un régale !', '2020-09-27'),
-(5,1,'la pire chose au monde', 'Pire recette que j''ai fais de ma vie', '2020-07-01'),
-(6,1,'Wouhouuu', 'Pour les fans de nutte', '2020-09-30'),
-(5,2,'loved it', 'Absolument, absolument .... Peut être même un peu trop il sera difficile de revenir en arrière !', '2020-08-04'), 
-(7,1,'Facilité et gourmandise', 'Un pur délice, très facile à réaliser, elle a fait l''unanimité.', '2020-08-04'), 
-(8,1,'Délicieux', 'Goûté lors lors de plusieurs occasions la recette a séduit tout le monde sans exception, et moi la première.', '2020-08-04');
+INSERT INTO `comments` (`rec_id`, `users_id`, `com_date`, `com_title`, `com_content`, `isAuthorised`) VALUES
+(1, 1, '2020-04-19 00:00:00', 'Merci Mostafa !', 'Très bonne recette, j''ai adoré !', 1),
+(2, 2, '2020-05-02 00:00:00', 'Hummm... un vrai délice', 'Excellent, simple mais efficace, je recommande en plat ou en dessert.', 1),
+(2, 3, '2020-07-04 00:00:00', 'DE LA MERDE', 'Rien de bon avec cette recette, je la déconseille franchement.', 1),
+(3, 3, '2020-08-26 00:00:00', 'Gourmand', 'Une découverte culinaire comme je les aime... Ce plat est tout simplement exelente', 1),
+(3, 4, '2020-08-11 00:00:00', 'Super facile', 'J''avais un peu peur croyant que c''était complexe mais non de loin pas du tout, merci beaucoup !', 1),
+(3, 5, '2020-07-19 00:00:00', 'Vraiment dégueulasse', 'J''ai suivi les instructions à la lettre et le résultats et mauvais, je déconseille.', 1),
+(3, 6, '2020-09-01 00:00:00', 'Mes amis ont adoré !', 'La recette simple mais très gouteuse. J''ai juste rajouté un peu de sel et de curcuma.', 1),
+(4, 5, '2020-06-27 00:00:00', 'Trop bonne cette recette !', 'Dès fois qu''on mette avè tout de coté un petit tabasco avec son avicenne chaude ur béton super bien .', 1),
+(5, 1, '2020-07-01 00:00:00', 'la pire chose au monde', 'Pire recette que j''ai fais de ma vie', 1),
+(5, 2, '2020-08-04 00:00:00', 'loved it', 'Absolument, absolument .... Peut être même un peu trop il sera difficile de revenir en arrière !', 1),
+(6, 1, '2020-09-30 00:00:00', 'Wouhouuu', 'Pour les fans de nutte', 1),
+(7, 1, '2020-08-04 00:00:00', 'Facilité et gourmandise', 'Un pur délice, très facile à réaliser, elle a fait l''unanimité.', 1),
+(8, 1, '2020-08-04 00:00:00', 'Délicieux', 'Goûté lors lors de plusieurs occasions la recette a séduit tout le monde sans exception, et moi la première.', 1),
+(10, 1, '2020-09-20 00:00:00', 'BeUrK !!!', 'Vraiment pas aimé ... C''été infect !', 1),
+(10, 6, '2020-09-27 00:00:00', 'Trop bon !!!', 'Un régale !', 1);
+COMMIT;
 
 -- INSERTION `likes`
 
