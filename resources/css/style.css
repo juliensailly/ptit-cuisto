@@ -629,7 +629,11 @@ div.deletionConfirmation img {
 
 /* -------------------- Admin dashboard -------------------- */
 
-#adminTabsContent div.tab-pane {
+#adminTabsContent h3 {
+    margin: 1.5rem 1rem;
+}
+
+#adminTabsContent div.tab-pane div.tabContentContainer {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -662,6 +666,10 @@ div.deletionConfirmation img {
 
     .carousel img {
         aspect-ratio: 16 / 9;
+    }
+
+    #adminTabsContent div.tab-pane div.tabContentContainer {
+        flex-direction: column;
     }
 }
 
