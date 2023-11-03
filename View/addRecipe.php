@@ -39,7 +39,7 @@
                 <br>
                 <div class="person_number btn-group">
                     <button type="button" class="btn btn-outline-primary" id="removePerson" onclick="javascript:(parseInt(document.getElementById('nbPerson').value) > 1 ? (document.getElementById('nbPerson').value = parseInt(document.getElementById('nbPerson').value) - 1) : void(0))">-</button>
-                    <input type="number" min="1" name="nbPerson" id="nbPerson" class="btn btn-outline-primary" value="1"></input>
+                    <input type="number" min="1" name="nbPerson" id="nbPerson" class="btn btn-outline-primary" value="4"></input>
                     <button type="button" class="btn btn-outline-primary" id="addPerson" onclick="javascript:(document.getElementById('nbPerson').value = parseInt(document.getElementById('nbPerson').value) + 1)">+</button>
                 </div>
             </div>

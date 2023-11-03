@@ -29,6 +29,10 @@ class controllerRecipes
     }
     $pageTitle = "Recette";
     $recipe = modelRecipes::getRecipe($_GET["id"]);
+    if ($recipe == false) {
+      controllerErreur::erreur("Cette recette n'existe pas");
+      return;
+    }
     $likes = modelRecipes::getRecipeLikes($_GET["id"]);
     $tags = modelRecipes::getRecipeTags($_GET["id"]);
     $comments = modelRecipes::getRecipeComments($_GET["id"]);
@@ -371,6 +375,11 @@ class controllerRecipes
           "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
         return;
       }
+      if (modelRecipes::updateRecipeImgPath($_GET['id'], "rec_" . $_GET['id'] . "." . strtolower(pathinfo(basename($_FILES["image"]["name"]), PATHINFO_EXTENSION))) == false) {
+        controllerErreur::erreur("Erreur lors de la modification de la recette (image).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
     }
 
     if (!modelRecipes::updateRecipeField($_GET['id'], "rec_modification_date", "CURRENT_TIMESTAMP", false)) {
@@ -386,5 +395,85 @@ class controllerRecipes
     }
 
     header('Location: index.php?controller=recipes&action=read&id=' . $_GET["id"]);
+  }
+
+  public static function deleteForm() {
+    $pageTitle = "Supprimer une recette";
+    if ($_SESSION['login'] === false) {
+      controllerErreur::erreur("Vous devez être connecté pour supprimer une recette");
+      return;
+    }
+    $recipe = modelRecipes::getRecipe($_GET["id"]);
+    if ($recipe == false) {
+      controllerErreur::erreur("Cette recette n'existe pas");
+      return;
+    }
+    if ($_SESSION['login']->users_id != $recipe['users_id']) {
+      controllerErreur::erreur("Seul le propriétaire de cette recette peut la supprimer");
+      return;
+    }
+
+    require(File::build_path(array("view", "navbar.php")));
+    require(File::build_path(array("view", "deleteRecipe.php")));
+    require(File::build_path(array("view", "footer.php")));
+  }
+
+  public static function delete()
+  {
+    if ($_SESSION['login'] === false) {
+      controllerErreur::erreur("Vous devez être connecté pour supprimer une recette");
+      return;
+    }
+    $recipe = modelRecipes::getRecipe($_GET["id"]);
+    if ($recipe == false) {
+      controllerErreur::erreur("Cette recette n'existe pas");
+      return;
+    }
+    if ($_SESSION['login']->users_id !=$recipe['users_id']) {
+      controllerErreur::erreur("Seul le propriétaire de cette recette peut la supprimer");
+      return;
+    }
+    if (!isset($_GET["id"])) {
+      controllerErreur::erreur("Problème dans la suppression de la recette");
+      return;
+    }
+
+    if (modelRecipes::deleteRecipeTags($_GET["id"]) == false) {
+      controllerErreur::erreur("Erreur lors de la suppression des tags de la recette.<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+      return;
+    }
+
+    if (modelRecipes::deleteRecipeIngredients($_GET["id"]) == false) {
+      controllerErreur::erreur("Erreur lors de la suppression des ingrédients de la recette.<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+      return;
+    }
+
+    if (modelRecipes::deleteRecipeComments($_GET["id"]) == false) {
+      controllerErreur::erreur("Erreur lors de la suppression des commentaires de la recette.<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+      return;
+    }
+
+    if (modelRecipes::deleteRecipeLikes($_GET["id"]) == false) {
+      controllerErreur::erreur("Erreur lors de la suppression des likes de la recette.<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+      return;
+    }
+
+    if (modelRecipes::deleteRecipe($_GET["id"]) == false) {
+      controllerErreur::erreur("Erreur lors de la suppression de la recette.<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+      return;
+    }
+
+    $target_dir = "resources/img/recipes_images/";
+    $target_file = $target_dir . $recipe['rec_image_src'];
+    if (file_exists($target_file)) {
+      unlink($target_file); 
+    }
+
+    header('Location: index.php?controller=recipes&action=readAll');
   }
 }
