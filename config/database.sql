@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 03 nov. 2023 à 15:22
+-- Généré le : ven. 03 nov. 2023 à 22:34
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -44,7 +44,8 @@ CREATE TABLE `comments` (
   `users_id` int(11) NOT NULL,
   `com_date` datetime NOT NULL DEFAULT current_timestamp(),
   `com_title` varchar(256) DEFAULT NULL,
-  `com_content` varchar(512) DEFAULT NULL
+  `com_content` varchar(512) DEFAULT NULL,
+  `isAuthorised` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

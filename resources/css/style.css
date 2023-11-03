@@ -627,6 +627,22 @@ div.deletionConfirmation img {
     object-fit: cover;
 }
 
+/* -------------------- Admin dashboard -------------------- */
+
+#adminTabsContent div.tab-pane {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+#adminTabsContent div.tab-pane div.card {
+    flex: 45%;
+}
+
+
+
 /* -------------------- Responsive design -------------------- */
 
 @media screen and (max-width: 992px) {
