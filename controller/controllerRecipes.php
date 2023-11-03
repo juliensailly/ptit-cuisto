@@ -92,10 +92,50 @@ class controllerRecipes
     }
 
     $rec_id = modelRecipes::createRecipe($_POST['title'], $_POST['content'], $_POST['summary'], $_POST['category'], $_SESSION['login']->users_id, $_POST['nbPerson']);
+    if ($rec_id == false) {
+      controllerErreur::erreur("Erreur lors de l'insertion' de la recette.<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+      return;
+    }
+
+    // File handling
+    $target_dir = "resources/img/recipes_images/";
+    $target_file = $target_dir . "rec_" . $rec_id . "." . strtolower(pathinfo(basename($_FILES["image"]["name"]), PATHINFO_EXTENSION));
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $fileOk = true;
+    if (
+      !in_array(
+        $imageFileType,
+        array(
+          "jpg",
+          "png",
+          "jpeg"
+        )
+      )
+    ) {
+      $fileOk = false;
+    }
+    if ($_FILES["image"]["size"] > 1000000) {
+      $fileOk = false;
+    }
+
+    if ($fileOk) {
+      if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        controllerErreur::erreur("Erreur lors de l'upload du fichier.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+
+      if (modelRecipes::updateRecipeImgPath($rec_id, "rec_" . $rec_id . "." . strtolower(pathinfo(basename($_FILES["image"]["name"]), PATHINFO_EXTENSION))) == false) {
+        controllerErreur::erreur("Erreur lors de la création de la recette (image).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+    }
 
     foreach ($ingredients as $ingredient) {
       if (!preg_match($regex, $ingredient['title']) || !preg_match($regex, $ingredient['quantity'])) {
-        controllerErreur::erreur("Le texte entré n'est pas valide (nom d'un ingrédient : ". preg_match($regex, $ingredient['title']) . " : " . preg_match($regex, $ingredient['quantity'])."<br>" .
+        controllerErreur::erreur("Le texte entré n'est pas valide (nom d'un ingrédient : " . preg_match($regex, $ingredient['title']) . " : " . preg_match($regex, $ingredient['quantity']) . "<br>" .
           "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
         return;
       }
@@ -110,10 +150,12 @@ class controllerRecipes
       $quantity = preg_replace('/[a-zA-Z]+/', '', $ingredient['quantity']);
       $unit = preg_replace('/[0-9]+/', '', $ingredient['quantity']);
       $quantity = trim($quantity);
-      if ($quantity == "") $quantity = 1;
+      if ($quantity == "")
+        $quantity = 1;
       $unit = trim($unit);
-      if ($unit == "") $unit = "unité";
-      
+      if ($unit == "")
+        $unit = "unité";
+
       if (modelRecipes::createRecipeIngredient($rec_id, $ing_id, $quantity, $unit) == false) {
         controllerErreur::erreur("Erreur lors de la création de la recette (ingrédient).<br>" .
           "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
