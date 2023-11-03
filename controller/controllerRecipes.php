@@ -56,7 +56,6 @@ class controllerRecipes
       return;
     }
 
-    $tags = modelRecipes::getAllTags();
     $categories = modelFiltres::getCategories();
 
     require(File::build_path(array("view", "navbar.php")));
@@ -209,7 +208,9 @@ class controllerRecipes
     }
 
     $recipe = modelRecipes::getRecipe($_GET["id"]);
-    $tags = modelRecipes::getAllTags();
+    $tags = modelRecipes::getRecipeTags($_GET["id"]);
+    $ingredients = modelRecipes::getRecipeIngredients($_GET["id"]);
+
     $categories = modelFiltres::getCategories();
 
     require(File::build_path(array("view", "navbar.php")));

@@ -13,7 +13,8 @@
 
             <div>
                 <label for="summary">Description :</label>
-                <textarea id="summary" name="summary" class="form-control" maxlength="300" required><?= $recipe['rec_summary'] ?></textarea>
+                <textarea id="summary" name="summary" class="form-control" maxlength="300"
+                    required><?= $recipe['rec_summary'] ?></textarea>
             </div>
 
             <div>
@@ -24,7 +25,8 @@
 
             <div>
                 <label for="content">Instructions :</label>
-                <textarea id="content" name="content" class="form-control" maxlength="2000" required><?= $recipe['rec_content'] ?></textarea>
+                <textarea id="content" name="content" class="form-control" maxlength="2000"
+                    required><?= $recipe['rec_content'] ?></textarea>
             </div>
 
             <div>
@@ -70,7 +72,17 @@
                             placeholder="Quantité et unité">
                     </div>
                     <button type="button" class="btn btn-success" id="addIngredientBtn">Ajouter l'ingrédient</button>
-                    <input type="text" name="selectedIngredients" id="selectedIngredients" hidden>
+                    <?php
+                    $json_ingredients = array();
+                    foreach ($ingredients as $ingredient) {
+                        array_push($json_ingredients, [
+                            "title" => $ingredient['ing_title'],
+                            "quantity" => $ingredient['ing_quantity']
+                        ]);
+                    }
+                    $json_ingredients = json_encode($json_ingredients);
+                    ?>
+                    <textarea type="text" name="selectedIngredients" id="selectedIngredients" hidden><?= $json_ingredients ?></textarea>
                     <hr>
                     <ul class="ingredientsList">
 
@@ -88,7 +100,17 @@
                         </ul>
                     </div>
                     <button type="button" class="btn btn-success" id="addTagBtn">Ajouter le tag</button>
-                    <input type="text" name="selectedTags" id="selectedTags" hidden>
+                    <?php
+                    $json_tags = array();
+                    foreach ($tags as $tag) {
+                        array_push($json_tags, [
+                            "title" => $tag['tag_title']
+                        ]);
+                    }
+                    $json_tags = json_encode($json_tags);
+                    $json_tags = str_replace("'", "&quot;", $json_tags);
+                    ?>
+                    <textarea type="text" name="selectedTags" id="selectedTags" hidden><?= $json_tags ?></textarea>
                     <hr>
                     <ul class="tagsList">
 

@@ -46,6 +46,9 @@ function init() {
         ingredientQuantity.value = "";
         updateSelectedIngredients();
     });
+
+    if (selectedIngredientsHiddenInput.value !== "") ingredientSelected = JSON.parse(selectedIngredientsHiddenInput.value);
+
     updateSelectedIngredients();
 }
 
