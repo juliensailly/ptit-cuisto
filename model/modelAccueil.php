@@ -23,6 +23,7 @@ class modelAccueil {
     $model->init();
     $sql = "SELECT rec_id, rec_title, rec_image_src, count(*) as nblikes from recipes
     join likes using (rec_id)
+    where isAuthorised = 1
     group by rec_id, rec_title, rec_image_src
     order by count(*) desc
     LIMIT :nb";
@@ -37,6 +38,7 @@ class modelAccueil {
     $model = new model();
     $model->init();
     $sql = "SELECT rec_id, rec_title, rec_summary, rec_image_src, rec_creation_date, rec_modification_date from recipes
+    where isAuthorised = 1
     order by rec_modification_date desc, rec_creation_date desc
     LIMIT 5";
     $req_prep = $model::$pdo->prepare($sql);
