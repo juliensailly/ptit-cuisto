@@ -1,3 +1,4 @@
+<?php global $recipe_img_path ?>
 <h2 class="recipe_title">
     <?= $recipe['rec_title'] ?>
 </h2>
@@ -11,7 +12,7 @@
     <div class="column col_left">
         <div class="component">
             <div class="img_container">
-                <img src="<?= $recipe['rec_image_src'] ?>" alt="<?= $recipe['rec_title'] ?>">
+                <img src="<?= $recipe_img_path . $recipe['rec_image_src'] ?>" alt="<?= $recipe['rec_title'] ?>">
             </div>
             <div class="author_save">
                 <div class="author">

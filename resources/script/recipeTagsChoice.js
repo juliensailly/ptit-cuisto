@@ -62,7 +62,7 @@ function updateSelectedTags() {
     }
     if (selectedTags.length === 0) {
         tagsList.innerHTML =
-            '<div class="alert alert-warning" role="alert">Aucun tag sélectionné</div>';
+            '<div class="alert alert-secondary" role="alert">Aucun tag sélectionné</div>';
     }
 }
 

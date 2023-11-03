@@ -65,7 +65,7 @@ function updateSelectedIngredients() {
     }
     if (ingredientSelected.length === 0) {
         ingredientsList.innerHTML =
-            '<div class="alert alert-warning" role="alert">Aucun ingrédient sélectionné</div>';
+            '<div class="alert alert-secondary" role="alert">Aucun ingrédient sélectionné</div>';
     }
 }
 

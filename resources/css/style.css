@@ -548,7 +548,7 @@ div.page_number button {
 }
 
 div.ingredientsChoiceList, div.tagsChoice {
-    background-color: rgb(210, 210, 210);
+    background-color: var(--secondary-color);
     border-radius: 8px;
     display: flex;
     flex-direction: column;

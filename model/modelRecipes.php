@@ -173,7 +173,7 @@ class modelRecipes extends model
     }
   }
 
-  public static function createRecipe($rec_title, $rec_content, $rec_summary, $cat_id, $users_id, $rec_nb_person, $rec_image_src = "") {
+  public static function createRecipe($rec_title, $rec_content, $rec_summary, $cat_id, $users_id, $rec_nb_person, $rec_image_src = "resources/img/placeholder.png") {
     $model = new Model();
     $model->init();
     $sql = "INSERT INTO recipes (rec_title, rec_content, rec_summary, cat_id, rec_creation_date, rec_modification_date, users_id, rec_nb_person, rec_image_src) VALUES (:title, :content, :summary, :cat_id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :users_id, :rec_nb_person, :rec_image_src)";
@@ -185,6 +185,7 @@ class modelRecipes extends model
     $req_prep->bindParam(':users_id', $users_id, PDO::PARAM_INT);
     $req_prep->bindParam(':rec_nb_person', $rec_nb_person, PDO::PARAM_INT);
     $req_prep->bindParam(':rec_image_src', $rec_image_src, PDO::PARAM_STR);
+    echo $req_prep->queryString;
     $req_prep->execute();
     if ($req_prep->rowCount() > 0) {
       return model::$pdo->lastInsertId();

@@ -1,6 +1,6 @@
 <h2>Ajouter une recette</h2>
 
-<form action="index.php?controller=recipes&action=create" method="post" id="addRecipeForm">
+<form enctype="multipart/form-data" action="index.php?controller=recipes&action=create" method="post" id="addRecipeForm">
     <div class="recipeFormContainer">
         <div class="column">
             <div>
@@ -58,7 +58,7 @@
                         <input type="text" name="ingredientQuantity" id="ingredientQuantity" class="form-control"
                             placeholder="Quantité et unité">
                     </div>
-                    <button type="button" class="btn btn-secondary" id="addIngredientBtn">Ajouter l'ingrédient</button>
+                    <button type="button" class="btn btn-success" id="addIngredientBtn">Ajouter l'ingrédient</button>
                     <input type="text" name="selectedIngredients" id="selectedIngredients" hidden>
                     <hr>
                     <ul class="ingredientsList">
@@ -76,7 +76,7 @@
                         <ul class="list-group">
                         </ul>
                     </div>
-                    <button type="button" class="btn btn-secondary" id="addTagBtn">Ajouter le tag</button>
+                    <button type="button" class="btn btn-success" id="addTagBtn">Ajouter le tag</button>
                     <input type="text" name="selectedTags" id="selectedTags" hidden>
                     <hr>
                     <ul class="tagsList">

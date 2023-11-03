@@ -175,7 +175,7 @@ VALUES
 -- INSERTION `edito`
 
 INSERT INTO `edito` (`edi_id`, `users_id`, `edi_date`, `edi_title`, `edi_content`) VALUES
-(1, 4, '2023-11-01 16:17:46', 'Bienvenue sur Pti-Cuisto !', 'Bienvenue sur Pti Cuisto, le site de recettes de cuisine collaboratif !\n\nVous trouverez ici des recettes de cuisine de tous types, pour tous les goûts et pour tous les niveaux. Vous pouvez également participer à l\'élaboration du site en proposant vos propres recettes, en les commentant ou en les likant.\n\nBonne visite !');
+(1, 4, '2023-11-01 16:17:46', 'Bienvenue sur Pti-Cuisto !', 'Bienvenue sur Pti Cuisto, le site de recettes de cuisine collaboratif !\n\nVous trouverez ici des recettes de cuisine de tous types, pour tous les goûts et pour tous les niveaux. Vous pouvez également participer à l''élaboration du site en proposant vos propres recettes, en les commentant ou en les likant.\n\nBonne visite !');
 
 
 COMMIT;
