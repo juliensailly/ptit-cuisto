@@ -88,7 +88,6 @@ class controllerRecipes
       return;
     }
 
-    // File handling
     $target_dir = "resources/img/recipes_images/";
     $target_file = $target_dir . "rec_" . $rec_id . "." . strtolower(pathinfo(basename($_FILES["image"]["name"]), PATHINFO_EXTENSION));
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -177,7 +176,8 @@ class controllerRecipes
     header('Location: index.php?controller=recipes&action=read&id=' . $rec_id);
   }
 
-  public static function parametersCheck() {
+  public static function parametersCheck()
+  {
     $regex = "/(?:\d+\s)?(?:[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+(?:\s[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+)*)/";
     if (!isset($_POST['title']) || !isset($_POST['summary']) || !isset($_POST['content']) || !isset($_POST['category']) || !isset($_POST['selectedIngredients']) || !isset($_POST['selectedTags'])) {
       controllerErreur::erreur("Erreur lors de la création de la recette.<br>" .
@@ -223,7 +223,8 @@ class controllerRecipes
     require(File::build_path(array("view", "footer.php")));
   }
 
-  public static function edit() {
+  public static function edit()
+  {
     if ($_SESSION['login'] === false) {
       controllerErreur::erreur("Vous devez être connecté pour modifier une recette");
       return;
@@ -238,7 +239,7 @@ class controllerRecipes
 
     controllerRecipes::parametersCheck();
     $regex = "/(?:\d+\s)?(?:[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+(?:\s[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+)*)/";
-    
+
     if (!empty($_POST['selectedIngredients']) && !empty($_POST['selectedTags'])) {
       $ingredients = json_decode($_POST['selectedIngredients'], true);
       $tags = json_decode($_POST['selectedTags'], true);
@@ -339,5 +340,51 @@ class controllerRecipes
         return;
       }
     }
+
+    // File update
+    $target_dir = "resources/img/recipes_images/";
+    $target_file = $target_dir . "rec_" . $_GET['id'] . "." . strtolower(pathinfo(basename($_FILES["image"]["name"]), PATHINFO_EXTENSION));
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $fileOk = true;
+    if (
+      !in_array(
+        $imageFileType,
+        array(
+          "jpg",
+          "png",
+          "jpeg"
+        )
+      )
+    ) {
+      $fileOk = false;
+    }
+    if ($_FILES["image"]["size"] > 1000000) {
+      $fileOk = false;
+    }
+
+    if ($fileOk) {
+      if (file_exists($target_file)) {
+        unlink($target_file); 
+      }
+      if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        controllerErreur::erreur("Erreur lors de l'upload du fichier.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
+    }
+
+    if (!modelRecipes::updateRecipeField($_GET['id'], "rec_modification_date", "CURRENT_TIMESTAMP", false)) {
+      controllerErreur::erreur("Erreur lors de la modification de la recette (date de modification).<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+      return;
+    }
+
+    if (!modelRecipes::setIsAuthorised($_GET['id'], 0)) {
+      controllerErreur::erreur("Erreur lors de la modification de la recette (autorisation).<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+      return;
+    }
+
+    header('Location: index.php?controller=recipes&action=read&id=' . $_GET["id"]);
   }
 }
