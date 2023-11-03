@@ -191,4 +191,20 @@ class controllerRecipes
 
     header('Location: index.php?controller=recipes&action=read&id=' . $rec_id);
   }
+
+  public static function editForm() {
+    $pageTitle = "Modifier une recette";
+    if ($_SESSION['login'] === false && $_SESSION['login']->users_id != modelRecipes::getRecipe($_GET["id"])['users_id']) {
+      controllerErreur::erreur("Vous devez être connecté pour modifier une recette");
+      return;
+    }
+
+    $recipe = modelRecipes::getRecipe($_GET["id"]);
+    $tags = modelRecipes::getAllTags();
+    $categories = modelFiltres::getCategories();
+
+    require(File::build_path(array("view", "navbar.php")));
+    require(File::build_path(array("view", "addRecipe.php")));
+    require(File::build_path(array("view", "footer.php")));
+  }
 }

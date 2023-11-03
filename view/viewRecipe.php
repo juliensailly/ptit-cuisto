@@ -1,5 +1,5 @@
-<?php 
-global $recipe_img_path; 
+<?php
+global $recipe_img_path;
 
 if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['login']->users_id == $recipe['users_id']) {
     echo "<div class='alert alert-warning' role='alert'>Cette recette n'a pas encore été authorisée</div>";
@@ -7,7 +7,21 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
 ?>
 
 <h2 class="recipe_title">
-    <?= $recipe['rec_title'] ?>
+    <?php
+    echo $recipe['rec_title'];
+    if ($_SESSION['login'] != false && $_SESSION['login']->users_id == $recipe['users_id']) {
+        ?>
+        <a href="index.php?controller=recipes&action=editForm&id=<?= $recipe['rec_id'] ?>" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill"
+                viewBox="0 0 16 16">
+                <path
+                    d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+            </svg>
+        </a>
+        <?php
+    }
+    ?>
+
 </h2>
 <a href="index.php?controller=filtre&action=categories&id=<?= $recipe['cat_id'] ?>">
     <h4 class="recipe_category"><i>
