@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-md navbar-light" id="neubar">
         <div class="container">
             <a href="index.php">
-                <img src="../resources/img/logo.png" height="60" alt="Logo de l'application">
+                <img src="resources/img/logo.png" height="60" alt="Logo de l'application">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
