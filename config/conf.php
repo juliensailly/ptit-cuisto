@@ -1,10 +1,10 @@
 <?php
 class conf{
 	static private $databases = array(
-		'hostname' => 'mysql.info.unicaen.fr',
-		'database' => 'sailly221_bd',
-		'login' => 'sailly221',
-		'password' => 'otheuyiisisaa0Yo'
+		'hostname' => 'localhost',
+		'database' => 'pti-cuisto',
+		'login' => 'root',
+		'password' => ''
 	);
 
 	static public function getLogin(){
