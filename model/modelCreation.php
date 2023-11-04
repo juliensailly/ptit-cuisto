@@ -80,8 +80,6 @@ class modelCreation{
             "type" => $type,
             "date_ins" => date("Y-m-d H:i:s")
         );
-        print_r($values);
-        print_r($sql);
 
         $req_prep->execute($values);
     }
