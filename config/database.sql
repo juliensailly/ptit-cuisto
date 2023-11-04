@@ -155,8 +155,8 @@ CREATE TABLE `users` (
   `users_lastname` varchar(100) DEFAULT NULL,
   `users_name` varchar(100) DEFAULT NULL,
   `users_inscription_date` date DEFAULT NULL,
-  `users_type` int(1) NOT NULL,
-  `users_status` int(1) NOT NULL
+  `users_type` int(1) NOT NULL DEFAULT 0,
+  `users_status` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

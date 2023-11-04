@@ -470,7 +470,7 @@ class controllerRecipes
 
     $target_dir = "resources/img/recipes_images/";
     $target_file = $target_dir . $recipe['rec_image_src'];
-    if (file_exists($target_file)) {
+    if (file_exists($target_file) && $recipe['rec_image_src'] != "placeholder.jpg") {
       unlink($target_file); 
     }
 
