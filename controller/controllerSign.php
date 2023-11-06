@@ -72,6 +72,8 @@ class controllerSign{
 
     $user = new modelCreation($name, $surname, $pseudo, $mail, $password, $type);
     $user->createAccount($name, $surname, $pseudo, $mail, $password, $type);
+    $user = modelAuthentification::checkPassword($mail, $password);
+    $_SESSION['login'] = $user;
     header("location:".$url);
   }
 
