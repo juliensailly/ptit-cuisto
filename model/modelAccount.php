@@ -1,64 +1,32 @@
 <?php
 require_once(File::build_path(array("model", "model.php")));
 
-class modelAccount{
-  /** ATTRIBUTS **/
+class modelAccount {
   private $nomType;
-  /*private $something;*/
 
-  /** CONSTRUCTEUR **/
-  public function __construct($nom = NULL/*, $something = NULL*/){
-    if(!is_null($nom)/* && !is_null($something)*/){
+  public function __construct($nom = NULL){
+    if(!is_null($nom)){
       $this->nomType = $nom;
-      /*$this->something = $something;*/
     }
   }
 
-  /** GETTERS **/
   public function getNomType(){
     return $this->nomType;
   }
 
-  /*public function getSomething(){
-  return $this->something;
-  }*/
-
-  /** SETTERS **/
   public function setNomType($nom){
     $this->nomType = $nom;
   }
 
-  /*public function setSomething($something){
-  $this->something = $something;
-  }*/
-
-  /** METHODES **/
-  public static function readAll(){
-    $sql = "SELECT * FROM recipes";
-    $rep = model::$pdo->query($sql);
-    $rep->setFetchMode(PDO::FETCH_CLASS, 'modelTypes');
-    return $rep->fetchAll();
-  }
-
-  public function create(){
-    $sql = "INSERT INTO types(idType, nomType) VALUES (:idT, :nomT)";
-    $req_prep = model::$pdo->prepare($sql);
-    $values = array("idT" => NULL, "nomT" => $this->nomType);
-    $req_prep->execute($values);
-  }
-
-  public function update(){
-    $sql = 'UPDATE types SET nomType = :nomT';
-    $req_prep = model::$pdo->prepare($sql);
-    $values = array("nomT" => $this->nomType);
-    $req_prep->execute($values);
-  }
-
-  public function delete(){
-    $sql = "DELETE FROM types WHERE nomType = :nomT";
-    $req_prep = model::$pdo->prepare($sql);
-    $values = array("nomT" => $this->nomType);
-    $req_prep->execute($values);
+  public static function getUser($users_id) {
+    $model = new model();
+    $model->init();
+    $sql = "SELECT users_id, users_pseudo, users_email, users_lastname, users_name, users_inscription_date, users_type, users_status from users
+    where users_id = :users_id";
+    $req_prep = $model::$pdo->prepare($sql);
+    $req_prep->bindParam(':users_id', $users_id);
+    $req_prep->execute();
+    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+    return $req_prep->fetch();
   }
 }
-?>

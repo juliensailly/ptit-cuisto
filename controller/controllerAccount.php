@@ -34,7 +34,6 @@ class controllerAccount{
       $modifieType = new modelTypes($nomType);
       $modifieType->update();
       require (File::build_path(array("view", "navbar.php")));
-      /* require	(File::build_path(array("view", "types", "nomDeLaVue.php"))); */
       require (File::build_path(array("view", "footer.php")));
     }
     else{
@@ -49,7 +48,6 @@ class controllerAccount{
       $supprimeType = new modelTypes($nomType);
       $supprimeType->delete();
       require (File::build_path(array("view", "navbar.php")));
-      /* require	(File::build_path(array("view", "types", "nomDeLaVue.php"))); */
       require (File::build_path(array("view", "footer.php")));
     }
     else{
@@ -67,5 +65,17 @@ class controllerAccount{
     }
   }
 
-  
+  public static function showProfil() {
+    if (!isset($_GET['id'])) {
+      controllerErreur::erreur("Les paramètres n'ont pas été correctement renseignés.");
+      return;
+    }
+
+    $user = modelAccount::getUser($_GET['id']);
+
+    require (File::build_path(array("view", "navbar.php")));
+    require (File::build_path(array("view", "accountView.php")));
+    require (File::build_path(array("view", "footer.php")));
+
+  }
 }
