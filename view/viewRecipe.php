@@ -1,6 +1,8 @@
 <?php
 global $recipe_img_path;
 
+require('view/addComment.php');
+
 if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['login']->users_id == $recipe['users_id']) {
     echo "<div class='alert alert-warning' role='alert'>Cette recette n'a pas encore été autorisée</div>";
 }
@@ -118,6 +120,11 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
         <div class="comments component">
             <h3>Commentaires</h3>
             <?php
+            if($_SESSION['login'] != false){
+            ?>
+                <button type="button" onclick="commForm()" class="btn btn-secondary"> Ajouter un commentaire </button>
+            <?php
+            }
             if (sizeof($comments) == 0) {
                 ?>
                 <div class="alert alert-warning" role="alert">Aucun commentaire pour le moment</div>
@@ -224,4 +231,5 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
         </div>
     </div>
 </article>
+<script src="resources/script/comment.js"></script>
 <script src="resources/script/ingredientQuantity.js"></script>
