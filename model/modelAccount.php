@@ -42,4 +42,23 @@ class modelAccount {
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
     return $req_prep->fetchAll();
   }
+
+  public static function modifyUserInfo($users_id, $users_pseudo, $users_email, $users_lastname, $users_name, $users_password){
+    $model = new model();
+    $model->init();
+    $sql = "UPDATE users SET users_pseudo = :users_pseudo, users_email = :users_email, users_lastname = :users_lastname, 
+    users_name = :users_name, users_password = :users_password WHERE users_id = :users_id";
+    $req_prep = $model::$pdo->prepare($sql);
+    $values = array(
+      "users_id" => $users_id,
+      "users_pseudo" => $users_pseudo,
+      "users_email" => $users_email,
+      "users_lastname" => $users_lastname,
+      "users_name" => $users_name,
+      "users_password" => password_hash($users_password, PASSWORD_DEFAULT)
+    );
+    $req_prep->execute($values);
+    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+    return $req_prep->fetch();
+  }
 }
