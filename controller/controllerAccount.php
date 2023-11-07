@@ -18,6 +18,7 @@ class controllerAccount{
     }
 
     $user = modelAccount::getUser($_GET['id']);
+    $nbReceivedLiked = modelAccount::getUserNbReceivedLikes($_SESSION['login']->users_id);
     $usersRecipes = modelAccount::getUsersRecipes($_SESSION['login']->users_id);
     $usersLikedRecipes = modelAccount::getUsersLikedRecipes($_SESSION['login']->users_id);
     require (File::build_path(array("view", "navbar.php")));

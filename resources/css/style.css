@@ -693,6 +693,43 @@ div.tabContentContainer div.commentsContainer .commentChoice {
     margin: 0.5rem 0 1rem 0;
 }
 
+/* -------------------- Show profil page -------------------- */
+
+.profil_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 2rem 0;
+    gap: 2rem;
+}
+
+.profil_header div:first-child div {
+    width: 150px;
+    height: 150px;
+}
+
+.profil_header div:first-child div span {
+    font-size: 4rem;
+}
+
+.profil_header div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.profil_header div:last-child * {
+    margin: 0;
+}
+
+div#pills-home div.card {
+    flex: 1;
+}
+
+#pills-home img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
 
 /* -------------------- Responsive design -------------------- */
 
