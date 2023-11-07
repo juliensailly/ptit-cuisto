@@ -53,7 +53,7 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
                     echo "style=\"background-color: $randColor;\"";
                     ?>>
                         <span>
-                            <?= substr($recipe['users_pseudo'], 0, 1) ?>
+                            <?= strtoupper(substr($recipe['users_pseudo'], 0, 1)) ?>
                         </span>
                     </div>
                     <div>
