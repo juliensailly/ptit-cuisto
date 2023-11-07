@@ -78,4 +78,42 @@ class controllerAccount{
     require (File::build_path(array("view", "changeInfo.php")));
     require (File::build_path(array("view", "footer.php")));
   }
+
+  public static function changePassword(){
+    if (!isset($_GET['id'])) {
+      controllerErreur::erreur("Les paramètres n'ont pas été correctement renseignés.");
+      return;
+    }
+    $pageTitle = "Profile - Modification";
+    if (!isset($_SESSION["login"])) {
+      controllerErreur::erreur("Vous n'êtes pas connecté.");
+      return;
+    }
+
+    if(isset($_POST['old-password']) && isset($_POST['new-password']) && isset($_POST['new-password2'])){
+      $oldPassword = $_POST['old-password'];
+      $newPassword = $_POST['new-password'];
+      $newPassword2 = $_POST['new-password2'];
+
+      if($newPassword != $newPassword2){
+        controllerErreur::erreur("Les mots de passe ne correspondent pas");
+        return;
+      }
+
+      if(!modelAuthentification::checkPassword($_SESSION['login']->users_email, $oldPassword)){
+        controllerErreur::erreur("Le mot de passe actuel n'est pas correct");
+        return;
+      }
+
+      $bool = modelAccount::modifyUserPassword($_SESSION['login']->users_id, $newPassword);
+
+      if($bool){
+        header('Location: index.php?controller=account&action=showProfil&id='.$_SESSION['login']->users_id);
+      }
+      $_SESSION['login']->users_password = $newPassword;
+    }
+    require (File::build_path(array("view", "navbar.php")));
+    require (File::build_path(array("view", "changePassword.php")));
+    require (File::build_path(array("view", "footer.php")));
+  }
 }
