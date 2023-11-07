@@ -93,4 +93,5 @@
                 ?>
 
     <a href="index.php?controller=account&action=changeProfilInformation&id=<?= $_SESSION['login']->users_id?>">Change info</a>
+    <a href="index.php?controller=account&action=changePassword&id=<?= $_SESSION['login']->users_id?>">Change password</a>
 

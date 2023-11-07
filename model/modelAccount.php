@@ -60,4 +60,17 @@ class modelAccount {
     return true;
   }
 
+  public static function modifyUserPassword($users_id, $users_password){
+    $model = new model();
+    $model->init();
+    $sql = "UPDATE users SET users_password = :users_password WHERE users_id = :users_id";
+    $req_prep = $model::$pdo->prepare($sql);
+    $values = array(
+      "users_id" => $users_id,
+      "users_password" => password_hash($users_password, PASSWORD_DEFAULT)
+    );
+    $req_prep->execute($values);
+    return true;
+  }
+
 }
