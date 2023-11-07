@@ -57,6 +57,7 @@ class modelAccount {
       "users_name" => $users_name
     );
     $req_prep->execute($values);
+    return true;
   }
 
 }

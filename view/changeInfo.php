@@ -22,5 +22,5 @@
     <label for="sign-up-mail">Adresse mail :</label>
     <input type="email" id="sign-up-mail" name="sign-up-mail" class="form-control" value=<?= $users->users_email ?>>
   </div>
-  <input type="submit" class="btn btn-primary" value="Modifier">
+  <input type="submit" id="submit" class="btn btn-primary" value="Modifier">
 </form>
