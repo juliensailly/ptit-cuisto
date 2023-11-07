@@ -317,5 +317,39 @@ class modelRecipes extends model
     $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);
     return $req_prep->execute();
   }
+
+  public static function addLike($userId,$recId){
+    $model = new Model();
+    $model->init();
+    $sql = "INSERT INTO likes (users_id, rec_id) VALUES (:userId, :recId)";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':userId', $userId, PDO::PARAM_STR);
+    $req_prep->bindParam(':recId', $recId, PDO::PARAM_STR);
+    return $req_prep->execute();
+  }
+
+  public static function removeLike($userId, $recId){
+    $model = new Model();
+    $model->init();
+    $sql = "DELETE FROM likes WHERE users_id = :userId AND rec_id = :recId";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':userId', $userId, PDO::PARAM_STR);
+    $req_prep->bindParam(':recId', $recId, PDO::PARAM_STR);
+    return $req_prep->execute();
+  }
+
+  public static function isRecipeLiked($userId, $recId){
+    $model = new Model();
+    $model->init();
+    $sql = "SELECT COUNT(*) as NB FROM likes WHERE users_id = :userId AND rec_id = :recId";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(':userId', $userId, PDO::PARAM_STR);
+    $req_prep->bindParam(':recId', $recId, PDO::PARAM_STR);
+    $req_prep->execute();
+    if($req_prep->fetch()['NB'] > 0){
+      return true;
+    } 
+    return false;
+  }
 }
 
