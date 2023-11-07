@@ -37,7 +37,8 @@ class controllerRecipes
     $tags = modelRecipes::getRecipeTags($_GET["id"]);
     $comments = modelRecipes::getRecipeComments($_GET["id"]);
     $ingredients = modelRecipes::getRecipeIngredients($_GET["id"]);
-    if ($recipe['isAuthorised'] == 0) {
+    
+    if ($recipe['isAuthorised'] == 0 && $_SESSION['login']->users_type != 1) {
       if ($_SESSION['login'] === false) {
         controllerErreur::erreur("Cette recette n'est pas encore autorisée");
         return;
