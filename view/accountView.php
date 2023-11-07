@@ -2,96 +2,22 @@
 
 <h2>Tableau de bord - Utilisateurs</h2>
 
-<section class="userDashboard">
-    <h3>Utilisateurs</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Identifiant</th>
-                <th>Adresse mail</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Pseudo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $users = $_SESSION['login'];
-            echo '<tr>';
-            echo '<td>' . $users->users_id . '</td>';
-            echo '<td>' . $users->users_email . '</td>';
-            echo '<td>' . $users->users_name . '</td>';
-            echo '<td>' . $users->users_lastname . '</td>';
-            echo '<td>' . $users->users_pseudo . '</td>';
-            echo '</tr>';
-            echo '<td>';
-            echo '</td>';
-            echo '</tr>';
-            ?>
-        </tbody>
-    </table>
-</section>
-
-<div class="tab-content" id="adminTabsContent">
-    <div class="tab-pane fade show active" id="awaiting-recipe" role="tabpanel" aria-labelledby="awaiting-recipe-tab">
-        <h3>Recettes écrite </h3>
-        <div class="tabContentContainer">
-            <?php
-            foreach ($usersRecipes as $index => $recipe) { ?>
-                <div class="card">
-                    <img class="card-img-top" src="<?= $recipe_img_path . $recipe->rec_image_src ?>"
-                        alt="Illustration de <?= $recipe->rec_title ?>">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <?= $recipe->rec_title ?>
-                        </h4>
-                        <h6 class="recipe_category card-subtitle">
-                            <a href="index.php?controller=filtre&action=categories&id=<?= $recipe->cat_id ?>"><i>
-                                    <?= $recipe->cat_title ?>
-                                </i></a>
-                        </h6>
-                        <p class="card-text">
-                            <?= $recipe->rec_summary ?>
-                        </p>
-                    </div>
-
-                </div>
-                <?php
-            }
-            ?>
-
+<div class="profil_header">
+    <div>
+        <div class="user_pp" <?php
+        srand($user->users_id);
+        $randColor = "#" . str_pad(dechex(rand(0xb9b9b9, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+        echo "style=\"background-color: $randColor;\"";
+        ?>>
+            <span>
+                <?= strtoupper(substr($user->users_pseudo, 0, 1)) ?>
+            </span>
         </div>
     </div>
-
-    <div class="tab-content" id="adminTabsContent">
-        <div class="tab-pane fade show active" id="awaiting-recipe2" role="tabpanel"
-            aria-labelledby="awaiting-recipe-tab">
-            <h3>Recettes favorites</h3>
-            <div class="tabContentContainer">
-                <?php
-                foreach ($usersLikedRecipes as $index => $recipe) { ?>
-                    <div class="card">
-                        <img class="card-img-top" src="<?= $recipe_img_path . $recipe->rec_image_src ?>"
-                            alt="Illustration de <?= $recipe->rec_title ?>">
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <?= $recipe->rec_title ?>
-                            </h4>
-                            <h6 class="recipe_category card-subtitle">
-                                <a href="index.php?controller=filtre&action=categories&id=<?= $recipe->cat_id ?>"><i>
-                                        <?= $recipe->cat_title ?>
-                                    </i></a>
-                            </h6>
-                            <p class="card-text">
-                                <?= $recipe->rec_summary ?>
-                            </p>
-                        </div>
-
-                    </div>
-                    <?php
-                }
-                ?>
-
-    <a href="index.php?controller=account&action=changeProfilInformation&id=<?= $_SESSION['login']->users_id?>">Change info</a>
-    <a href="index.php?controller=account&action=changePassword&id=<?= $_SESSION['login']->users_id?>">Change password</a>
-
+    <div>
+        <h3><?= $user->users_pseudo ?></h3>
+        <p><?= $user->users_name ?> <?= $user->users_lastname ?></p>
+        <p>Inscrit depuis le <?= date("d/m/Y", strtotime($user->users_inscription_date)) ?></p>
+        <p>Responsable de <?= date("d/m/Y", strtotime($user->users_inscription_date)) ?></p>
+    </div>
+</div>
