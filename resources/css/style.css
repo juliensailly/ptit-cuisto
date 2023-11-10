@@ -722,11 +722,15 @@ div.tabContentContainer div.commentsContainer .commentChoice {
     margin: 0;
 }
 
-div#pills-home div.card {
+div#pills-home div.recipes_row, div#pills-profile div.recipes_row {
+    margin-bottom: 1rem;
+}
+
+div#pills-home div.card, div#pills-profile div.card {
     flex: 1;
 }
 
-#pills-home img {
+#pills-home img, #pills-profile img {
     aspect-ratio: 16 / 9;
     object-fit: cover;
 }
@@ -768,5 +772,14 @@ div#pills-home div.card {
 
     div#results > div {
         width: 100%;
+    }
+
+    div.profil_header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    div.profil_header p,  div.profil_header h3 {
+        text-align: center;
     }
 }

@@ -19,8 +19,10 @@
             <?= $user->users_pseudo ?>
         </h3>
         <p>
-            <?= $user->users_name ?>
-            <?= $user->users_lastname ?>
+            <em>
+                <?= $user->users_name ?>
+                <?= $user->users_lastname ?>
+            </em>
         </p>
         <p>Inscrit depuis le
             <?= date("d/m/Y", strtotime($user->users_inscription_date)) ?>
@@ -87,7 +89,7 @@
         </div>
     </div>
     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-        <?php
+    <?php
         foreach ($usersLikedRecipes as $key => $recipe) {
             if ($key % 2 == 0) {
                 echo "<div class='recipes_row'>";
@@ -123,7 +125,7 @@
             }
         }
         if (sizeof($usersLikedRecipes) == 0) {
-            echo "<div class='alert alert-warning' role='alert'>Aucune recette enregistrée</div>";
+            echo "<div class='alert alert-secondary' role='alert'>Aucune recette enregistrée</div>";
         }
         ?>
     </div>
