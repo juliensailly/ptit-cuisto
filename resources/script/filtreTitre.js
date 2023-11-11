@@ -23,7 +23,7 @@ function init() {
                     html += '</div>';
                 }
                 if (recipes.length === 0) {
-                    html = '<div class="alert alert-warning" role="alert">Aucune recette ne correspond à votre recherche.</div>';
+                    html = '<div class="alert alert-secondary" role="alert">Aucune recette ne correspond à votre recherche.</div>';
                 }
                 document.querySelector('#results').innerHTML = html;
             }

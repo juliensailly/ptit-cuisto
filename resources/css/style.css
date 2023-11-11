@@ -252,17 +252,24 @@ div#results img {
 
 /* Search by ingredient */
 
+#ingredientSearch {
+    margin-top: 1.5rem;
+}
+
 #ingredientsResults li,
 #ingredientsSelected li {
     cursor: pointer;
 }
 
-#ingredientsResults li:hover {
-    color: #00ff00;
+#ingredientsSelected li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #ingredientsSelected li:hover {
-    color: #ff0000;
+    background-color: #ff0000;
+    color: var(--background-color);
 }
 
 /* Categories */
