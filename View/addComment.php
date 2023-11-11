@@ -4,7 +4,7 @@
             <h3>Déposer un commentaire</h3>
             <img src="resources/img/xmark-solid.svg" alt="xmark icon" class="xmark">
         </div>
-        <form action="index.php?controller=comment&action=add" method="POST">
+        <form action="index.php?controller=comment&action=add&id=<?=$recipe['rec_id']?>" method="POST">
             <div id ="name-inputs">
                 <div>
                     <label for="comment-title">Titre :</label>
@@ -12,7 +12,7 @@
                 </div>
                 <div>
                     <label for="comment-content">Avis :</label>
-                    <textarea name="comment-content" id="comment-content" cols="30" rows="10"></textarea>
+                    <textarea name="comment-content" id="comment-content" cols="30" rows="10" required></textarea>
                 </div>
             </div>
             <input type="submit" class="btn btn-primary" value="Envoyer">

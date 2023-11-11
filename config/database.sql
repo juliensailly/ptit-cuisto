@@ -287,7 +287,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `fk_recipe_rec_id` FOREIGN KEY (`rec_id`) REFERENCES `recipes` (`rec_id`),
-  ADD CONSTRAINT `fk_users_users_id` FOREIGN KEY (`users_id`) REFERENCES `recipes` (`users_id`);
+  ADD CONSTRAINT `fk_users_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`);
 
 --
 -- Contraintes pour la table `edito`
