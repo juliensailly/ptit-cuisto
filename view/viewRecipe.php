@@ -1,6 +1,7 @@
 <?php
 global $recipe_img_path;
 
+
 if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['login']->users_id == $recipe['users_id'] || $_SESSION['login']->users_type == 1)) {
     echo "<div class='alert alert-warning' role='alert'>Cette recette n'a pas encore été autorisée</div>";
 }
@@ -131,12 +132,20 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
             if (sizeof($comments) == 0) {
                 ?>
                 <div class="alert alert-warning" role="alert">Aucun commentaire pour le moment</div>
+                <?php require('view/addComment.php'); ?>
                 <?php
             } else {
                 ?>
                 <div>
                     <?php
                     foreach ($comments as $key => $comment) {
+                        if ($comment['isAuthorised'] == 0) {
+                            if ($_SESSION['login'] == false) {
+                                continue;
+                            } else if ($_SESSION['login']->users_id != $comment['users_id'] && $_SESSION['login']->users_type != 1) {
+                                continue;
+                            }
+                        }
                         ?>
                         <div class="comment">
                             <div class="author">
@@ -153,12 +162,16 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
                                     <p>
                                         <?= $comment['users_pseudo'] ?>
                                     </p>
-                                    <p>Publié
+                                    <p>
                                         <?php
-                                        if ($comment['com_date'] < date("Y-m-d H:i:s", strtotime("-1 day"))) {
-                                            echo " le " . date("d/m/Y", strtotime($comment['com_date']));
+                                        if ($comment['isAuthorised'] == 1) {
+                                            if ($comment['com_date'] < date("Y-m-d H:i:s", strtotime("-1 day"))) {
+                                                echo "Publié le " . date("d/m/Y", strtotime($comment['com_date']));
+                                            } else {
+                                                echo "Publié à " . date("H:i", strtotime($comment['com_date']));
+                                            }
                                         } else {
-                                            echo " à " . date("H:i", strtotime($comment['com_date']));
+                                            echo "En attente de validation";
                                         }
                                         ?>
                                     </p>
@@ -175,6 +188,7 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
                             <?php
                         }
                     }
+                    require('view/addComment.php');
                     ?>
                 </div>
                 <?php

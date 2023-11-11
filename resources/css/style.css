@@ -420,7 +420,7 @@ div.recipes_display p.card-text {
 
 /* Comments */
 
-div.comments > div {
+div.comments > div:not(div#commentModal) {
     background-color: #e3e3e3;
     border-radius: 10px;
     padding: 0.5rem;
@@ -442,6 +442,10 @@ div.user_pp {
 div.user_pp span {
     font-size: 1.5rem;
     font-weight: 600;
+}
+
+.commentModalBtn {
+    width: 100%;
 }
 
 /* Ingredients */

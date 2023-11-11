@@ -1,6 +1,7 @@
 <?php
 require_once(File::build_path(array("model", "modelRecipes.php")));
 require_once(File::build_path(array("model", "modelFiltres.php")));
+require_once(File::build_path(array("model", "modelComment.php")));
 require_once(File::build_path(array("lib", "session.php")));
 
 class controllerRecipes
@@ -36,6 +37,10 @@ class controllerRecipes
     $likes = modelRecipes::getRecipeLikes($_GET["id"]);
     $tags = modelRecipes::getRecipeTags($_GET["id"]);
     $comments = modelRecipes::getRecipeComments($_GET["id"]);
+    $currentUserComment = false;
+    if ($_SESSION['login'] !== false) {
+      $currentUserComment = modelComment::getComment($_GET["id"], $_SESSION['login']->users_id);
+    }
     $ingredients = modelRecipes::getRecipeIngredients($_GET["id"]);
     if ($_SESSION['login'] === false) {
       $isLiked = false;

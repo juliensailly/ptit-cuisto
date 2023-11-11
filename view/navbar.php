@@ -65,7 +65,9 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link mx-2 dropdown-toggle text-white txt" href="" id="navbarDropdownMenuLink"
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Compte
+                                    <?php
+                                        echo $_SESSION['login']->users_pseudo
+                                    ?>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li><a class="dropdown-item text-white txt"
