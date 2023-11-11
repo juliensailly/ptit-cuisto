@@ -1,7 +1,5 @@
 <?php global $recipe_img_path; ?>
 
-<h2>Tableau de bord - Utilisateurs</h2>
-
 <div class="profil_header">
     <div>
         <div class="user_pp" <?php

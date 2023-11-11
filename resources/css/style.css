@@ -323,6 +323,11 @@ div.author_save {
     align-items: center;
 }
 
+div.author_save a.authorProfilLink {
+    text-decoration: none;
+    color: inherit;
+}
+
 div.author {
     display: flex;
     flex-direction: row;

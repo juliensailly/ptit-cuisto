@@ -21,6 +21,7 @@ class controllerAccount{
     $nbReceivedLiked = modelAccount::getUserNbReceivedLikes($_SESSION['login']->users_id);
     $usersRecipes = modelAccount::getUsersRecipes($_SESSION['login']->users_id);
     $usersLikedRecipes = modelAccount::getUsersLikedRecipes($_SESSION['login']->users_id);
+    $pageTitle = "Profil - ".$user->users_pseudo;
     require (File::build_path(array("view", "navbar.php")));
     require (File::build_path(array("view", "accountView.php")));
     require (File::build_path(array("view", "footer.php")));
