@@ -652,6 +652,11 @@ div.deletionConfirmation img {
     flex: 45%;
 }
 
+#adminTabsContent div.tab-pane div.card img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
 /* Awaiting comments */
 
 div.tabContentContainer h4 a, div.tabContentContainer h6 a {

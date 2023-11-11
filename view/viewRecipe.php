@@ -1,7 +1,7 @@
 <?php
 global $recipe_img_path;
 
-if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['login']->users_id == $recipe['users_id']) {
+if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['login']->users_id == $recipe['users_id'] || $_SESSION['login']->users_type == 1)) {
     echo "<div class='alert alert-warning' role='alert'>Cette recette n'a pas encore été autorisée</div>";
 }
 ?>
@@ -9,7 +9,7 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
 <h2 class="recipe_title">
     <?php
     echo $recipe['rec_title'];
-    if ($_SESSION['login'] != false && $_SESSION['login']->users_id == $recipe['users_id']) {
+    if ($_SESSION['login'] != false && ($_SESSION['login']->users_id == $recipe['users_id'] || $_SESSION['login']->users_type == 1)) {
         ?>
         <div>
             <a href="index.php?controller=recipes&action=editForm&id=<?= $recipe['rec_id'] ?>" class="btn btn-primary">
