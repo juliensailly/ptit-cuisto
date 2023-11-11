@@ -27,7 +27,7 @@ class controllerSign{
 
   public static function signUp(){
     $url = $_SERVER['HTTP_REFERER'];
-    if(!isset($url) || empty($url) || str_contains($url, "?controller=sign&action=signUp")){
+    if(!isset($url) || empty($url) || str_contains($url, "?controller=sign&action=signUp" || str_contains($url, "?controller=sign&action=signIn"))){
       $url = "index.php";
     }
     if(!isset($_POST['name']) || !isset($_POST['surname']) 

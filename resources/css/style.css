@@ -755,6 +755,24 @@ form.changeUserInfo div.submitBtn * {
     flex: 1;
 }
 
+div.editBtnProfilPage {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+}
+
+form.changeUserInfo ~ h4 {
+    margin-top: 1rem;
+}
+
+/* -------------------- Account deletion form -------------------- */
+
+form.deleteAccountForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 
 /* -------------------- Responsive design -------------------- */
 
