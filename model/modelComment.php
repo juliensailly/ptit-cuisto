@@ -11,7 +11,7 @@ class modelComment extends model{
   }
 
 
-  public static function create($recid, $userid, $title, $content){
+  public static function create($recid, $userid, $title, $content, $isAuthorised = 0){
 
     $model = new Model();
     $model->init();
@@ -22,7 +22,7 @@ class modelComment extends model{
     $req_prep->bindParam(":user", $userid, PDO::PARAM_INT);
     $req_prep->bindParam(":com_title", $title, PDO::PARAM_STR);
     $req_prep->bindParam(":com_content", $content, PDO::PARAM_STR);
-    $req_prep->bindParam(":isAuthorised", 0, PDO::PARAM_INT);
-    return $req_prep->execute();  
+    $req_prep->bindParam(":isAuthorised", $isAuthorised, PDO::PARAM_INT);
+    return $req_prep->execute();
   }
 }
