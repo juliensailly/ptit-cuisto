@@ -46,41 +46,44 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
                 <img src="<?= $recipe_img_path . $recipe['rec_image_src'] ?>" alt="<?= $recipe['rec_title'] ?>">
             </div>
             <div class="author_save">
-                <div class="author">
-                    <div class="user_pp" <?php
-                    srand($recipe['users_id']);
-                    $randColor = "#" . str_pad(dechex(rand(0xb9b9b9, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
-                    echo "style=\"background-color: $randColor;\"";
-                    ?>>
-                        <span>
-                            <?= substr($recipe['users_pseudo'], 0, 1) ?>
-                        </span>
-                    </div>
-                    <div>
-                        <p>
-                            <?= $recipe['users_pseudo'] ?>
-                        </p>
-                        <?php
-                        $date = $recipe['rec_creation_date'];
-                        if (isset($recipe['rec_modification_date'])) {
-                            if ($recipe['rec_modification_date'] > $recipe['rec_creation_date']) {
-                                $date = $recipe['rec_modification_date'];
-                            }
-                        }
-                        ?>
-                        <p>Publié
+                <a href="index.php?controller=account&action=showProfil&id=<?= $recipe['users_id'] ?>" class="authorProfilLink">
+                    <div class="author">
+                        <div class="user_pp" <?php
+                        srand($recipe['users_id']);
+                        $randColor = "#" . str_pad(dechex(rand(0xb9b9b9, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                        echo "style=\"background-color: $randColor;\"";
+                        ?>>
+                            <span>
+                                <?= strtoupper(substr($recipe['users_pseudo'], 0, 1)) ?>
+                            </span>
+                        </div>
+                        <div>
+                            <p>
+                                <?= $recipe['users_pseudo'] ?>
+                            </p>
                             <?php
-                            if ($date < date("Y-m-d H:i:s", strtotime("-1 day"))) {
-                                echo " le " . date("d/m/Y", strtotime($date));
-                            } else {
-                                echo " à " . date("H:i", strtotime($date));
+                            $date = $recipe['rec_creation_date'];
+                            if (isset($recipe['rec_modification_date'])) {
+                                if ($recipe['rec_modification_date'] > $recipe['rec_creation_date']) {
+                                    $date = $recipe['rec_modification_date'];
+                                }
                             }
                             ?>
-                        </p>
+                            <p>Publié
+                                <?php
+                                if ($date < date("Y-m-d H:i:s", strtotime("-1 day"))) {
+                                    echo " le " . date("d/m/Y", strtotime($date));
+                                } else {
+                                    echo " à " . date("H:i", strtotime($date));
+                                }
+                                ?>
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </a>
                 <div class="save_recipe_button">
-                    <span class="save"><a href="index.php?controller=recipes&action=like&id=<?=$recipe['rec_id']?>" style='text-decoration: none; color: white;'>Sauvegarder</a></span>
+                    <span class="save"><a href="index.php?controller=recipes&action=like&id=<?= $recipe['rec_id'] ?>"
+                            style='text-decoration: none; color: white;'>Sauvegarder</a></span>
                     <span>
                         <?= $likes['NBLIKES'] ?>
                     </span>
@@ -90,9 +93,9 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
                         <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                         <?php
                     } else {
-                    ?>
-                    <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                    <?php
+                        ?>
+                        <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        <?php
                     }
                     ?>
                 </div>

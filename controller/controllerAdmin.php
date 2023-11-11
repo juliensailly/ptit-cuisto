@@ -10,6 +10,9 @@ class controllerAdmin
         if (!isset($_SESSION['login'])) {
             return false;
         }
+        if ($_SESSION['login'] == false) {
+            return false;
+        }
         if ($_SESSION['login']->users_type != 1) {
             return false;
         }
