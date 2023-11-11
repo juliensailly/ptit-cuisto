@@ -255,7 +255,7 @@
                             </a>
                         <?php } ?>
                         <a title="Supprimer le compte"
-                            href="index.php?controller=admin&action=deleteUser&id=<?= $user->users_id ?>"
+                            href="index.php?controller=account&action=deleteAccountAction&id=<?= $user->users_id ?>"
                             class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                 <path
