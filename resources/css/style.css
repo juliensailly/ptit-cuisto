@@ -746,6 +746,16 @@ form.changeUserInfo {
     gap: 1rem;
 }
 
+form.changeUserInfo div.submitBtn {
+    display: flex;
+    gap: 1rem;
+}
+
+form.changeUserInfo div.submitBtn * {
+    flex: 1;
+}
+
+
 /* -------------------- Responsive design -------------------- */
 
 @media screen and (max-width: 992px) {
