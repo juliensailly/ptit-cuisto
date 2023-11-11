@@ -820,6 +820,14 @@ form.deleteAccountForm {
     }
 }
 
+@media screen and (max-width: 880px) {
+    #users div.list-group-item div.userTextInfo {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 1rem;
+    }
+}
+
 @media screen and (max-width: 768px) {
     article#recipe_view {
         flex-direction: column;

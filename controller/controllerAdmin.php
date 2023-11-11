@@ -112,4 +112,40 @@ class controllerAdmin
 
         header('Location: index.php');
     }
+
+    public static function suspendUser() {
+        if (!controllerAdmin::isAdmin()) {
+            controllerErreur::erreur("Vous n'avez pas les droits pour accéder à cette page.");
+            return;
+        }
+        if (!isset($_GET['id'])) {
+            controllerErreur::erreur("Les paramètres n'ont pas été correctement renseignés.");
+            return;
+        }
+
+        if (!modelAdmin::suspendUser($_GET['id'])) {
+            controllerErreur::erreur("L'utilisateur n'a pas pu être suspendu.");
+            return;
+        }
+
+        header('Location: index.php?controller=admin&action=adminDashboard');
+    }
+
+    public static function unsuspendUser() {
+        if (!controllerAdmin::isAdmin()) {
+            controllerErreur::erreur("Vous n'avez pas les droits pour accéder à cette page.");
+            return;
+        }
+        if (!isset($_GET['id'])) {
+            controllerErreur::erreur("Les paramètres n'ont pas été correctement renseignés.");
+            return;
+        }
+
+        if (!modelAdmin::unsuspendUser($_GET['id'])) {
+            controllerErreur::erreur("L'utilisateur n'a pas pu être suspendu.");
+            return;
+        }
+
+        header('Location: index.php?controller=admin&action=adminDashboard');
+    }
 }
