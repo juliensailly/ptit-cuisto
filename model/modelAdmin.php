@@ -147,4 +147,16 @@ class modelAdmin
         $req_prep->bindParam(':users_id', $user_id);
         return $req_prep->execute();
     }
+
+    public static function getRecipes() {
+        $model = new model();
+        $model->init();
+        $sql = "SELECT rec_id, rec_title, cat_id, cat_title, rec_summary, rec_image_src, rec_creation_date, rec_modification_date from recipes
+        join category using(cat_id)
+        order by rec_modification_date desc, rec_creation_date desc";
+        $req_prep = $model::$pdo->prepare($sql);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+        return $req_prep->fetchAll();
+    }
 }
