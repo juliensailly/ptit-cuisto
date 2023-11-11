@@ -122,7 +122,7 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
             if (sizeof($comments) == 0) {
                 ?>
                 <div class="alert alert-warning" role="alert">Aucun commentaire pour le moment</div>
-                    <?php require('view/addComment.php'); ?>
+                <?php require('view/addComment.php'); ?>
                 <?php
             } else {
                 ?>
@@ -152,13 +152,16 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
                                     <p>
                                         <?= $comment['users_pseudo'] ?>
                                     </p>
-                                    <p>   
-                                    Publié
+                                    <p>
                                         <?php
-                                        if ($comment['com_date'] < date("Y-m-d H:i:s", strtotime("-1 day"))) {
-                                            echo " le " . date("d/m/Y", strtotime($comment['com_date']));
+                                        if ($comment['isAuthorised'] == 1) {
+                                            if ($comment['com_date'] < date("Y-m-d H:i:s", strtotime("-1 day"))) {
+                                                echo "Publié le " . date("d/m/Y", strtotime($comment['com_date']));
+                                            } else {
+                                                echo "Publié à " . date("H:i", strtotime($comment['com_date']));
+                                            }
                                         } else {
-                                            echo " à " . date("H:i", strtotime($comment['com_date']));
+                                            echo "En attente de validation";
                                         }
                                         ?>
                                     </p>

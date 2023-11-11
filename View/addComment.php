@@ -1,11 +1,17 @@
 <hr>
+<?php
+if ($_SESSION['login'] === false) { ?>
+    <button type="button" class="btn btn-primary commentModalBtn" data-bs-toggle="modal"
+        data-bs-target="#commentModal" disabled>Connectez-vous pour laisser un commentaire</button>
+<?php return; } 
+?>
 <button type="button" class="btn btn-primary commentModalBtn" data-bs-toggle="modal" data-bs-target="#commentModal">
     <?php
-        if ($currentUserComment !== false) {
-            echo "Modifier mon commentaire";
-        } else {
-            echo "Ajouter un commentaire";
-        }
+    if ($currentUserComment !== false) {
+        echo "Modifier mon commentaire";
+    } else {
+        echo "Ajouter un commentaire";
+    }
     ?>
 </button>
 
