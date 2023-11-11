@@ -30,6 +30,16 @@
         <p>Responsable de
             <?= $nbReceivedLiked->NBRECEIVEDLIKES ?> <i class="fa-regular fa-heart"></i> plaisirs
         </p>
+        <?php
+        if ($_SESSION['login'] != false) {
+            if ($_SESSION['login']->users_id == $user->users_id) {
+                ?>
+                <a href="index.php?controller=account&action=changeProfilInformation&id=<?= $user->users_id ?>" class="btn btn-primary">Modifier
+                    mes informations</a>
+                <?php
+            }
+        }
+        ?>
     </div>
 </div>
 
@@ -86,47 +96,47 @@
             echo "<div class='alert alert-secondary' role='alert'>Aucune recette créée</div>";
         }
         ?>
-        </div>
     </div>
-    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+</div>
+<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
     <?php
-        foreach ($usersLikedRecipes as $key => $recipe) {
-            if ($key % 2 == 0) {
-                echo "<div class='recipes_row'>";
-            }
-            ?>
-            <div class="card">
-                <img class="card-img-top" src="<?= $recipe_img_path . $recipe->rec_image_src ?>"
-                    alt="Illustration de <?= $recipe->rec_title ?>">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <?= $recipe->rec_title ?>
-                    </h4>
-                    <h6 class="recipe_category card-subtitle">
-                        <a href="index.php?controller=filtre&action=categories&id=<?= $recipe->cat_id ?>"><i>
-                                <?= $recipe->cat_title ?>
-                            </i></a>
-                    </h6>
-                    <p class="card-text">
-                        <?= $recipe->rec_summary ?>
-                    </p>
-                    <a href="index.php?controller=recipes&action=read&id=<?= $recipe->rec_id ?>" class="btn btn-primary">
-                        Consulter la recette
-                    </a>
-                </div>
-            </div>
-
-            <?php
-            if ($key % 2 != 0) {
-                echo "</div>";
-            }
-            if ($key == sizeof($usersLikedRecipes) - 1) {
-                echo "<div class=\"card\" style=\"visibility:hidden;\"></div>";
-            }
-        }
-        if (sizeof($usersLikedRecipes) == 0) {
-            echo "<div class='alert alert-secondary' role='alert'>Aucune recette enregistrée</div>";
+    foreach ($usersLikedRecipes as $key => $recipe) {
+        if ($key % 2 == 0) {
+            echo "<div class='recipes_row'>";
         }
         ?>
-    </div>
+        <div class="card">
+            <img class="card-img-top" src="<?= $recipe_img_path . $recipe->rec_image_src ?>"
+                alt="Illustration de <?= $recipe->rec_title ?>">
+            <div class="card-body">
+                <h4 class="card-title">
+                    <?= $recipe->rec_title ?>
+                </h4>
+                <h6 class="recipe_category card-subtitle">
+                    <a href="index.php?controller=filtre&action=categories&id=<?= $recipe->cat_id ?>"><i>
+                            <?= $recipe->cat_title ?>
+                        </i></a>
+                </h6>
+                <p class="card-text">
+                    <?= $recipe->rec_summary ?>
+                </p>
+                <a href="index.php?controller=recipes&action=read&id=<?= $recipe->rec_id ?>" class="btn btn-primary">
+                    Consulter la recette
+                </a>
+            </div>
+        </div>
+
+        <?php
+        if ($key % 2 != 0) {
+            echo "</div>";
+        }
+        if ($key == sizeof($usersLikedRecipes) - 1) {
+            echo "<div class=\"card\" style=\"visibility:hidden;\"></div>";
+        }
+    }
+    if (sizeof($usersLikedRecipes) == 0) {
+        echo "<div class='alert alert-secondary' role='alert'>Aucune recette enregistrée</div>";
+    }
+    ?>
+</div>
 </div>
