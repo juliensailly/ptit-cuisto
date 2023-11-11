@@ -69,7 +69,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li><a class="dropdown-item text-white txt"
-                                            href="index.php?controller=account&action=showProfil">Consulter mon profil</a></li>
+                                            href="index.php?controller=account&action=showProfil&id=<?= $_SESSION['login']->users_id?>">Consulter mon profil</a></li>
                                     <li><a class="dropdown-item text-white txt"
                                             href="index.php?controller=recipes&action=createForm">Ajouter une recette</a></li>
                                     <li><a class="dropdown-item text-white txt"

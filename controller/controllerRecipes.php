@@ -37,6 +37,11 @@ class controllerRecipes
     $tags = modelRecipes::getRecipeTags($_GET["id"]);
     $comments = modelRecipes::getRecipeComments($_GET["id"]);
     $ingredients = modelRecipes::getRecipeIngredients($_GET["id"]);
+    if ($_SESSION['login'] === false) {
+      $isLiked = false;
+    } else {
+      $isLiked = modelRecipes::isRecipeLiked($_SESSION['login']->users_id, $_GET["id"]);
+    }
     if ($recipe['isAuthorised'] == 0) {
       if ($_SESSION['login'] === false) {
         controllerErreur::erreur("Cette recette n'est pas encore autorisée");
@@ -429,7 +434,7 @@ class controllerRecipes
       controllerErreur::erreur("Cette recette n'existe pas");
       return;
     }
-    if ($_SESSION['login']->users_id !=$recipe['users_id']) {
+    if ($_SESSION['login']->users_id != $recipe['users_id']) {
       controllerErreur::erreur("Seul le propriétaire de cette recette peut la supprimer");
       return;
     }
@@ -475,5 +480,26 @@ class controllerRecipes
     }
 
     header('Location: index.php?controller=recipes&action=readAll');
+  }
+
+  public static function like(){
+    if ($_SESSION['login'] === false) {
+      controllerErreur::erreur("Vous devez être connecté pour liker une recette");
+      return;
+    }
+    if (!isset($_GET["id"])) {
+      controllerErreur::erreur("Problème dans le like de la recette");
+      return;
+    }
+
+    $isRecipeLiked = modelRecipes::isRecipeLiked($_SESSION['login']->users_id, $_GET["id"]);
+    if($isRecipeLiked == true){
+      modelRecipes::removeLike($_SESSION['login']->users_id, $_GET["id"]);
+      $isLiked = false;
+    } else {
+      modelRecipes::addLike($_SESSION['login']->users_id, $_GET["id"]);
+      $isLiked = true;
+    }
+    header('Location: index.php?controller=recipes&action=read&id=' . $_GET["id"]);
   }
 }

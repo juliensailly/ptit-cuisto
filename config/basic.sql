@@ -12,13 +12,15 @@ DELETE FROM users;
 -- INSERTION `users`
 INSERT INTO users (users_id, users_pseudo, users_email, users_password, users_lastname, users_name, users_inscription_date, users_type, users_status)
 VALUES
-(0, 'deleted_user', 'admin@admin.fr', 'admin123', 'user', 'deleted', NOW(), 1, 0),
-(1,'ElMostafa', 'elmostafa@gmail.com', '3yadziri', 'Dazzi', 'Mostafa', '2020-01-10', 0, 0),
-(2,'SergeBelb', 'sergebelb@gmail.com', '4444ziri', 'Belbour', 'Serge', '2020-01-23', 0, 0),
-(3,'TecheneM', 'techene@gmail.com', '202020sten', 'Monteche', 'Nour', '2020-02-06', 0, 0),
-(4,'MarcLecocqADMIN', 'marclecocq@gmail.com', '202020cocq', 'Lecocq', 'Marc', '2020-02-08', 1, 0),
-(5,'KacemHamdaoui', 'kacemhamdaoui@gmail.com', '2020eaui', 'Hamdaoui', 'Kacem', '2020-02-25', 0, 0),
-(6,'QuentinVanden', 'quentin@gmail.com', '2020vanden', 'Vanden', 'Quentin', '2020-03-07', 0, 0);
+(1, 'ElMostafa', 'elmostafa@gmail.com', '3yadziri', 'Dazzi', 'Mostafa', '2020-01-10', 0, 0),
+(2, 'SergeBelb', 'sergebelb@gmail.com', '4444ziri', 'Belbour', 'Serge', '2020-01-23', 0, 0),
+(3, 'TecheneM', 'techene@gmail.com', '202020sten', 'Monteche', 'Nour', '2020-02-06', 0, 0),
+(4, 'MarcLecocqADMIN', 'marclecocq@gmail.com', '202020cocq', 'Lecocq', 'Marc', '2020-02-08', 1, 0),
+(5, 'KacemHamdaoui', 'kacemhamdaoui@gmail.com', '2020eaui', 'Hamdaoui', 'Kacem', '2020-02-25', 0, 0),
+(6, 'QuentinVanden', 'quentin@gmail.com', '2020vanden', 'Vanden', 'Quentin', '2020-03-07', 0, 0),
+(7, 'deleted_user', 'admin@admin.fr', 'admin123', 'user', 'deleted', NOW(), 1, 0);
+
+UPDATE users SET users_id = 0 WHERE users_pseudo = 'deleted_user';
 
 -- INSERTION `category`
 INSERT INTO category(cat_id, cat_title, cat_desc)

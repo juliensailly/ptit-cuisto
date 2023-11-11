@@ -27,7 +27,7 @@ class controllerSign{
 
   public static function signUp(){
     $url = $_SERVER['HTTP_REFERER'];
-    if(!isset($url) || empty($url) || str_contains($url, "?controller=sign&action=signUp")){
+    if(!isset($url) || empty($url) || str_contains($url, "?controller=sign&action=signUp" || str_contains($url, "?controller=sign&action=signIn"))){
       $url = "index.php";
     }
     if(!isset($_POST['name']) || !isset($_POST['surname']) 
@@ -72,6 +72,8 @@ class controllerSign{
 
     $user = new modelCreation($name, $surname, $pseudo, $mail, $password, $type);
     $user->createAccount($name, $surname, $pseudo, $mail, $password, $type);
+    $user = modelAuthentification::checkPassword($mail, $password);
+    $_SESSION['login'] = $user;
     header("location:".$url);
   }
 

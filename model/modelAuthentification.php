@@ -22,7 +22,7 @@ class modelAuthentification
         $this->nomType = $nom;
     }
 
-    public static function checkPassword($mail, $password)
+    public static function checkPassword($mail, $password, $redirect = true)
     {
         $model = new model();
         $model->init();
@@ -38,7 +38,7 @@ class modelAuthentification
             return 0;
         } else {
             if (password_verify($password, $user->users_password)) {
-                header("location:" . $_SERVER['HTTP_REFERER']);
+                if ($redirect) header("location:" . $_SERVER['HTTP_REFERER']);
                 return $user;
             } else {
                 return -1;
