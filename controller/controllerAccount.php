@@ -118,98 +118,42 @@ class controllerAccount
     require(File::build_path(array("view", "footer.php")));
   }
 
-  public static function deleteAccount()
+  public static function deleteAccountAction()
   {
-    $pageTitle = "Profil - Suppression du compte";
-    var_dump($_SESSION["login"]);
-    echo "<br>";
-    var_dump($_POST);
-    echo "<br>";
     if ($_SESSION["login"] == false) {
       controllerErreur::erreur("Vous n'êtes pas connecté.");
       return;
     }
+    if (!isset($_POST['password'])) {
+      controllerErreur::erreur("Le mot de passe entré n'est pas valide.");
+      return;
+    }
+    $password = $_POST['password'];
+    $temp = modelAuthentification::checkPassword($_SESSION['login']->users_email, $password, false);
+    if ($temp === -1 || $temp === 0) {
+      controllerErreur::erreur("Le mot de passe actuel n'est pas correct");
+      return;
+    }
 
-    if (isset($_POST['password'])) {
-      $password = $_POST['password'];
+    if (modelAccount::deleteLikes($_SESSION['login']->users_id) == false) {
+      controllerErreur::erreur("Erreur lors de la suppression des likes");
+      return;
+    }
 
-      $temp = modelAuthentification::checkPassword($_SESSION['login']->users_email, $password);
+    if (modelAccount::deleteComments($_SESSION['login']->users_id) == false) {
+      controllerErreur::erreur("Erreur lors de la suppression des commentaires");
+      return;
+    }
 
-      if ($temp == -1 || $temp == 0) {
-        controllerErreur::erreur("Le mot de passe actuel n'est pas correct");
+    if (modelAccount::deleteEdito($_SESSION['login']->users_id) == false) {
+      controllerErreur::erreur("Erreur lors de la suppression des editos");
+      return;
+    }
+
+    if ((isset($_POST['leaveRecipeCheck']) && $_POST['leaveRecipeCheck'] == "1")) {
+      if (modelAccount::updateRecipesToDeletedUser($_SESSION['login']->users_id) == false) {
+        controllerErreur::erreur("Erreur lors de la suppression des recettes (update)");
         return;
-      }
-
-      if (modelAccount::deleteLikes($_SESSION['login']->users_id) == false) {
-        controllerErreur::erreur("Erreur lors de la suppression des likes");
-        return;
-      }
-
-      if (modelAccount::deleteComments($_SESSION['login']->users_id) == false) {
-        controllerErreur::erreur("Erreur lors de la suppression des commentaires");
-        return;
-      }
-
-      if (modelAccount::deleteEdito($_SESSION['login']->users_id) == false) {
-        controllerErreur::erreur("Erreur lors de la suppression des editos");
-        return;
-      }
-
-      if ((isset($_POST['leaveRecipeCheck']) && $_POST['leaveRecipeCheck'] == "1")) {
-        if (modelAccount::updateRecipesToDeletedUser($_SESSION['login']->users_id) == false) {
-          controllerErreur::erreur("Erreur lors de la suppression des recettes (update)");
-          return;
-        }
-
-        if (modelAccount::deleteUser($_SESSION['login']->users_id) == false) {
-          controllerErreur::erreur("Erreur lors de la suppression de l'utilisateur");
-          return;
-        }
-
-        session_unset();
-        session_destroy();
-        // header('Location: index.php');
-        return;
-      }
-
-      $recipes = modelAccount::getUsersRecipes($_SESSION['login']->users_id);
-
-      foreach ($recipes as $recipe) {
-        if (modelRecipes::deleteRecipeTags($_GET["id"]) == false) {
-          controllerErreur::erreur("Erreur lors de la suppression des tags de la recette.<br>" .
-            "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
-          return;
-        }
-
-        if (modelRecipes::deleteRecipeIngredients($_GET["id"]) == false) {
-          controllerErreur::erreur("Erreur lors de la suppression des ingrédients de la recette.<br>" .
-            "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
-          return;
-        }
-
-        if (modelRecipes::deleteRecipeComments($_GET["id"]) == false) {
-          controllerErreur::erreur("Erreur lors de la suppression des commentaires de la recette.<br>" .
-            "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
-          return;
-        }
-
-        if (modelRecipes::deleteRecipeLikes($_GET["id"]) == false) {
-          controllerErreur::erreur("Erreur lors de la suppression des likes de la recette.<br>" .
-            "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
-          return;
-        }
-
-        if (modelRecipes::deleteRecipe($_GET["id"]) == false) {
-          controllerErreur::erreur("Erreur lors de la suppression de la recette.<br>" .
-            "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
-          return;
-        }
-
-        $target_dir = "resources/img/recipes_images/";
-        $target_file = $target_dir . $recipe['rec_image_src'];
-        if (file_exists($target_file) && $recipe['rec_image_src'] != "placeholder.jpg") {
-          unlink($target_file);
-        }
       }
 
       if (modelAccount::deleteUser($_SESSION['login']->users_id) == false) {
@@ -219,7 +163,64 @@ class controllerAccount
 
       session_unset();
       session_destroy();
-      // header('Location: index.php');
+      header('Location: index.php');
+    }
+
+    $recipes = modelAccount::getUsersRecipes($_SESSION['login']->users_id);
+
+    foreach ($recipes as $recipe) {
+      if (modelRecipes::deleteRecipeTags($recipe->rec_id) == false) {
+        controllerErreur::erreur("Erreur lors de la suppression des tags de la recette.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+        return;
+      }
+
+      if (modelRecipes::deleteRecipeIngredients($recipe->rec_id) == false) {
+        controllerErreur::erreur("Erreur lors de la suppression des ingrédients de la recette.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+        return;
+      }
+
+      if (modelRecipes::deleteRecipeComments($recipe->rec_id) == false) {
+        controllerErreur::erreur("Erreur lors de la suppression des commentaires de la recette.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+        return;
+      }
+
+      if (modelRecipes::deleteRecipeLikes($recipe->rec_id) == false) {
+        controllerErreur::erreur("Erreur lors de la suppression des likes de la recette.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+        return;
+      }
+
+      if (modelRecipes::deleteRecipe($recipe->rec_id) == false) {
+        controllerErreur::erreur("Erreur lors de la suppression de la recette.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+        return;
+      }
+
+      $target_dir = "resources/img/recipes_images/";
+      $target_file = $target_dir . $recipe->rec_image_src;
+      if (file_exists($target_file) && $recipe->rec_image_src != "placeholder.jpg") {
+        unlink($target_file);
+      }
+    }
+
+    if (modelAccount::deleteUser($_SESSION['login']->users_id) == false) {
+      controllerErreur::erreur("Erreur lors de la suppression de l'utilisateur");
+      return;
+    }
+
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+  }
+
+  public static function deleteAccount()
+  {
+    $pageTitle = "Profil - Suppression du compte";
+    if ($_SESSION["login"] == false) {
+      controllerErreur::erreur("Vous n'êtes pas connecté.");
       return;
     }
 
