@@ -174,10 +174,10 @@ class modelRecipes extends model
     }
   }
 
-  public static function createRecipe($rec_title, $rec_content, $rec_summary, $cat_id, $users_id, $rec_nb_person, $rec_image_src = "placeholder.jpg") {
+  public static function createRecipe($rec_title, $rec_content, $rec_summary, $cat_id, $users_id, $rec_nb_person, $isAdmin = 0, $rec_image_src = "placeholder.jpg") {
     $model = new Model();
     $model->init();
-    $sql = "INSERT INTO recipes (rec_title, rec_content, rec_summary, cat_id, rec_creation_date, rec_modification_date, users_id, rec_nb_person, rec_image_src) VALUES (:title, :content, :summary, :cat_id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :users_id, :rec_nb_person, :rec_image_src)";
+    $sql = "INSERT INTO recipes (rec_title, rec_content, rec_summary, cat_id, rec_creation_date, rec_modification_date, users_id, rec_nb_person, rec_image_src, isAuthorised) VALUES (:title, :content, :summary, :cat_id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :users_id, :rec_nb_person, :rec_image_src, :isAuthorised)";
     $req_prep = model::$pdo->prepare($sql);
     $req_prep->bindParam(':title', $rec_title, PDO::PARAM_STR);
     $req_prep->bindParam(':content', $rec_content, PDO::PARAM_STR);
@@ -186,6 +186,7 @@ class modelRecipes extends model
     $req_prep->bindParam(':users_id', $users_id, PDO::PARAM_INT);
     $req_prep->bindParam(':rec_nb_person', $rec_nb_person, PDO::PARAM_INT);
     $req_prep->bindParam(':rec_image_src', $rec_image_src, PDO::PARAM_STR);
+    $req_prep->bindParam(':isAuthorised', $isAdmin, PDO::PARAM_INT);
     $req_prep->execute();
     if ($req_prep->rowCount() > 0) {
       return model::$pdo->lastInsertId();

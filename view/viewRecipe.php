@@ -9,7 +9,7 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
 <h2 class="recipe_title">
     <?php
     echo $recipe['rec_title'];
-    if ($_SESSION['login'] != false && $_SESSION['login']->users_id == $recipe['users_id']) {
+    if ($_SESSION['login'] != false && ($_SESSION['login']->users_id == $recipe['users_id'] || $_SESSION['login']->users_type == 1)) {
         ?>
         <div>
             <a href="index.php?controller=recipes&action=editForm&id=<?= $recipe['rec_id'] ?>" class="btn btn-primary">
