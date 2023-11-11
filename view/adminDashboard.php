@@ -171,7 +171,8 @@
     <div class="tabContentContainer">
         <form action="index.php?controller=admin&action=edito" method="post">
             <label for="edito_titre">Titre</label>
-            <textarea class="form-control" name="edito_titre" id="edito_titre" rows="1"><?= $edito->edi_title ?></textarea>
+            <textarea class="form-control" name="edito_titre" id="edito_titre"
+                rows="1"><?= $edito->edi_title ?></textarea>
             <label for="edito">Contenu</label>
             <textarea class="form-control" id="edito" name="edito" rows="10"><?= $edito->edi_content ?></textarea>
 
@@ -182,7 +183,61 @@
 <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
     <h3>Utilisateurs de Pti-Cuisto</h3>
     <div class="tabContentContainer">
-
+        <div class="list-group">
+            <?php foreach ($users as $key => $user) { ?>
+                <div class="list-group-item list-group-item-action">
+                    <div class="user_pp" <?php
+                    srand($user->users_id);
+                    $randColor = "#" . str_pad(dechex(rand(0xb9b9b9, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                    echo "style=\"background-color: $randColor;\"";
+                    ?>>
+                        <span>
+                            <?= substr($user->users_pseudo, 0, 1) ?>
+                        </span>
+                    </div>
+                    <div class="userTextInfo">
+                        <div>
+                            <p>Pseudonyme :</p>
+                            <p>
+                                <?= $user->users_pseudo ?>
+                            </p>
+                        </div>
+                        <div>
+                            <p>Nom :</p>
+                            <p>
+                                <?= $user->users_name . " " . $user->users_lastname ?>
+                            </p>
+                        </div>
+                        <div>
+                            <p>Email :</p>
+                            <p>
+                                <?= $user->users_email ?>
+                            </p>
+                        </div>
+                        <div>
+                            <p>Date d'inscription :</p>
+                            <p>
+                                <?= $user->users_inscription_date ?>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <a title="Suspendre le compte" href="index.php?controller=admin&action=editUser&id=<?= $user->users_id ?>"
+                            class="btn btn-outline-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-person-fill-slash" viewBox="0 0 16 16">
+                                <path
+                                    d="M13.879 10.414a2.501 2.501 0 0 0-3.465 3.465l3.465-3.465Zm.707.707-3.465 3.465a2.501 2.501 0 0 0 3.465-3.465Zm-4.56-1.096a3.5 3.5 0 1 1 4.949 4.95 3.5 3.5 0 0 1-4.95-4.95ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
+                            </svg></a>
+                        <a title="Supprimer le compte" href="index.php?controller=admin&action=deleteUser&id=<?= $user->users_id ?>"
+                            class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                            </svg></a>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
     </div>
 </div>
 <div class="tab-pane fade" id="recipes" role="tabpanel" aria-labelledby="recipes-tab">

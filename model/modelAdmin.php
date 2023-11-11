@@ -113,4 +113,15 @@ class modelAdmin
         $req_prep->bindParam(':edi_content', $edi_content);
         return $req_prep->execute();
     }
+
+    public static function getUsers() {
+        $model = new model();
+        $model->init();
+        $sql = "SELECT users_id, users_name, users_lastname, users_pseudo, users_email, users_type, users_inscription_date from users
+        order by users_inscription_date desc";
+        $req_prep = $model::$pdo->prepare($sql);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+        return $req_prep->fetchAll();
+    }
 }

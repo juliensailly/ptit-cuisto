@@ -31,6 +31,7 @@ class controllerAdmin
         $awaitingRecipes = modelAdmin::getAwaitingRecipes();
         $awaitingComments = modelAdmin::getAwaitingComments();
         $edito = modelAdmin::getCurrentEdito();
+        $users = modelAdmin::getUsers();
 
         require(File::build_path(array("view", "navbar.php")));
         require(File::build_path(array("view", "adminDashboard.php")));

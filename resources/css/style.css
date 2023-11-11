@@ -698,6 +698,44 @@ div.tabContentContainer div.commentsContainer .commentChoice {
     margin: 0.5rem 0 1rem 0;
 }
 
+/* Users */
+
+div#users div.tabContentContainer {
+    width: 100%;
+}
+
+div#users div.list-group {
+    flex: 1;
+}
+
+#users div.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+#users div.list-group-item div.userTextInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+#users div.list-group-item div.userTextInfo p {
+    margin-bottom: 0;
+}
+
+#users div.list-group-item div.userTextInfo div {
+    flex: 1;
+}
+
+#users div.list-group-item div.userTextInfo div p:first-child {
+    font-weight: bold;
+    font-size: smaller;
+}
+
 /* -------------------- Show profil page -------------------- */
 
 .profil_header {
