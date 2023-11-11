@@ -1,8 +1,8 @@
 <h1>Filtre - Recherche par ingrédients</h1>
 
 <form action="javascript:void(0);">
-    <input type="text" name="ingredientSearch" id="ingredientSearch"
-        placeholder="Veuillez entrer le nom d'un ingrédient" style="width: 400px;">
+    <input class="form-control" type="text" name="ingredientSearch" id="ingredientSearch"
+        placeholder="Veuillez entrer le nom d'un ingrédient">
 </form>
 
 <div id="ingredientsResults">

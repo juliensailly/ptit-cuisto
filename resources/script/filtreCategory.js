@@ -1,23 +1,26 @@
 function init() {
-    document
-        .querySelector("#category")
-        .addEventListener("change", displayRecipe);
+    var radios = document.forms["categoriesForm"].elements["catRadio"];
+    for (var i = 0, max = radios.length; i < max; i++) {
+        radios[i].onclick = function () {
+            displayRecipe();
+        };
+    }
     displayRecipe();
 }
 
 function displayRecipe() {
-    if (document.querySelector("#category").value == "") return;
+    if (document.forms["categoriesForm"].elements["catRadio"].value == "") return;
     window.history.pushState(
         {},
         "",
         "index.php?controller=filtre&action=categories&id=" +
-            document.querySelector("#category").value
+        document.forms["categoriesForm"].elements["catRadio"].value
     );
     let xhr = new XMLHttpRequest();
     xhr.open(
         "GET",
         "index.php?controller=API&action=categoryFilter&id=" +
-            document.querySelector("#category").value,
+        document.forms["categoriesForm"].elements["catRadio"].value,
         true
     );
     xhr.send();
@@ -26,7 +29,7 @@ function displayRecipe() {
             // Parse JSON
             let recipes = JSON.parse(xhr.responseText);
             // Display recipes
-            let html = '';
+            let html = "";
             for (let i = 0; i < recipes.length; i++) {
                 html += '<div class="col_display">';
                 html += '<div class="card">';
