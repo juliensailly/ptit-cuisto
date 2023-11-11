@@ -124,49 +124,65 @@ class controllerAccount
       controllerErreur::erreur("Vous n'êtes pas connecté.");
       return;
     }
-    if (!isset($_POST['password'])) {
-      controllerErreur::erreur("Le mot de passe entré n'est pas valide.");
-      return;
-    }
-    $password = $_POST['password'];
-    $temp = modelAuthentification::checkPassword($_SESSION['login']->users_email, $password, false);
-    if ($temp === -1 || $temp === 0) {
-      controllerErreur::erreur("Le mot de passe actuel n'est pas correct");
-      return;
+    $user = $_SESSION['login'];
+    if ($user->users_type == 1) {
+      if (isset($_GET['id'])) {
+        $user = modelAccount::getUser($_GET['id']);
+      } else {
+        controllerErreur::erreur("Les paramètres n'ont pas été correctement renseignés.");
+        return;
+      }
+    } else {
+      if (!isset($_POST['password'])) {
+        controllerErreur::erreur("Le mot de passe entré n'est pas valide.");
+        return;
+      }
+      $password = $_POST['password'];
+      $temp = modelAuthentification::checkPassword($user->users_email, $password, false);
+      if ($temp === -1 || $temp === 0) {
+        controllerErreur::erreur("Le mot de passe actuel n'est pas correct");
+        return;
+      }
     }
 
-    if (modelAccount::deleteLikes($_SESSION['login']->users_id) == false) {
+
+    if (modelAccount::deleteLikes($user->users_id) == false) {
       controllerErreur::erreur("Erreur lors de la suppression des likes");
       return;
     }
 
-    if (modelAccount::deleteComments($_SESSION['login']->users_id) == false) {
+    if (modelAccount::deleteComments($user->users_id) == false) {
       controllerErreur::erreur("Erreur lors de la suppression des commentaires");
       return;
     }
 
-    if (modelAccount::deleteEdito($_SESSION['login']->users_id) == false) {
+    if (modelAccount::deleteEdito($user->users_id) == false) {
       controllerErreur::erreur("Erreur lors de la suppression des editos");
       return;
     }
 
     if ((isset($_POST['leaveRecipeCheck']) && $_POST['leaveRecipeCheck'] == "1")) {
-      if (modelAccount::updateRecipesToDeletedUser($_SESSION['login']->users_id) == false) {
+      if (modelAccount::updateRecipesToDeletedUser($user->users_id) == false) {
         controllerErreur::erreur("Erreur lors de la suppression des recettes (update)");
         return;
       }
 
-      if (modelAccount::deleteUser($_SESSION['login']->users_id) == false) {
+      if (modelAccount::deleteUser($user->users_id) == false) {
         controllerErreur::erreur("Erreur lors de la suppression de l'utilisateur");
         return;
       }
 
-      session_unset();
-      session_destroy();
-      header('Location: index.php');
+      if ($user->users_type == 1) {
+        header('Location: index.php?controller=admin&action=adminDashboard');
+      } else {
+        session_unset();
+        session_destroy();
+        header('Location: index.php');
+      }
+      return;
     }
 
-    $recipes = modelAccount::getUsersRecipes($_SESSION['login']->users_id);
+    $recipes = modelAccount::getUsersRecipes($user->users_id);
 
     foreach ($recipes as $recipe) {
       if (modelRecipes::deleteRecipeTags($recipe->rec_id) == false) {
@@ -206,14 +222,19 @@ class controllerAccount
       }
     }
 
-    if (modelAccount::deleteUser($_SESSION['login']->users_id) == false) {
+    if (modelAccount::deleteUser($user->users_id) == false) {
       controllerErreur::erreur("Erreur lors de la suppression de l'utilisateur");
       return;
     }
 
-    session_unset();
-    session_destroy();
-    header('Location: index.php');
+    if ($user->users_type == 1) {
+      header('Location: index.php?controller=admin&action=adminDashboard');
+    } else {
+      session_unset();
+      session_destroy();
+      header('Location: index.php');
+    }
+    return;
   }
 
   public static function deleteAccount()

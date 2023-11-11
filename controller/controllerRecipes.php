@@ -64,6 +64,10 @@ class controllerRecipes
       controllerErreur::erreur("Vous devez être connecté pour créer une recette");
       return;
     }
+    if ($_SESSION['login']->users_status == 1) {
+      controllerErreur::erreur("Votre compte a été suspendu, vous ne pouvez pas créer de recettes.");
+      return;
+    }
 
     $categories = modelFiltres::getCategories();
 
