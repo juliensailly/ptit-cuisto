@@ -755,6 +755,12 @@ form.changeUserInfo div.submitBtn * {
     flex: 1;
 }
 
+div.editBtnProfilPage {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+}
+
 
 /* -------------------- Responsive design -------------------- */
 
