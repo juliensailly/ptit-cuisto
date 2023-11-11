@@ -122,12 +122,20 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
             if (sizeof($comments) == 0) {
                 ?>
                 <div class="alert alert-warning" role="alert">Aucun commentaire pour le moment</div>
+                    <?php require('view/addComment.php'); ?>
                 <?php
             } else {
                 ?>
                 <div>
                     <?php
                     foreach ($comments as $key => $comment) {
+                        if ($comment['isAuthorised'] == 0) {
+                            if ($_SESSION['login'] == false) {
+                                continue;
+                            } else if ($_SESSION['login']->users_id != $comment['users_id'] && $_SESSION['login']->users_type != 1) {
+                                continue;
+                            }
+                        }
                         ?>
                         <div class="comment">
                             <div class="author">
@@ -144,7 +152,8 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
                                     <p>
                                         <?= $comment['users_pseudo'] ?>
                                     </p>
-                                    <p>Publié
+                                    <p>   
+                                    Publié
                                         <?php
                                         if ($comment['com_date'] < date("Y-m-d H:i:s", strtotime("-1 day"))) {
                                             echo " le " . date("d/m/Y", strtotime($comment['com_date']));

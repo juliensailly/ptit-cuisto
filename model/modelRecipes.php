@@ -104,9 +104,9 @@ class modelRecipes extends model
   {
     $model = new Model();
     $model->init();
-    $sql = "SELECT users_id, users_pseudo, com_date, com_content FROM comments
+    $sql = "SELECT users_id, users_pseudo, com_date, com_content, isAuthorised FROM comments
     JOIN users using (users_id)
-    WHERE rec_id = :id and isAuthorised = 1
+    WHERE rec_id = :id
     order by com_date desc";
     $req_prep = model::$pdo->prepare($sql);
     $req_prep->bindParam(':id', $rec_id, PDO::PARAM_INT);

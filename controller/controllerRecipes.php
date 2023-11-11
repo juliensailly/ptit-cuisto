@@ -1,6 +1,7 @@
 <?php
 require_once(File::build_path(array("model", "modelRecipes.php")));
 require_once(File::build_path(array("model", "modelFiltres.php")));
+require_once(File::build_path(array("model", "modelComment.php")));
 require_once(File::build_path(array("lib", "session.php")));
 
 class controllerRecipes
@@ -36,6 +37,10 @@ class controllerRecipes
     $likes = modelRecipes::getRecipeLikes($_GET["id"]);
     $tags = modelRecipes::getRecipeTags($_GET["id"]);
     $comments = modelRecipes::getRecipeComments($_GET["id"]);
+    $currentUserComment = false;
+    if ($_SESSION['login'] !== false) {
+      $currentUserComment = modelComment::getComment($_GET["id"], $_SESSION['login']->users_id);
+    }
     $ingredients = modelRecipes::getRecipeIngredients($_GET["id"]);
     if ($recipe['isAuthorised'] == 0) {
       if ($_SESSION['login'] === false) {
@@ -368,7 +373,7 @@ class controllerRecipes
 
     if ($fileOk) {
       if (file_exists($target_file)) {
-        unlink($target_file); 
+        unlink($target_file);
       }
       if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
         controllerErreur::erreur("Erreur lors de l'upload du fichier.<br>" .
@@ -397,7 +402,8 @@ class controllerRecipes
     header('Location: index.php?controller=recipes&action=read&id=' . $_GET["id"]);
   }
 
-  public static function deleteForm() {
+  public static function deleteForm()
+  {
     $pageTitle = "Supprimer une recette";
     if ($_SESSION['login'] === false) {
       controllerErreur::erreur("Vous devez être connecté pour supprimer une recette");
@@ -429,7 +435,7 @@ class controllerRecipes
       controllerErreur::erreur("Cette recette n'existe pas");
       return;
     }
-    if ($_SESSION['login']->users_id !=$recipe['users_id']) {
+    if ($_SESSION['login']->users_id != $recipe['users_id']) {
       controllerErreur::erreur("Seul le propriétaire de cette recette peut la supprimer");
       return;
     }
@@ -471,7 +477,7 @@ class controllerRecipes
     $target_dir = "resources/img/recipes_images/";
     $target_file = $target_dir . $recipe['rec_image_src'];
     if (file_exists($target_file) && $recipe['rec_image_src'] != "placeholder.jpg") {
-      unlink($target_file); 
+      unlink($target_file);
     }
 
     header('Location: index.php?controller=recipes&action=readAll');
