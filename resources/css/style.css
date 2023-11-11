@@ -439,6 +439,10 @@ div.user_pp span {
     font-weight: 600;
 }
 
+.commentModalBtn {
+    width: 100%;
+}
+
 /* Ingredients */
 
 div.ingredients > div {

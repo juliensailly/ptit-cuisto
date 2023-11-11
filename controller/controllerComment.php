@@ -9,11 +9,7 @@ class controllerComment
 
   public static function add()
   {
-    $pageTitle = "Ajouter un commentaire";
-    if (
-      !isset($_POST['comment-content']) || !isset($_POST['comment-title'])
-      || !isset($_GET["id"]) || !isset($_POST['comment-content']) || !isset($_POST['comment-title'])
-    ) {
+    if (!isset($_GET["id"]) || !isset($_POST['comment-content'])) {
       controllerErreur::erreur("Eléments non définis");
       return;
     }
@@ -23,19 +19,28 @@ class controllerComment
       return;
     }
 
-    $id = $_GET["id"];
-    $idUser = $_SESSION['login']->users_id;
+    $rec_id = $_GET["id"];
+    $users_id = $_SESSION['login']->users_id;
     $content = $_POST['comment-content'];
-    $title = $_POST['comment-title'];
-    if (!modelComment::create($id, $idUser, $title, $content)) {
-      controllerErreur::erreur("Erreur lors de l'insertion du commentaire.<br>" .
-        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
-      return;
+    $isAuthorised = $_SESSION['login']->users_type;
+
+    $old_comment = modelComment::getComment($rec_id, $users_id);
+    if ($old_comment !== false) {
+      if (!modelComment::updateComment($rec_id, $users_id, $content, $isAuthorised)) {
+        controllerErreur::erreur("Erreur lors de la mise à jour du commentaire.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+        return;
+      }
+    } else {
+      if (!modelComment::addComment($rec_id, $users_id, $content, $isAuthorised)) {
+        controllerErreur::erreur("Erreur lors de l'insertion du commentaire.<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+        return;
+      }
     }
-
-    header("Location: index.php?action=read&id=" . $id);
+    
+    header("Location: index.php?controller=recipes&action=read&id=" . $rec_id);
+    return;
   }
-
-  public static
 }
 

@@ -48,11 +48,11 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
             </div>
             <div class="author_save">
                 <div class="author">
-                    <div class="user_pp" <?php
+                    <div <?php
                     srand($recipe['users_id']);
                     $randColor = "#" . str_pad(dechex(rand(0xb9b9b9, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
                     echo "style=\"background-color: $randColor;\"";
-                    ?>>
+                    ?> class="user_pp">
                         <span>
                             <?= substr($recipe['users_pseudo'], 0, 1) ?>
                         </span>
@@ -119,13 +119,6 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
         <div class="comments component">
             <h3>Commentaires</h3>
             <?php
-            require('view/addComment.php');
-
-            if($_SESSION['login'] != false){
-            ?>
-                <button type="button" onclick="commForm()" class="btn btn-secondary"> Ajouter un commentaire </button>
-            <?php
-            }
             if (sizeof($comments) == 0) {
                 ?>
                 <div class="alert alert-warning" role="alert">Aucun commentaire pour le moment</div>
@@ -173,6 +166,7 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
                             <?php
                         }
                     }
+                    require('view/addComment.php');
                     ?>
                 </div>
                 <?php
@@ -232,5 +226,4 @@ if ($recipe['isAuthorised'] == 0 && isset($_SESSION['login']) && $_SESSION['logi
         </div>
     </div>
 </article>
-<script src="resources/script/comment.js"></script>
 <script src="resources/script/ingredientQuantity.js"></script>
