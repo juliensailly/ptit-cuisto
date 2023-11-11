@@ -42,11 +42,16 @@ class controllerRecipes
       $currentUserComment = modelComment::getComment($_GET["id"], $_SESSION['login']->users_id);
     }
     $ingredients = modelRecipes::getRecipeIngredients($_GET["id"]);
+    if ($_SESSION['login'] === false) {
+      $isLiked = false;
+    } else {
+      $isLiked = modelRecipes::isRecipeLiked($_SESSION['login']->users_id, $_GET["id"]);
+    }
     if ($recipe['isAuthorised'] == 0) {
       if ($_SESSION['login'] === false) {
         controllerErreur::erreur("Cette recette n'est pas encore autorisée");
         return;
-      } else if ($_SESSION['login']->users_id != $recipe['users_id']) {
+      } else if ($_SESSION['login']->users_id != $recipe['users_id'] && $_SESSION['login']->users_type != 1) {
         controllerErreur::erreur("Cette recette n'est pas encore autorisée");
         return;
       }
@@ -62,6 +67,10 @@ class controllerRecipes
     $pageTitle = "Créer une recette";
     if ($_SESSION['login'] === false) {
       controllerErreur::erreur("Vous devez être connecté pour créer une recette");
+      return;
+    }
+    if ($_SESSION['login']->users_status == 1) {
+      controllerErreur::erreur("Votre compte a été suspendu, vous ne pouvez pas créer de recettes.");
       return;
     }
 
@@ -90,7 +99,11 @@ class controllerRecipes
       $tags = array();
     }
 
-    $rec_id = modelRecipes::createRecipe($_POST['title'], $_POST['content'], $_POST['summary'], $_POST['category'], $_SESSION['login']->users_id, $_POST['nbPerson']);
+    $isAuthorised = 0;
+    if ($_SESSION['login']->users_type == 1) {
+      $isAuthorised = 1;
+    }
+    $rec_id = modelRecipes::createRecipe($_POST['title'], $_POST['content'], $_POST['summary'], $_POST['category'], $_SESSION['login']->users_id, $_POST['nbPerson'], $isAuthorised);
     if ($rec_id == false) {
       controllerErreur::erreur("Erreur lors de l'insertion' de la recette.<br>" .
         "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
@@ -216,7 +229,7 @@ class controllerRecipes
     if ($_SESSION['login'] === false) {
       controllerErreur::erreur("Vous devez être connecté pour modifier une recette");
       return;
-    } else if ($_SESSION['login']->users_id != modelRecipes::getRecipe($_GET["id"])['users_id']) {
+    } else if ($_SESSION['login']->users_id != modelRecipes::getRecipe($_GET["id"])['users_id'] && $_SESSION['login']->users_type != 1) {
       controllerErreur::erreur("Seul le propriétaire de cette recette peut la modifier");
       return;
     }
@@ -237,7 +250,7 @@ class controllerRecipes
     if ($_SESSION['login'] === false) {
       controllerErreur::erreur("Vous devez être connecté pour modifier une recette");
       return;
-    } else if ($_SESSION['login']->users_id != modelRecipes::getRecipe($_GET["id"])['users_id']) {
+    } else if ($_SESSION['login']->users_id != modelRecipes::getRecipe($_GET["id"])['users_id'] && $_SESSION['login']->users_type != 1) {
       controllerErreur::erreur("Seul le propriétaire de cette recette peut la modifier");
       return;
     }
@@ -393,10 +406,12 @@ class controllerRecipes
       return;
     }
 
-    if (!modelRecipes::setIsAuthorised($_GET['id'], 0)) {
-      controllerErreur::erreur("Erreur lors de la modification de la recette (autorisation).<br>" .
-        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
-      return;
+    if ($_SESSION['login']->users_type != 1) {
+      if (!modelRecipes::setIsAuthorised($_GET['id'], 0)) {
+        controllerErreur::erreur("Erreur lors de la modification de la recette (autorisation).<br>" .
+          "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour au formulaire</button>");
+        return;
+      }
     }
 
     header('Location: index.php?controller=recipes&action=read&id=' . $_GET["id"]);
@@ -414,7 +429,7 @@ class controllerRecipes
       controllerErreur::erreur("Cette recette n'existe pas");
       return;
     }
-    if ($_SESSION['login']->users_id != $recipe['users_id']) {
+    if ($_SESSION['login']->users_id != $recipe['users_id'] && $_SESSION['login']->users_type != 1) {
       controllerErreur::erreur("Seul le propriétaire de cette recette peut la supprimer");
       return;
     }
@@ -435,7 +450,7 @@ class controllerRecipes
       controllerErreur::erreur("Cette recette n'existe pas");
       return;
     }
-    if ($_SESSION['login']->users_id != $recipe['users_id']) {
+    if ($_SESSION['login']->users_id != $recipe['users_id'] && $_SESSION['login']->users_type != 1) {
       controllerErreur::erreur("Seul le propriétaire de cette recette peut la supprimer");
       return;
     }
@@ -481,5 +496,27 @@ class controllerRecipes
     }
 
     header('Location: index.php?controller=recipes&action=readAll');
+  }
+
+  public static function like()
+  {
+    if ($_SESSION['login'] === false) {
+      controllerErreur::erreur("Vous devez être connecté pour liker une recette");
+      return;
+    }
+    if (!isset($_GET["id"])) {
+      controllerErreur::erreur("Problème dans le like de la recette");
+      return;
+    }
+
+    $isRecipeLiked = modelRecipes::isRecipeLiked($_SESSION['login']->users_id, $_GET["id"]);
+    if ($isRecipeLiked == true) {
+      modelRecipes::removeLike($_SESSION['login']->users_id, $_GET["id"]);
+      $isLiked = false;
+    } else {
+      modelRecipes::addLike($_SESSION['login']->users_id, $_GET["id"]);
+      $isLiked = true;
+    }
+    header('Location: index.php?controller=recipes&action=read&id=' . $_GET["id"]);
   }
 }

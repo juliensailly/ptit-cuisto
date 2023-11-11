@@ -49,11 +49,19 @@
                     </div>
                     <div class="btn-group">
                         <a href="index.php?controller=recipes&action=deleteForm&id=<?= $recipe->rec_id ?>"
-                            class="btn btn-outline-danger">Supprimer la recette</a>
+                            class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                            </svg></a>
                         <a href="index.php?controller=recipes&action=read&id=<?= $recipe->rec_id ?>"
                             class="btn btn-primary">Plus de détails</a>
                         <a href="index.php?controller=admin&action=validRecipe&id=<?= $recipe->rec_id ?>"
-                            class="btn btn-outline-success">Accepter la recette</a>
+                            class="btn btn-outline-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                            </svg></a>
                     </div>
                 </div>
                 <?php
@@ -171,7 +179,8 @@
     <div class="tabContentContainer">
         <form action="index.php?controller=admin&action=edito" method="post">
             <label for="edito_titre">Titre</label>
-            <textarea class="form-control" name="edito_titre" id="edito_titre" rows="1"><?= $edito->edi_title ?></textarea>
+            <textarea class="form-control" name="edito_titre" id="edito_titre"
+                rows="1"><?= $edito->edi_title ?></textarea>
             <label for="edito">Contenu</label>
             <textarea class="form-control" id="edito" name="edito" rows="10"><?= $edito->edi_content ?></textarea>
 
@@ -182,13 +191,153 @@
 <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
     <h3>Utilisateurs de Pti-Cuisto</h3>
     <div class="tabContentContainer">
+        <div class="list-group">
+            <?php foreach ($users as $key => $user) { ?>
+                <div class="list-group-item list-group-item-action">
+                    <div class="user_pp" <?php
+                    srand($user->users_id);
+                    $randColor = "#" . str_pad(dechex(rand(0xb9b9b9, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                    echo "style=\"background-color: $randColor;\"";
+                    ?>>
+                        <span>
+                            <?= substr($user->users_pseudo, 0, 1) ?>
+                        </span>
+                    </div>
+                    <div class="userTextInfo">
+                        <div>
+                            <p>Pseudonyme :</p>
+                            <p>
+                                <?= $user->users_pseudo ?>
+                            </p>
+                        </div>
+                        <div>
+                            <p>Nom :</p>
+                            <p>
+                                <?= $user->users_name . " " . $user->users_lastname ?>
+                            </p>
+                        </div>
+                        <div>
+                            <p>Email :</p>
+                            <p>
+                                <?= $user->users_email ?>
+                            </p>
+                        </div>
+                        <div>
+                            <p>Date d'inscription :</p>
+                            <p>
+                                <?= $user->users_inscription_date ?>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="btn-group">
 
+                        <?php if ($user->users_status == 0) { ?>
+                            <a href="index.php?controller=admin&action=suspendUser&id=<?= $user->users_id ?>"
+                                class="btn btn-outline-primary" title="Suspendre l'utilisateur'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-person-fill-slash" viewBox="0 0 16 16">
+                                    <path
+                                        d="M13.879 10.414a2.501 2.501 0 0 0-3.465 3.465l3.465-3.465Zm.707.707-3.465 3.465a2.501 2.501 0 0 0 3.465-3.465Zm-4.56-1.096a3.5 3.5 0 1 1 4.949 4.95 3.5 3.5 0 0 1-4.95-4.95ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
+                                </svg>
+                            </a>
+                            <?php
+                        } else {
+                            ?>
+                            <a href="index.php?controller=admin&action=unsuspendUser&id=<?= $user->users_id ?>"
+                                class="btn btn-outline-primary" title="Réintégrer l'utilisateur">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-person-fill-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    <path
+                                        d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
+                                </svg>
+                            </a>
+                        <?php } ?>
+                        <a title="Supprimer le compte"
+                            href="index.php?controller=account&action=deleteAccountAction&id=<?= $user->users_id ?>"
+                            class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                            </svg></a>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
     </div>
 </div>
 <div class="tab-pane fade" id="recipes" role="tabpanel" aria-labelledby="recipes-tab">
     <h3>Recettes de Pti-Cuisto</h3>
     <div class="tabContentContainer">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+            tabindex="0">
+            <?php
+            foreach ($recipes as $key => $recipe) {
+                if ($key % 2 == 0) {
+                    echo "<div class='recipes_row'>";
+                }
+                ?>
+                <div class="card">
+                    <img class="card-img-top" src="<?= $recipe_img_path . $recipe->rec_image_src ?>"
+                        alt="Illustration de <?= $recipe->rec_title ?>">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <?= $recipe->rec_title ?>
+                        </h4>
+                        <h6 class="recipe_category card-subtitle">
+                            <a href="index.php?controller=filtre&action=categories&id=<?= $recipe->cat_id ?>"><i>
+                                    <?= $recipe->cat_title ?>
+                                </i></a>
+                        </h6>
+                        <p class="card-text">
+                            <?= $recipe->rec_summary ?>
+                        </p>
+                        <a href="index.php?controller=recipes&action=read&id=<?= $recipe->rec_id ?>"
+                            class="btn btn-primary">
+                            Consulter la recette
+                        </a>
+                    </div>
+                    <?php
+                    if ($_SESSION['login'] != false && $_SESSION['login']->users_type == 1) {
+                        ?>
+                        <div class="editBtnProfilPage">
+                            <a href="index.php?controller=recipes&action=editForm&id=<?= $recipe->rec_id ?>"
+                                class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pen-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+                                </svg>
+                            </a>
+                            <a href="index.php?controller=recipes&action=deleteForm&id=<?= $recipe->rec_id ?>"
+                                class="btn btn-danger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                </svg>
+                            </a>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
 
+                <?php
+                if ($key % 2 != 0) {
+                    echo "</div>";
+                }
+                if ($key == sizeof($recipes) - 1) {
+                    echo "<div class=\"card\" style=\"visibility:hidden;\"></div>";
+                }
+            }
+            if (sizeof($recipes) == 0) {
+                echo "<div class='alert alert-secondary' role='alert'>Aucune recette créée</div>";
+            }
+            ?>
+        </div>
     </div>
+</div>
 </div>
 </div>

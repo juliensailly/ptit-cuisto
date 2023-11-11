@@ -113,4 +113,50 @@ class modelAdmin
         $req_prep->bindParam(':edi_content', $edi_content);
         return $req_prep->execute();
     }
+
+    public static function getUsers() {
+        $model = new model();
+        $model->init();
+        $sql = "SELECT users_id, users_name, users_lastname, users_pseudo, users_email, users_type, users_status, users_inscription_date from users
+        where users_id != 0
+        order by users_inscription_date desc";
+        $req_prep = $model::$pdo->prepare($sql);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+        return $req_prep->fetchAll();
+    }
+
+    public static function suspendUser($user_id) {
+        $model = new model();
+        $model->init();
+        $sql = "UPDATE users
+        SET users_status = 1
+        WHERE users_id = :users_id";
+        $req_prep = $model::$pdo->prepare($sql);
+        $req_prep->bindParam(':users_id', $user_id);
+        return $req_prep->execute();
+    }
+
+    public static function unsuspendUser($user_id) {
+        $model = new model();
+        $model->init();
+        $sql = "UPDATE users
+        SET users_status = 0
+        WHERE users_id = :users_id";
+        $req_prep = $model::$pdo->prepare($sql);
+        $req_prep->bindParam(':users_id', $user_id);
+        return $req_prep->execute();
+    }
+
+    public static function getRecipes() {
+        $model = new model();
+        $model->init();
+        $sql = "SELECT rec_id, rec_title, cat_id, cat_title, rec_summary, rec_image_src, rec_creation_date, rec_modification_date from recipes
+        join category using(cat_id)
+        order by rec_modification_date desc, rec_creation_date desc";
+        $req_prep = $model::$pdo->prepare($sql);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+        return $req_prep->fetchAll();
+    }
 }
