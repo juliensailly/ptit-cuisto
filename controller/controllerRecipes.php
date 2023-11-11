@@ -46,7 +46,7 @@ class controllerRecipes
       if ($_SESSION['login'] === false) {
         controllerErreur::erreur("Cette recette n'est pas encore autorisée");
         return;
-      } else if ($_SESSION['login']->users_id != $recipe['users_id']) {
+      } else if ($_SESSION['login']->users_id != $recipe['users_id'] && $_SESSION['login']->users_type != 1) {
         controllerErreur::erreur("Cette recette n'est pas encore autorisée");
         return;
       }
