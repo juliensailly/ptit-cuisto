@@ -12,15 +12,10 @@ class controllerAccount{
     }
     $pageTitle = "Mon compte";
 
-    if (!isset($_SESSION['login'])) {
-      controllerErreur::erreur("Vous n'êtes pas connecté.");
-      return;
-    }
-
     $user = modelAccount::getUser($_GET['id']);
-    $nbReceivedLiked = modelAccount::getUserNbReceivedLikes($_SESSION['login']->users_id);
-    $usersRecipes = modelAccount::getUsersRecipes($_SESSION['login']->users_id);
-    $usersLikedRecipes = modelAccount::getUsersLikedRecipes($_SESSION['login']->users_id);
+    $nbReceivedLiked = modelAccount::getUserNbReceivedLikes($_GET['id']);
+    $usersRecipes = modelAccount::getUsersRecipes($_GET['id']);
+    $usersLikedRecipes = modelAccount::getUsersLikedRecipes($_GET['id']);
     $pageTitle = "Profil - ".$user->users_pseudo;
     require (File::build_path(array("view", "navbar.php")));
     require (File::build_path(array("view", "accountView.php")));
@@ -81,12 +76,8 @@ class controllerAccount{
   }
 
   public static function changePassword(){
-    if (!isset($_GET['id'])) {
-      controllerErreur::erreur("Les paramètres n'ont pas été correctement renseignés.");
-      return;
-    }
-    $pageTitle = "Profile - Modification";
-    if (!isset($_SESSION["login"])) {
+    $pageTitle = "Profil - Modification du mot de passe";
+    if ($_SESSION["login"] == false) {
       controllerErreur::erreur("Vous n'êtes pas connecté.");
       return;
     }
@@ -101,7 +92,9 @@ class controllerAccount{
         return;
       }
 
-      if(!modelAuthentification::checkPassword($_SESSION['login']->users_email, $oldPassword)){
+      $temp = modelAuthentification::checkPassword($_SESSION['login']->users_email, $oldPassword);
+
+      if($temp == -1 || $temp == 0){
         controllerErreur::erreur("Le mot de passe actuel n'est pas correct");
         return;
       }
@@ -111,7 +104,7 @@ class controllerAccount{
       if($bool){
         header('Location: index.php?controller=account&action=showProfil&id='.$_SESSION['login']->users_id);
       }
-      $_SESSION['login']->users_password = $newPassword;
+      $_SESSION['login']->users_password = password_hash($newPassword, PASSWORD_DEFAULT);;
     }
     require (File::build_path(array("view", "navbar.php")));
     require (File::build_path(array("view", "changePassword.php")));

@@ -1,5 +1,5 @@
 <form action="index.php?controller=account&action=changeProfilInformation&id=<?= $_SESSION['login']->users_id ?>"
-  method="POST">
+  method="POST" class="changeUserInfo">
   <?php
   $users = $_SESSION['login'];
   ?>
