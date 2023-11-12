@@ -1,7 +1,7 @@
 <?php
 class conf{
 	static private $databases = array(
-		'hostname' => 'mysql.info.unicaen.fr',
+		'hostname' => 'localhost',
 		'database' => 'pti-cuisto',
 		'login' => 'root',
 		'password' => ''
