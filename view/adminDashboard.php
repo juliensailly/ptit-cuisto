@@ -174,6 +174,7 @@
             ?>
     </div>
 </div>
+</div>
 <div class="tab-pane fade" id="edito" role="tabpanel" aria-labelledby="edito-tab">
     <h3>Modification de l'éditorial de la page d'accueil</h3>
     <div class="tabContentContainer">
