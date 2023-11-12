@@ -326,7 +326,6 @@ class modelRecipes extends model
     $req_prep = model::$pdo->prepare($sql);
     $req_prep->bindParam(':userId', $userId, PDO::PARAM_STR);
     $req_prep->bindParam(':recId', $recId, PDO::PARAM_STR);
-    echo "INSERT INTO likes (users_id, rec_id) VALUES ('".$userId."', '".$recId."')";
     return $req_prep->execute();
   }
 

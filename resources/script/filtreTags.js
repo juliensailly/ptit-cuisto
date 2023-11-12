@@ -85,7 +85,7 @@ function updateSelectedIngredients() {
 
 function searchForRecipes() {
     let url =
-        "http://localhost/index.php?controller=API&action=tagsFilter&tab_ing_id=";
+        "index.php?controller=API&action=tagsFilter&tab_ing_id=";
     for (var tag_id in selectedIngredients) {
         url += tag_id + ",";
     }

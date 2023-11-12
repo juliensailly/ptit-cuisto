@@ -52,7 +52,7 @@ function updateSelectedIngredients() {
 }
 
 function searchForRecipes() {
-    let url = "http://localhost/index.php?controller=API&action=ingredientsFilter&tab_ing_id=";
+    let url = "index.php?controller=API&action=ingredientsFilter&tab_ing_id=";
     for (var ing_id in selectedIngredients) {
         url += ing_id + ",";
     }

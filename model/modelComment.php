@@ -31,8 +31,6 @@ class modelComment extends model{
     $req_prep->bindParam(":user", $users_id, PDO::PARAM_INT);
     $req_prep->bindParam(":com_content", $content, PDO::PARAM_STR);
     $req_prep->bindParam(":isAuthorised", $isAuthorised, PDO::PARAM_INT);
-    echo "INSERT INTO comments(rec_id, users_id, com_date, com_content, isAuthorised) VALUES 
-    (".$rec_id.", ".$users_id.", NOW(), '".$content."', ".$isAuthorised.")";
     return $req_prep->execute();
   }
 
