@@ -107,7 +107,7 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
             <?php
             if (sizeof($tags) == 0) {
                 ?>
-                <div class="alert alert-warning" role="alert">Aucun tag</div>
+                <div class="alert alert-secondary" role="alert">Aucun tag</div>
                 <?php
             } else {
                 ?>
@@ -131,7 +131,7 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
             <?php
             if (sizeof($comments) == 0) {
                 ?>
-                <div class="alert alert-warning" role="alert">Aucun commentaire pour le moment</div>
+                <div class="alert alert-secondary" role="alert">Aucun commentaire pour le moment</div>
                 <?php require('view/addComment.php'); ?>
                 <?php
             } else {
@@ -212,7 +212,7 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
             <?php
             if (sizeof($ingredients) == 0) {
                 ?>
-                <div class="alert alert-warning" role="alert">Aucun ingrédient</div>
+                <div class="alert alert-secondary" role="alert">Aucun ingrédient</div>
                 <?php
             } else {
                 ?>
