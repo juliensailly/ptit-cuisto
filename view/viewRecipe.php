@@ -189,7 +189,7 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
                                     echo "style=\"background-color: $randColor;\"";
                                     ?>>
                                         <span>
-                                            <?= substr($comment['users_pseudo'], 0, 1) ?>
+                                            <?= strtoupper(substr($comment['users_pseudo'], 0, 1)) ?>
                                         </span>
                                     </div>
                                     <div>
