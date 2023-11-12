@@ -110,4 +110,26 @@ class modelAPI {
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
     return $req_prep->fetchAll();
   }
+
+  public static function getRecipesByTags($tab_ing_id) {
+    $model = new model();
+    $model->init();
+    $sql = "SELECT * FROM recipes WHERE isAuthorised = 1";
+    if (count($tab_ing_id) > 0 && $tab_ing_id[0] != "") {
+      $sql .= " and ";
+      foreach ($tab_ing_id as $key => $value) {
+        $sql .= "rec_id in (
+          select rec_id from tags_list
+          where tag_id = $value
+          )";
+        if ($key != count($tab_ing_id) - 1) {
+          $sql .= " AND ";
+        }
+      }
+    }
+    $req_prep = $model::$pdo->prepare($sql);
+    $req_prep->execute();
+    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+    return $req_prep->fetchAll();
+  }
 }

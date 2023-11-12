@@ -51,4 +51,15 @@ class controllerAPI{
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data);
     }
+
+    public static function tagsFilter() {
+        if (!isset($_GET["tab_ing_id"])) {
+            $tab_ing_id = array();
+        } else {
+            $tab_ing_id = explode(",", $_GET["tab_ing_id"]);
+        }
+        $data = modelAPI::getRecipesByTags($tab_ing_id);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
+    }
 }
