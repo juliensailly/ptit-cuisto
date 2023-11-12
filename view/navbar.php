@@ -51,6 +51,8 @@
                                     href="index.php?controller=filtre&action=titleSearch">Titre</a></li>
                             <li><a class="dropdown-item text-white txt"
                                     href="index.php?controller=filtre&action=ingredientsSearch">Ingrédients</a></li>
+                            <li><a class="dropdown-item text-white txt"
+                                    href="index.php?controller=filtre&action=tagsSearch">Tags</a></li>
                         </ul>
                     </li>
                     <?php
