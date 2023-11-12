@@ -180,35 +180,38 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
                                 <?php
                             }
                             ?>
-                            <div class="author">
-                                <div class="user_pp" <?php
-                                srand($comment['users_id']);
-                                $randColor = "#" . str_pad(dechex(rand(0xb9b9b9, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
-                                echo "style=\"background-color: $randColor;\"";
-                                ?>>
-                                    <span>
-                                        <?= substr($comment['users_pseudo'], 0, 1) ?>
-                                    </span>
-                                </div>
-                                <div>
-                                    <p>
-                                        <?= $comment['users_pseudo'] ?>
-                                    </p>
-                                    <p>
-                                        <?php
-                                        if ($comment['isAuthorised'] == 1) {
-                                            if ($comment['com_date'] < date("Y-m-d H:i:s", strtotime("-1 day"))) {
-                                                echo "Publié le " . date("d/m/Y", strtotime($comment['com_date']));
+                            <a href="index.php?controller=account&action=showProfil&id=<?= $comment['users_id'] ?>"
+                                class="authorProfilLink">
+                                <div class="author">
+                                    <div class="user_pp" <?php
+                                    srand($comment['users_id']);
+                                    $randColor = "#" . str_pad(dechex(rand(0xb9b9b9, 0xFFFFFF)), 6, 0, STR_PAD_LEFT);
+                                    echo "style=\"background-color: $randColor;\"";
+                                    ?>>
+                                        <span>
+                                            <?= substr($comment['users_pseudo'], 0, 1) ?>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <p>
+                                            <?= $comment['users_pseudo'] ?>
+                                        </p>
+                                        <p>
+                                            <?php
+                                            if ($comment['isAuthorised'] == 1) {
+                                                if ($comment['com_date'] < date("Y-m-d H:i:s", strtotime("-1 day"))) {
+                                                    echo "Publié le " . date("d/m/Y", strtotime($comment['com_date']));
+                                                } else {
+                                                    echo "Publié à " . date("H:i", strtotime($comment['com_date']));
+                                                }
                                             } else {
-                                                echo "Publié à " . date("H:i", strtotime($comment['com_date']));
+                                                echo "En attente de validation";
                                             }
-                                        } else {
-                                            echo "En attente de validation";
-                                        }
-                                        ?>
-                                    </p>
+                                            ?>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                             <p class="comment">
                                 <?= $comment['com_content'] ?>
                             </p>
