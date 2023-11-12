@@ -43,6 +43,6 @@ Amusez-vous bien à cuisiner avec Pti-Cuisto! 🎉
 
 ## MLD & MCD
 
-![MLD](resources/img/MLD.jpg)
+![MLD](resources/img/MLD.png)
 
-![MLD](resources/img/MCD.jpg)
+![MCD](resources/img/MCD.png)
