@@ -1,6 +1,7 @@
 # Pti-Cuisto 🍽️
 
 Bienvenue sur le repository GitHub de Pti-Cuisto, le site de cuisine ludique pour les petits chefs en herbe! 👩‍🍳👨‍🍳
+Il est accessible à l'adresse : [https://dev-sailly221.users.info.unicaen.fr/](https://dev-sailly221.users.info.unicaen.fr/)
 
 ## Fonctionnalités principales 🚀
 
