@@ -592,6 +592,10 @@ div.ingredientsChoiceList, div.tagsChoice {
     padding: 1rem;
 }
 
+div.recipeFormContainer div:last-child label {
+    color: var(--background-color);
+}
+
 div#ingredientsResults ul, div#tagsResults ul {
     position: absolute;
     border-radius: 8px;

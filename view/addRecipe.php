@@ -1,6 +1,7 @@
 <h2>Ajouter une recette</h2>
 
-<form enctype="multipart/form-data" action="index.php?controller=recipes&action=create" method="post" id="addRecipeForm">
+<form enctype="multipart/form-data" action="index.php?controller=recipes&action=create" method="post"
+    id="addRecipeForm">
     <div class="recipeFormContainer">
         <div class="column">
             <div>
@@ -38,27 +39,33 @@
                 <label for="nbPerson">Nombre de personne(s) :</label>
                 <br>
                 <div class="person_number btn-group">
-                    <button type="button" class="btn btn-outline-primary" id="removePerson" onclick="javascript:(parseInt(document.getElementById('nbPerson').value) > 1 ? (document.getElementById('nbPerson').value = parseInt(document.getElementById('nbPerson').value) - 1) : void(0))">-</button>
-                    <input type="number" min="1" name="nbPerson" id="nbPerson" class="btn btn-outline-primary" value="4"></input>
-                    <button type="button" class="btn btn-outline-primary" id="addPerson" onclick="javascript:(document.getElementById('nbPerson').value = parseInt(document.getElementById('nbPerson').value) + 1)">+</button>
+                    <button type="button" class="btn btn-outline-primary" id="removePerson"
+                        onclick="javascript:(parseInt(document.getElementById('nbPerson').value) > 1 ? (document.getElementById('nbPerson').value = parseInt(document.getElementById('nbPerson').value) - 1) : void(0))">-</button>
+                    <input type="number" min="1" name="nbPerson" id="nbPerson" class="btn btn-outline-primary"
+                        value="4"></input>
+                    <button type="button" class="btn btn-outline-primary" id="addPerson"
+                        onclick="javascript:(document.getElementById('nbPerson').value = parseInt(document.getElementById('nbPerson').value) + 1)">+</button>
                 </div>
             </div>
         </div>
         <div class="column">
             <div>
-                <label>Ajouter des ingredients :</label>
+                <p>Ajouter des ingredients :</p>
                 <div class="ingredientsChoiceList">
                     <div class="d-flex">
                         <div id="ingredientsResults">
-                            <input type="text" name="ingredientSearch" id="ingredientSearch" class="form-control"
-                                placeholder="Nom d'un ingrédient">
+                            <label for="ingredientSearch">Nom d'un ingrédient</label>
+                            <input type="text" name="ingredientSearch" id="ingredientSearch" class="form-control">
                             <ul class="list-group">
                             </ul>
                         </div>
-                        <input type="text" name="ingredientQuantity" id="ingredientQuantity" class="form-control"
-                            placeholder="Quantité et unité">
+                        <div>
+                            <label for="ingredientQuantity">Quantité et unité</label>
+                            <input type="text" name="ingredientQuantity" id="ingredientQuantity" class="form-control">
+                        </div>
                     </div>
                     <button type="button" class="btn btn-success" id="addIngredientBtn">Ajouter l'ingrédient</button>
+                    <label for="selectedIngredients" style="visibility: hidden;">hidden input</label>
                     <input type="text" name="selectedIngredients" id="selectedIngredients" hidden>
                     <hr>
                     <ul class="ingredientsList">
@@ -68,15 +75,16 @@
             </div>
 
             <div>
-                <label>Ajouter des tags :</label>
+                <p>Ajouter des tags :</p>
                 <div class="tagsChoice">
                     <div id="tagsResults">
-                        <input type="text" name="tagSearch" id="tagSearch" class="form-control"
-                            placeholder="Nom d'un tag">
+                        <label for="tagSearch">Nom d'un tag</label>
+                        <input type="text" name="tagSearch" id="tagSearch" class="form-control">
                         <ul class="list-group">
                         </ul>
                     </div>
                     <button type="button" class="btn btn-success" id="addTagBtn">Ajouter le tag</button>
+                    <label for="selectedTags" style="visibility: hidden;">hidden input</label>
                     <input type="text" name="selectedTags" id="selectedTags" hidden>
                     <hr>
                     <ul class="tagsList">

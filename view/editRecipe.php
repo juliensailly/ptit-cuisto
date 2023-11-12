@@ -1,8 +1,8 @@
 <?php global $recipe_img_path; ?>
 <h2>Modifier une recette :</h2>
 
-<form enctype="multipart/form-data" action="index.php?controller=recipes&action=edit&id=<?= $recipe['rec_id'] ?>" method="post"
-    id="addRecipeForm">
+<form enctype="multipart/form-data" action="index.php?controller=recipes&action=edit&id=<?= $recipe['rec_id'] ?>"
+    method="post" id="addRecipeForm">
     <div class="recipeFormContainer">
         <div class="column">
             <div>
@@ -59,17 +59,19 @@
         </div>
         <div class="column">
             <div>
-                <label>Ajouter des ingredients :</label>
+                <p>Ajouter des ingredients :</p>
                 <div class="ingredientsChoiceList">
                     <div class="d-flex">
                         <div id="ingredientsResults">
-                            <input type="text" name="ingredientSearch" id="ingredientSearch" class="form-control"
-                                placeholder="Nom d'un ingrédient">
+                            <label for="ingredientSearch">Nom d'un ingrédient</label>
+                            <input type="text" name="ingredientSearch" id="ingredientSearch" class="form-control">
                             <ul class="list-group">
                             </ul>
                         </div>
-                        <input type="text" name="ingredientQuantity" id="ingredientQuantity" class="form-control"
-                            placeholder="Quantité et unité">
+                        <div>
+                            <label for="ingredientQuantity">Quantité et unité</label>
+                            <input type="text" name="ingredientQuantity" id="ingredientQuantity" class="form-control">
+                        </div>
                     </div>
                     <button type="button" class="btn btn-success" id="addIngredientBtn">Ajouter l'ingrédient</button>
                     <?php
@@ -82,7 +84,9 @@
                     }
                     $json_ingredients = json_encode($json_ingredients);
                     ?>
-                    <textarea type="text" name="selectedIngredients" id="selectedIngredients" hidden><?= $json_ingredients ?></textarea>
+                    <label for="selectedIngredients" style="visibility: hidden">hidden input</label>
+                    <textarea type="text" name="selectedIngredients" id="selectedIngredients"
+                        hidden><?= $json_ingredients ?></textarea>
                     <hr>
                     <ul class="ingredientsList">
 
@@ -91,11 +95,11 @@
             </div>
 
             <div>
-                <label>Ajouter des tags :</label>
+                <p>Ajouter des tags :</p>
                 <div class="tagsChoice">
                     <div id="tagsResults">
-                        <input type="text" name="tagSearch" id="tagSearch" class="form-control"
-                            placeholder="Nom d'un tag">
+                        <label for="tagSearch">Nom d'un tag</label>
+                        <input type="text" name="tagSearch" id="tagSearch" class="form-control">
                         <ul class="list-group">
                         </ul>
                     </div>
@@ -110,6 +114,7 @@
                     $json_tags = json_encode($json_tags);
                     $json_tags = str_replace("'", "&quot;", $json_tags);
                     ?>
+                    <label for="selectedTags" style="visibility: hidden">hidden input</label>
                     <textarea type="text" name="selectedTags" id="selectedTags" hidden><?= $json_tags ?></textarea>
                     <hr>
                     <ul class="tagsList">

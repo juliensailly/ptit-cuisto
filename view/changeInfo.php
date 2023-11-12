@@ -7,20 +7,20 @@
 
   <div id="change-name-inputs">
     <div>
-      <label for="name">Prénom :</label>
+      <label for="nameM">Prénom :</label>
       <input type="text" id="nameM" name="name" class="form-control" value="<?= $users->users_name ?>">
     </div>
     <div>
-      <label for="surname">Nom :</label>
+      <label for="surnameM">Nom :</label>
       <input type="text" id="surnameM" name="surname" class="form-control" value="<?= $users->users_lastname ?>">
     </div>
   </div>
   <div>
-    <label for="pseudo">Pseudonyme :</label>
+    <label for="pseudoM">Pseudonyme :</label>
     <input type="text" id="pseudoM" name="pseudo" class="form-control" value="<?= $users->users_pseudo ?>">
   </div>
   <div>
-    <label for="sign-up-mail">Adresse mail :</label>
+    <label for="sign-up-mailM">Adresse mail :</label>
     <input type="email" id="sign-up-mailM" name="sign-up-mail" class="form-control" value="<?= $users->users_email ?>">
   </div>
   <div class="submitBtn">

@@ -5,16 +5,16 @@
   ?>
 
   <div>
-    <label for="name">Ancien mot de passe :</label>
+    <label for="old-password">Ancien mot de passe :</label>
     <input type="password" id="old-password" name="old-password" class="form-control">
   </div>
   <div id="name-inputs">
     <div>
-      <label for="surname">Nouveau mot de passe :</label>
+      <label for="new-password">Nouveau mot de passe :</label>
       <input type="password" id="new-password" name="new-password" class="form-control">
     </div>
     <div>
-      <label for="pseudo">Confirmation du nouveau mot de passe :</label>
+      <label for="new-password2">Confirmation du nouveau mot de passe :</label>
       <input type="password" id="new-password2" name="new-password2" class="form-control">
     </div>
   </div>
