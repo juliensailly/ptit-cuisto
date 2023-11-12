@@ -23,11 +23,16 @@ class controllerSign{
     }
 
     $_SESSION['login'] = $user;
+    $url = $_SERVER['HTTP_REFERER'];
+    if(!isset($url) || empty($url) || strpos($url, "?controller=sign&action=signUp") !== false || strpos($url, "?controller=sign&action=signIn") !== false || strpos($url, "?controller=erreur") !== false){
+      $url = "index.php";
+    }
+    header("location:".$url);
   }
 
   public static function signUp(){
     $url = $_SERVER['HTTP_REFERER'];
-    if(!isset($url) || empty($url) || strpos($url, "?controller=sign&action=signUp") !== false || strpos($url, "?controller=sign&action=signIn") !== false){
+    if(!isset($url) || empty($url) || strpos($url, "?controller=sign&action=signUp") !== false || strpos($url, "?controller=sign&action=signIn") !== false || strpos($url, "?controller=erreur") !== false){
       $url = "index.php";
     }
     if(!isset($_POST['name']) || !isset($_POST['surname']) 
