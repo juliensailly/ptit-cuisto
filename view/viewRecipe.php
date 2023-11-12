@@ -85,24 +85,26 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
                         </div>
                     </div>
                 </a>
-                <div class="save_recipe_button">
-                    <span class="save"><a href="index.php?controller=recipes&action=like&id=<?= $recipe['rec_id'] ?>"
-                            style='text-decoration: none; color: white;'>Sauvegarder</a></span>
-                    <span>
-                        <?= $likes['NBLIKES'] ?>
-                    </span>
-                    <?php
-                    if ($isLiked == true) {
-                        ?>
-                        <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+                <a href="index.php?controller=recipes&action=like&id=<?= $recipe['rec_id'] ?>"
+                    style='text-decoration: none; color: white;'>
+                    <div class="save_recipe_button">
+                        <span class="save">Sauvegarder</span>
+                        <span>
+                            <?= $likes['NBLIKES'] ?>
+                        </span>
                         <?php
-                    } else {
+                        if ($isLiked == true) {
+                            ?>
+                            <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+                            <?php
+                        } else {
+                            ?>
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            <?php
+                        }
                         ?>
-                        <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
-                        <?php
-                    }
-                    ?>
-                </div>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="tags component">
