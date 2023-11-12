@@ -79,7 +79,7 @@
                     foreach ($ingredients as $ingredient) {
                         array_push($json_ingredients, [
                             "title" => $ingredient['ing_title'],
-                            "quantity" => $ingredient['ing_quantity']
+                            "quantity" => $ingredient['ing_quantity'] . " " . $ingredient['ing_unit']
                         ]);
                     }
                     $json_ingredients = json_encode($json_ingredients);

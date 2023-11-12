@@ -40,7 +40,7 @@ function init() {
         if (ingredientSelected.find((ingredient) => ingredient.title === ingredientSearch.value)) return;
         ingredientSelected.push({
             title: ingredientSearch.value,
-            quantity: ingredientQuantity.value,
+            quantity: ingredientQuantity.value
         });
         ingredientSearch.value = "";
         ingredientQuantity.value = "";
