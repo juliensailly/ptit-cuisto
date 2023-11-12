@@ -21,16 +21,7 @@ class modelFiltres {
     public static function getCategories() {
         $model = new model();
         $model->init();
-        $sql = "SELECT * FROM category";
-        $rep = $model::$pdo->query($sql);
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'model');
-        return $rep->fetchAll();
-    }
-
-    public static function getIngredients() {
-        $model = new model();
-        $model->init();
-        $sql = "SELECT * FROM ingredient";
+        $sql = "SELECT cat_id, cat_title FROM category";
         $rep = $model::$pdo->query($sql);
         $rep->setFetchMode(PDO::FETCH_CLASS, 'model');
         return $rep->fetchAll();

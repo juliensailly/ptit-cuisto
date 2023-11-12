@@ -9,14 +9,15 @@ function init() {
 }
 
 function displayRecipe() {
-    if (document.forms["categoriesForm"].elements["catRadio"].value == "")
-        // return;
-    window.history.pushState(
-        {},
-        "",
-        "index.php?controller=filtre&action=categories&id=" +
-            document.forms["categoriesForm"].elements["catRadio"].value
-    );
+    if (document.forms["categoriesForm"].elements["catRadio"].value != "") {
+        window.history.pushState(
+            {},
+            "",
+            "index.php?controller=filtre&action=categories&id=" +
+                document.forms["categoriesForm"].elements["catRadio"].value
+        );
+    }
+
     let xhr = new XMLHttpRequest();
     xhr.open(
         "GET",
