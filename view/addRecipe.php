@@ -15,7 +15,7 @@
             </div>
 
             <div>
-                <label for="image">Image :</label>
+                <label for="image">Image (jpg, jpeg, png et < 1Mo) :</label>
                 <input type="file" id="image" name="image" class="form-control" accept="image/png, image/jpeg">
             </div>
 

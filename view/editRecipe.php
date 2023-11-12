@@ -18,7 +18,7 @@
             </div>
 
             <div>
-                <label for="image">Image :</label>
+                <label for="image">Image (jpg, jpeg, png et < 1Mo) :</label>
                 <img src="<?= $recipe_img_path . $recipe['rec_image_src'] ?>" alt="Image actuelle de la recette">
                 <input type="file" id="image" name="image" class="form-control" accept="image/png, image/jpeg">
             </div>
