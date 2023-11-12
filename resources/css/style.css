@@ -405,25 +405,11 @@ div.tags div {
     gap: 0.5rem;
 }
 
-div.tags span {
+div.tags a.tag {
     padding: 0.25rem 0.5rem;
     border-radius: 5rem;
-}
-
-div.tags span:nth-child(4n) {
-    background-color: #ff7a7a;
-}
-
-div.tags span:nth-child(4n + 1) {
-    background-color: #7a90ff;
-}
-
-div.tags span:nth-child(4n + 2) {
-    background-color: #8eff7a;
-}
-
-div.tags span:nth-child(4n + 3) {
-    background-color: #fbff7a;
+    text-decoration: none;
+    color: black;
 }
 
 div.tags.all_recipes {
