@@ -55,13 +55,13 @@
                     <div class="d-flex">
                         <div id="ingredientsResults">
                             <label for="ingredientSearch">Nom d'un ingrédient</label>
-                            <input type="text" name="ingredientSearch" id="ingredientSearch" class="form-control">
+                            <input type="text" name="ingredientSearch" id="ingredientSearch" class="form-control" placeholder="Il sera ajouté si inexistant">
                             <ul class="list-group">
                             </ul>
                         </div>
                         <div>
                             <label for="ingredientQuantity">Quantité et unité</label>
-                            <input type="text" name="ingredientQuantity" id="ingredientQuantity" class="form-control">
+                            <input type="text" name="ingredientQuantity" id="ingredientQuantity" class="form-control"  placeholder="ex: 10 cl">
                         </div>
                     </div>
                     <button type="button" class="btn btn-success" id="addIngredientBtn">Ajouter l'ingrédient</button>
@@ -79,7 +79,7 @@
                 <div class="tagsChoice">
                     <div id="tagsResults">
                         <label for="tagSearch">Nom d'un tag</label>
-                        <input type="text" name="tagSearch" id="tagSearch" class="form-control">
+                        <input type="text" name="tagSearch" id="tagSearch" class="form-control" placeholder="Il sera ajouté si inexistant">
                         <ul class="list-group">
                         </ul>
                     </div>

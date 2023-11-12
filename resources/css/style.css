@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Permanent+Marker&display=swap');
+
 :root {
     --primary-color: #2a3990;
     --secondary-color: #7890cd;
@@ -17,6 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-family: 'Pacifico', cursive;
 }
 
 body > .container {
@@ -24,6 +27,10 @@ body > .container {
     margin-bottom: 1rem;
     flex: 1;
     max-width: 1000px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Permanent Marker', cursive;
 }
 
 /* -------------------- Navbar -------------------- */
