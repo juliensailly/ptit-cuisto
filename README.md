@@ -40,3 +40,9 @@ Nous sommes ouverts aux contributions! Si vous avez des idées pour améliorer P
 Ce projet est sous licence [MIT](LICENSE) - voir le fichier de licence pour plus de détails.
 
 Amusez-vous bien à cuisiner avec Pti-Cuisto! 🎉
+
+## MLD & MCD
+
+![MLD](resources/img/MLD.jpg)
+
+![MLD](resources/img/MCD.jpg)
