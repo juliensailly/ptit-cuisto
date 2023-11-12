@@ -33,6 +33,10 @@ body > .container {
     box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4);
 }
 
+#neubar img {
+    border-radius: 8px;
+}
+
 #neubar .dropdown-menu a:hover {
     color: black;
 }
@@ -577,6 +581,11 @@ div.page_number button {
     aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: 0.375rem 0.375rem 0 0;
+}
+
+input#nbPerson {
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 #addRecipeForm #image {
