@@ -118,7 +118,7 @@ class modelRecipes extends model
   {
     $model = new Model();
     $model->init();
-    $sql = "SELECT tag_title from tag
+    $sql = "SELECT tag_id, tag_title from tag
     join tags_list using (tag_id)
     where rec_id = :id";
     $req_prep = model::$pdo->prepare($sql);

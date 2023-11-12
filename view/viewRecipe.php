@@ -115,10 +115,21 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
                 <div>
                     <?php
                     foreach ($tags as $key => $tag) {
+                        srand($tag['tag_id']);
+                        $colorcanal = rand(0, 2);
+                        $color = rand(0, 255);
+                        $colorB = rand($color, 255);
+                        if ($colorcanal == 0)
+                            $color = "rgb($color, $colorB, 255)";
+                        else if ($colorcanal == 1)
+                            $color = "rgb(255, $color, $colorB)";
+                        else
+                            $color = "rgb($colorB, 255, $color)";
                         ?>
-                        <span class="tag">
+                        <a href="index.php?controller=filtre&action=tagsSearch&tag_id=<?= $tag['tag_id'] ?>&tag_title=<?= str_replace(" ", "%20", $tag['tag_title']) ?>"
+                            class="tag" style="background-color: <?= $color ?>;">
                             <?= $tag['tag_title'] ?>
-                        </span>
+                        </a>
                         <?php
                     }
                     ?>

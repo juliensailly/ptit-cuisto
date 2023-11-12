@@ -1,6 +1,7 @@
 <h1>Filtre - Recherche par tags</h1>
 
 <form action="javascript:void(0);">
+    <label for="ingredientSearch" style="visibility: hidden">Recherche par tags</label>
     <input class="form-control" type="text" name="ingredientSearch" id="ingredientSearch"
         placeholder="Veuillez entrer le nom d'un tag">
 </form>
