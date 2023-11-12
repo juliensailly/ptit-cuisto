@@ -4,9 +4,9 @@
   <?php
   foreach ($rep as $key => $value) {
     if ($value->cat_id == $id) {
-      echo "<input type=\"radio\" class=\"btn-check\" name=\"catRadio\" value=\"$value->cat_id\" id=\"$value->cat_id\" autocomplete=\"off\" checked>";
+      echo "<input type=\"radio\" class=\"btn-check\" name=\"catRadio\" value=\"$value->cat_id\" id=\"$value->cat_id\" checked>";
     } else {
-      echo "<input type=\"radio\" class=\"btn-check\" name=\"catRadio\" value=\"$value->cat_id\" id=\"$value->cat_id\" autocomplete=\"off\">";
+      echo "<input type=\"radio\" class=\"btn-check\" name=\"catRadio\" value=\"$value->cat_id\" id=\"$value->cat_id\">";
     } ?>
     <label class="btn btn-primary" for="<?= $value->cat_id ?>"><?= $value->cat_title ?></label>
     <?php

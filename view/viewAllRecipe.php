@@ -31,7 +31,7 @@
                                 continue;
                             }
                             ?>
-                            <a href="index.php?controller=filtre&action=tagsSearch&tag_id=<?= $tag['tag_id'] ?>&tag_title=<?= $tag['tag_title'] ?>"
+                            <a href="index.php?controller=filtre&action=tagsSearch&tag_id=<?= $tag['tag_id'] ?>&tag_title=<?= str_replace(" ", "%20", $tag['tag_title']) ?>"
                                 class="tag" <?php
                                 srand($tag['tag_id']);
                                 $colorcanal = rand(0, 2);

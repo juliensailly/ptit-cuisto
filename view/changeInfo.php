@@ -5,23 +5,23 @@
   $users = $_SESSION['login'];
   ?>
 
-  <div id="name-inputs">
+  <div id="change-name-inputs">
     <div>
       <label for="name">Prénom :</label>
-      <input type="text" id="nameM" name="name" class="form-control" value=<?= $users->users_name ?>>
+      <input type="text" id="nameM" name="name" class="form-control" value="<?= $users->users_name ?>">
     </div>
     <div>
       <label for="surname">Nom :</label>
-      <input type="text" id="surnameM" name="surname" class="form-control" value=<?= $users->users_lastname ?>>
+      <input type="text" id="surnameM" name="surname" class="form-control" value="<?= $users->users_lastname ?>">
     </div>
   </div>
   <div>
     <label for="pseudo">Pseudonyme :</label>
-    <input type="text" id="pseudoM" name="pseudo" class="form-control" value=<?= $users->users_pseudo ?>>
+    <input type="text" id="pseudoM" name="pseudo" class="form-control" value="<?= $users->users_pseudo ?>">
   </div>
   <div>
     <label for="sign-up-mail">Adresse mail :</label>
-    <input type="email" id="sign-up-mailM" name="sign-up-mail" class="form-control" value=<?= $users->users_email ?>>
+    <input type="email" id="sign-up-mailM" name="sign-up-mail" class="form-control" value="<?= $users->users_email ?>">
   </div>
   <div class="submitBtn">
     <a href="index.php?controller=account&action=changePassword" class="btn btn-outline-primary">Modifier mon mot de passe</a>

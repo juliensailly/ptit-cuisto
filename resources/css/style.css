@@ -108,14 +108,14 @@ body > .container {
     gap: 0.5rem;
 }
 
-div#name-inputs {
+div#name-inputs, div#change-name-inputs {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 0.5rem;
 }
 
-div#name-inputs > div {
+div#name-inputs > div, div#change-name-inputs > div {
     flex: 1;
 }
 
