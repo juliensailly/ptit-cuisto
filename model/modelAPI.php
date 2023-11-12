@@ -21,7 +21,11 @@ class modelAPI {
   public static function getRecipesByCategories($categoriesID) {
     $model = new model();
     $model->init();
-    $sql = "SELECT * FROM recipes WHERE cat_id = $categoriesID and isAuthorised = 1";
+    if ($categoriesID == "") {
+      $sql = "SELECT * FROM recipes WHERE isAuthorised = 1";
+    } else {
+      $sql = "SELECT * FROM recipes WHERE cat_id = $categoriesID and isAuthorised = 1";
+    }
     $req_prep = $model::$pdo->prepare($sql);
     $req_prep->execute();
     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
@@ -31,18 +35,38 @@ class modelAPI {
   public static function getRecipesByTitle($words) {
     $model = new model();
     $model->init();
-    $sql = "SELECT * FROM recipes WHERE isAuthorised = 1 and upper(rec_title) LIKE ";
-    foreach ($words as $key => $value) {
-      $sql .= "'%".strtoupper($value)."%' ";
-      if ($key != count($words) - 1) {
-        $sql .= "OR upper(rec_title) LIKE ";
+    if ($words == "") {
+      $sql = "SELECT * FROM recipes WHERE isAuthorised = 1 ORDER BY rec_title LIMIT 10";
+      $req_prep = $model::$pdo->prepare($sql);
+      $req_prep->execute();
+      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+      return $req_prep->fetchAll();
+    } else {
+      $sql = "SELECT * FROM recipes WHERE isAuthorised = 1 and upper(rec_title) LIKE ";
+      foreach ($words as $key => $value) {
+        $sql .= "'%".strtoupper($value)."%' ";
+        if ($key != count($words) - 1) {
+          $sql .= "OR upper(rec_title) LIKE ";
+        }
       }
+      $sql .= "ORDER BY rec_title LIMIT 5";
+      $req_prep = $model::$pdo->prepare($sql);
+      $req_prep->execute();
+      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+      return $req_prep->fetchAll();
     }
-    $sql .= "ORDER BY rec_title LIMIT 5";
-    $req_prep = $model::$pdo->prepare($sql);
-    $req_prep->execute();
-    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
-    return $req_prep->fetchAll();
+    // $sql = "SELECT * FROM recipes WHERE isAuthorised = 1 and upper(rec_title) LIKE ";
+    // foreach ($words as $key => $value) {
+    //   $sql .= "'%".strtoupper($value)."%' ";
+    //   if ($key != count($words) - 1) {
+    //     $sql .= "OR upper(rec_title) LIKE ";
+    //   }
+    // }
+    // $sql .= "ORDER BY rec_title LIMIT 5";
+    // $req_prep = $model::$pdo->prepare($sql);
+    // $req_prep->execute();
+    // $req_prep->setFetchMode(PDO::FETCH_CLASS, 'model');
+    // return $req_prep->fetchAll();
   }
 
   public static function getIngredients($searchText = "") {

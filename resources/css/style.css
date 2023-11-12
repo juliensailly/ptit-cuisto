@@ -252,7 +252,7 @@ div#results img {
 
 /* Search by ingredient */
 
-#ingredientSearch {
+form > #ingredientSearch {
     margin-top: 1.5rem;
 }
 
