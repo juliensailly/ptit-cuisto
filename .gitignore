@@ -1,1 +1,5 @@
-/resources/img/recipes_images/rec_*
+# Exclure les fichiers rec_* dans resources/img/recipes_images/
+resources/img/recipes_images/rec_*
+
+# Exclure le fichier config/conf.php
+config/conf.php
