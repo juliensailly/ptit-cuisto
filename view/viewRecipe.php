@@ -47,7 +47,8 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
                 <img src="<?= $recipe_img_path . $recipe['rec_image_src'] ?>" alt="<?= $recipe['rec_title'] ?>">
             </div>
             <div class="author_save">
-                <a href="index.php?controller=account&action=showProfil&id=<?= $recipe['users_id'] ?>" class="authorProfilLink">
+                <a href="index.php?controller=account&action=showProfil&id=<?= $recipe['users_id'] ?>"
+                    class="authorProfilLink">
                     <div class="author">
                         <div class="user_pp" <?php
                         srand($recipe['users_id']);
@@ -148,6 +149,22 @@ if ($recipe['isAuthorised'] == 0 && $_SESSION['login'] != false && ($_SESSION['l
                         }
                         ?>
                         <div class="comment">
+                            <?php
+                            if ($_SESSION['login'] != false && ($_SESSION['login']->users_id == $comment['users_id'] || $_SESSION['login']->users_type == 1)) {
+                                ?>
+                                <div class="comment_buttons">
+                                    <a href="index.php?controller=comment&action=delete&rid=<?= $comment['rec_id'] ?>&uid=<?= $comment['users_id'] ?>"
+                                        class="btn btn-danger" title="Supprimer le commentaire">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <div class="author">
                                 <div class="user_pp" <?php
                                 srand($comment['users_id']);

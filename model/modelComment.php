@@ -47,4 +47,14 @@ class modelComment extends model{
     $req_prep->bindParam(":isAuthorised", $isAuthorised, PDO::PARAM_INT);
     return $req_prep->execute();
   }
+
+  public static function deleteComment($rec_id, $users_id) {
+    $model = new Model();
+    $model->init();
+    $sql = "DELETE FROM comments WHERE rec_id = :rec AND users_id = :user";
+    $req_prep = model::$pdo->prepare($sql);
+    $req_prep->bindParam(":rec", $rec_id, PDO::PARAM_INT);
+    $req_prep->bindParam(":user", $users_id, PDO::PARAM_INT);
+    return $req_prep->execute();
+  }
 }

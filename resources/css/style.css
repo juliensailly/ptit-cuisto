@@ -450,6 +450,16 @@ div.user_pp span {
     width: 100%;
 }
 
+div.comment {
+    position: relative;
+}
+
+div.comment_buttons {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
 /* Ingredients */
 
 div.ingredients > div {

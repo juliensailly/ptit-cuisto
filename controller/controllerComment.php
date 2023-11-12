@@ -42,5 +42,29 @@ class controllerComment
     header("Location: index.php?controller=recipes&action=read&id=" . $rec_id);
     return;
   }
+
+  public static function delete() {
+    if (!isset($_GET["uid"]) || !isset($_GET["rid"])) {
+      controllerErreur::erreur("Eléments non définis");
+      return;
+    }
+    if ($_SESSION['login'] == false && $_SESSION['login'] != $_GET["uid"] && $_SESSION['login']->users_type != 1) {
+      controllerErreur::erreur("Vous n'avez pas les droits nécessaires pour supprimer ce commentaire.<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+      return;
+    }
+
+    $rec_id = $_GET["rid"];
+    $users_id = $_GET["uid"];
+
+    if (!modelComment::deleteComment($rec_id, $users_id)) {
+      controllerErreur::erreur("Erreur lors de la suppression du commentaire.<br>" .
+        "<button class=\"btn btn-primary\" onclick=\"history.back()\">Retour à la recette</button>");
+      return;
+    }
+
+    header("Location: index.php?controller=recipes&action=read&id=" . $rec_id);
+    return;
+  }
 }
 
