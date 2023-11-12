@@ -86,7 +86,7 @@
                     ?>
                     <div class="editBtnProfilPage">
                         <a href="index.php?controller=recipes&action=editForm&id=<?= $recipe->rec_id ?>"
-                            class="btn btn-primary">
+                            class="btn btn-primary" title="Modifier la recette">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-pen-fill" viewBox="0 0 16 16">
                                 <path
@@ -94,7 +94,7 @@
                             </svg>
                         </a>
                         <a href="index.php?controller=recipes&action=deleteForm&id=<?= $recipe->rec_id ?>"
-                            class="btn btn-danger">
+                            class="btn btn-danger" title="Supprimer la recette">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                 <path
