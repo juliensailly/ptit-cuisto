@@ -1,0 +1,7 @@
+Améliorations Pti-Cuisto :
+
+- Responsive page administrateur
+- Clique sur ligne de profil page administrateur emmène vers profil utilisateur
+- Mettre des liens sur les images et titres des recettes
+- Ajout de notes intégrée au commentaire (ex: 👍 et 👎) 
+- 
